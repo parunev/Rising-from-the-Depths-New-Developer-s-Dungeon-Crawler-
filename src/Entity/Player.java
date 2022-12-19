@@ -14,17 +14,28 @@ public class Player extends Entity{
     GamePanel gp;
     KeyHandler keyH;
 
+    // where we draw player on the screen
+    public final int screenX;
+    public final int screenY;
+
     public Player(GamePanel gp, KeyHandler keyH){
         this.gp = gp;
         this.keyH = keyH;
+
+        // center
+        screenX = gp.screenWidth / 2 - (gp.tileSize/2);
+        screenY = gp.screenHeight / 2 - (gp.tileSize/2);
 
         setDefaultValues();
         getPlayerImage();
     }
 
     public void setDefaultValues(){
-        x = 100;
-        y = 100;
+
+        // player starting position on world map
+        // you can also type  worldX = 1000, it doesn't really matter works fine both ways.
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
         speed = 4;
         direction = "down"; //any directions are fine
     }
@@ -53,16 +64,16 @@ public class Player extends Entity{
 
             if (keyH.upPressed){
                 direction = "up";
-                y -= speed;
+                worldY -= speed;
             }else if (keyH.downPressed){
                 direction = "down";
-                y += speed;
+                worldY += speed;
             }else if (keyH.leftPressed){
                 direction = "left";
-                x -= speed;
+                worldX -= speed;
             }else {
                 direction = "right";
-                x += speed;
+                worldX += speed;
             }
 
             // player image chances in every 10 frames
@@ -116,6 +127,6 @@ public class Player extends Entity{
             }
         }
 
-        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null); // image observer
+        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null); // image observer
     }
 }
