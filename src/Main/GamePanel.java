@@ -1,3 +1,7 @@
+package Main;
+
+import Entity.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,7 +11,7 @@ public class GamePanel extends JPanel implements Runnable {
     // SCREEN SETTINGS
     final int originalTileSize = 16; // 16x16 default size of the player character, NPCs and map tiles
     final int scale = 3;
-    final int tileSize = originalTileSize * scale; // 16x3 (48x48) pixels on the screen. Pretty common for retro games.
+    public final int tileSize = originalTileSize * scale; // 16x3 (48x48) pixels on the screen. Pretty common for retro games.
 
     // 16 tiles horizontally, 12 tiles vertically 4:3 ratio
     final int maxScreenCol = 16;
@@ -22,6 +26,7 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyH = new KeyHandler();
     //it keeps your program running until you stop it
     Thread gameThread;
+    Player player = new Player(this, keyH);
 
     //Set player's default position
     int playerX = 100;
@@ -36,10 +41,10 @@ public class GamePanel extends JPanel implements Runnable {
         // enabling this can improve game's rendering performance
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
-        this.setFocusable(true); // with this, this GamePanel can be "focused" to receive key inputs
+        this.setFocusable(true); // with this, this Main.GamePanel can be "focused" to receive key inputs
     }
 
-    // passing this(GamePanel) to this thread constructor, instantiate
+    // passing this(Main.GamePanel) to this thread constructor, instantiate
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start(); // automatically calls the run method
@@ -81,15 +86,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update(){
-        if (keyH.upPressed){
-            playerY -= playerSpeed;
-        }else if (keyH.downPressed){
-            playerY += playerSpeed;
-        }else if (keyH.leftPressed){
-            playerX -= playerSpeed;
-        }else if (keyH.rightPressed){
-            playerX += playerSpeed;
-        }
+        player.update();
     }
 
     //Graphics - a class that has many functions to draw objects on screen
@@ -100,9 +97,7 @@ public class GamePanel extends JPanel implements Runnable {
         // Extends the Graphics class to provide more sophisticated control over
         // geometry, coordinate transformations, color management, and text layout
         Graphics2D g2 = (Graphics2D) g;
-
-        g2.setColor(Color.WHITE);
-        g2.fillRect(playerX,playerY, tileSize, tileSize); // draws a rectangle and fills it with the specified color
+        player.draw(g2);
         g2.dispose(); // dispose of this graphics context and release any system resources that it is using
     }
 }
