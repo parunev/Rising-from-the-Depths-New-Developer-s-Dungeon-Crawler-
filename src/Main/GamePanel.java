@@ -1,6 +1,7 @@
 package Main;
 
 import Entity.Player;
+import Obj.SuperObject;
 import Tile.TileManager;
 
 import javax.swing.*;
@@ -34,7 +35,10 @@ public class GamePanel extends JPanel implements Runnable {
     //it keeps your program running until you stop it
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyH);
+    public SuperObject[] obj = new SuperObject[10]; // Slots for objects
+
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the size of this class (JPanel)
@@ -45,6 +49,11 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true); // with this, this Main.GamePanel can be "focused" to receive key inputs
+    }
+
+    // created this method, so we can add other setup stuff in the future
+    public void setupGame(){
+        aSetter.setObject();
     }
 
     // passing this(Main.GamePanel) to this thread constructor, instantiate
@@ -100,8 +109,20 @@ public class GamePanel extends JPanel implements Runnable {
         // Extends the Graphics class to provide more sophisticated control over
         // geometry, coordinate transformations, color management, and text layout
         Graphics2D g2 = (Graphics2D) g;
+
+        //TILE
         tileM.draw(g2); // first tiles, it's like a layout
+
+        //OBJECT
+        for (SuperObject superObject : obj) {
+            if (superObject != null) { // otherwise we might get NullPoint error
+                superObject.draw(g2, this);
+            }
+        }
+
+        //PLAYER
         player.draw(g2);
+
         g2.dispose(); // dispose of this graphics context and release any system resources that it is using
     }
 }
