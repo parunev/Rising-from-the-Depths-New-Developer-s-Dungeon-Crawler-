@@ -123,16 +123,23 @@ public class Player extends Entity{
 
             switch (objectName) {
                 case "Key" -> {
+                    gp.playSE(1);
                     hasKey++;
                     gp.obj[i] = null;// delete the object we just touched
                     System.out.println("Key: " + hasKey);
                 }
                 case "Door" -> {
                     if (hasKey > 0) {
+                        gp.playSE(3);
                         gp.obj[i] = null; // door will disappear (we opened it)
                         hasKey--;
                     }
                     System.out.println("Key: " + hasKey);
+                }
+                case "Boots" -> {
+                    gp.playSE(2);
+                    speed += 2; // boots gives us more speed (power up item), you can make it faster
+                    gp.obj[i] = null; // keep in mind faster moving leads to controls becoming difficult
                 }
             }
         }

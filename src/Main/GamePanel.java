@@ -24,18 +24,19 @@ public class GamePanel extends JPanel implements Runnable {
     // WORLD SETTINGS
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
-    public final int worldWidth = tileSize * maxWorldCol;
-    public final int worldHeight = tileSize * maxWorldRow;
 
     // FPS
     int FPS = 60;
 
+    // SYSTEM
     public TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
-    //it keeps your program running until you stop it
-    Thread gameThread;
+    Sound sound = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    Thread gameThread; //it keeps your program running until you stop it
+
+    // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
     public SuperObject[] obj = new SuperObject[10]; // Slots for objects
 
@@ -54,6 +55,7 @@ public class GamePanel extends JPanel implements Runnable {
     // created this method, so we can add other setup stuff in the future
     public void setupGame(){
         aSetter.setObject();
+        playMusic(0);
     }
 
     // passing this(Main.GamePanel) to this thread constructor, instantiate
@@ -124,5 +126,24 @@ public class GamePanel extends JPanel implements Runnable {
         player.draw(g2);
 
         g2.dispose(); // dispose of this graphics context and release any system resources that it is using
+    }
+
+    // Loop makes the music play non-stop
+    public void playMusic(int i){
+        sound.setFile(i); // we set the file we want to play
+        sound.play(); // we play
+        sound.loop(); // we loop
+    }
+
+    // Stops the music at all
+    public void stopMusic(){
+        sound.stop();
+    }
+
+    // Play sound effect
+    // Usually the sound effect is very short so we don't call the loop here
+    public void playSE(int i){
+        sound.setFile(i);
+        sound.play();
     }
 }
