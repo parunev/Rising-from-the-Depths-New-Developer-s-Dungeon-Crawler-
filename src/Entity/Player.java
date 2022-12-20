@@ -17,6 +17,7 @@ public class Player extends Entity{
     // Where we draw player on the screen
     public final int screenX;
     public final int screenY;
+    int hasKey = 0; // Indicates how many keys the player has
 
     public Player(GamePanel gp, KeyHandler keyH){
         this.gp = gp;
@@ -28,6 +29,10 @@ public class Player extends Entity{
 
         // Player character solid area (you can choose different values)
         solidArea = new Rectangle(8, 16, 32, 32); //x, y, width, height
+
+        // We want to record default values because we're going to change solidArea x,y later
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
         getPlayerImage();
@@ -45,14 +50,14 @@ public class Player extends Entity{
 
     public void getPlayerImage(){
         try{
-            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/Player/boy_down_1.png")));
-            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/Player/boy_up_2.png")));
-            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/Player/boy_down_1.png")));
-            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/Player/boy_down_2.png")));
-            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/Player/boy_left_1.png")));
-            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/Player/boy_left_2.png")));
-            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/Player/boy_right_1.png")));
-            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/Player/boy_right_2.png")));
+            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Resources/Player/boy_down_1.png")));
+            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Resources/Player/boy_up_2.png")));
+            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Resources/Player/boy_down_1.png")));
+            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Resources/Player/boy_down_2.png")));
+            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Resources/Player/boy_left_1.png")));
+            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Resources/Player/boy_left_2.png")));
+            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Resources/Player/boy_right_1.png")));
+            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Resources/Player/boy_right_2.png")));
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -81,6 +86,10 @@ public class Player extends Entity{
             collisionOn = false;
             gp.cChecker.checkTile(this); // Since this class is subclass of Entity class
 
+            // CHECK OBJECT COLLISION
+            int objIndex = gp.cChecker.checkObject(this, true); // Since this is player the boolean is true
+            pickupObject(objIndex);
+
             // IF COLLISION IS FALSE, PLAYER CAN MOVE
             if (!collisionOn){
                 switch (direction) {
@@ -104,41 +113,50 @@ public class Player extends Entity{
         }
     }
 
+    public void pickupObject(int i){
+
+        // I picked 999 as index but basically any number is fine as long as
+        // it's not used by the objects arrays index
+
+        if (i != 999){ // If this index is 999, that means we didn't touched any object but If we did we have touched
+            String objectName = gp.obj[i].name;
+
+            switch (objectName) {
+                case "Key" -> {
+                    hasKey++;
+                    gp.obj[i] = null;// delete the object we just touched
+                    System.out.println("Key: " + hasKey);
+                }
+                case "Door" -> {
+                    if (hasKey > 0) {
+                        gp.obj[i] = null; // door will disappear (we opened it)
+                        hasKey--;
+                    }
+                    System.out.println("Key: " + hasKey);
+                }
+            }
+        }
+    }
+
     public void draw(Graphics2D g2){
         BufferedImage image = null;
 
         switch (direction) {
             case "up" -> {
-                if (spriteNumber == 1) {
-                    image = up1;
-                }
-                if (spriteNumber == 2) {
-                    image = up2;
-                }
+                if (spriteNumber == 1) {image = up1;}
+                if (spriteNumber == 2) {image = up2;}
             }
             case "down" -> {
-                if (spriteNumber == 1) {
-                    image = down1;
-                }
-                if (spriteNumber == 2) {
-                    image = down2;
-                }
+                if (spriteNumber == 1) {image = down1;}
+                if (spriteNumber == 2) {image = down2;}
             }
             case "left" -> {
-                if (spriteNumber == 1) {
-                    image = left1;
-                }
-                if (spriteNumber == 2) {
-                    image = left2;
-                }
+                if (spriteNumber == 1) {image = left1;}
+                if (spriteNumber == 2) {image = left2;}
             }
             case "right" -> {
-                if (spriteNumber == 1) {
-                    image = right1;
-                }
-                if (spriteNumber == 2) {
-                    image = right2;
-                }
+                if (spriteNumber == 1) {image = right1;}
+                if (spriteNumber == 2) {image = right2;}
             }
         }
 

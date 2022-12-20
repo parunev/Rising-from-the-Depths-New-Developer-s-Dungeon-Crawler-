@@ -13,6 +13,11 @@ public class SuperObject {
     public boolean collision = false;
     public int worldX, worldY;
 
+    // each object has solidArea, you can specify the area for each object
+    public Rectangle solidArea = new Rectangle(0,0,48,48);
+    public int solidAreaDefaultX = 0;
+    public int solidAreaDefaultY = 0;
+
     // Similar to the TileManager
     public void draw(Graphics2D g2, GamePanel gp){
         int screenX = worldX - gp.player.worldX + gp.player.screenX;

@@ -14,5 +14,6 @@ public class Entity {
     public int spriteNumber = 1;
 
     public Rectangle solidArea; // with this class we can create invisible or abstract rectangle used for collision
+    public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
 }
