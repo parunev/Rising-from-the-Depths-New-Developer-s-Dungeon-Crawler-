@@ -14,7 +14,7 @@ public class Player extends Entity{
     GamePanel gp;
     KeyHandler keyH;
 
-    // where we draw player on the screen
+    // Where we draw player on the screen
     public final int screenX;
     public final int screenY;
 
@@ -22,9 +22,12 @@ public class Player extends Entity{
         this.gp = gp;
         this.keyH = keyH;
 
-        // center
+        // Center
         screenX = gp.screenWidth / 2 - (gp.tileSize/2);
         screenY = gp.screenHeight / 2 - (gp.tileSize/2);
+
+        // Player character solid area (you can choose different values)
+        solidArea = new Rectangle(8, 16, 32, 32); //x, y, width, height
 
         setDefaultValues();
         getPlayerImage();
@@ -32,8 +35,8 @@ public class Player extends Entity{
 
     public void setDefaultValues(){
 
-        // player starting position on world map
-        // you can also type  worldX = 1000, it doesn't really matter works fine both ways.
+        // Player starting position on world map
+        // You can also type worldX = 1000, it doesn't really matter works fine both ways.
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
         speed = 4;
@@ -62,21 +65,33 @@ public class Player extends Entity{
         // at one position (etc. the sprites are not updating if we do not press buttons)
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed){
 
+            // Direction if statement
+            // Based on this direction we check collision
             if (keyH.upPressed){
                 direction = "up";
-                worldY -= speed;
             }else if (keyH.downPressed){
                 direction = "down";
-                worldY += speed;
             }else if (keyH.leftPressed){
                 direction = "left";
-                worldX -= speed;
             }else {
                 direction = "right";
-                worldX += speed;
             }
 
-            // player image chances in every 10 frames
+            // CHECK TILE COLLISION
+            collisionOn = false;
+            gp.cChecker.checkTile(this); // Since this class is subclass of Entity class
+
+            // IF COLLISION IS FALSE, PLAYER CAN MOVE
+            if (!collisionOn){
+                switch (direction) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
+            }
+
+            // Player image chances in every 10 frames
             spriteCounter++;
             if (spriteCounter > 12){
                 if (spriteNumber == 1){

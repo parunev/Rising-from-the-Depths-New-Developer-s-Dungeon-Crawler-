@@ -1,5 +1,6 @@
 package Entity;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 // Stores variables that will be used in Player, Monster and NPC classes.
@@ -11,4 +12,7 @@ public class Entity {
     public String direction;
     public int spriteCounter = 0;
     public int spriteNumber = 1;
+
+    public Rectangle solidArea; // with this class we can create invisible or abstract rectangle used for collision
+    public boolean collisionOn = false;
 }
