@@ -31,7 +31,8 @@ public class GamePanel extends JPanel implements Runnable {
     // SYSTEM
     public TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
-    Sound sound = new Sound();
+    Sound music = new Sound();
+    Sound se = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     Thread gameThread; //it keeps your program running until you stop it
@@ -130,20 +131,20 @@ public class GamePanel extends JPanel implements Runnable {
 
     // Loop makes the music play non-stop
     public void playMusic(int i){
-        sound.setFile(i); // we set the file we want to play
-        sound.play(); // we play
-        sound.loop(); // we loop
+        music.setFile(i); // we set the file we want to play
+        music.play(); // we play
+        music.loop(); // we loop
     }
 
     // Stops the music at all
     public void stopMusic(){
-        sound.stop();
+        music.stop();
     }
 
     // Play sound effect
-    // Usually the sound effect is very short so we don't call the loop here
+    // Usually the sound effect is very short, so we don't call the loop here
     public void playSE(int i){
-        sound.setFile(i);
-        sound.play();
+        se.setFile(i);
+        se.play();
     }
 }
