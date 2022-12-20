@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     Sound se = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
     Thread gameThread; //it keeps your program running until you stop it
 
     // ENTITY AND OBJECT
@@ -113,18 +114,21 @@ public class GamePanel extends JPanel implements Runnable {
         // geometry, coordinate transformations, color management, and text layout
         Graphics2D g2 = (Graphics2D) g;
 
-        //TILE
+        // TILE
         tileM.draw(g2); // first tiles, it's like a layout
 
-        //OBJECT
+        // OBJECT
         for (SuperObject superObject : obj) {
             if (superObject != null) { // otherwise we might get NullPoint error
                 superObject.draw(g2, this);
             }
         }
 
-        //PLAYER
+        // PLAYER
         player.draw(g2);
+
+        // UI
+        ui.draw(g2);
 
         g2.dispose(); // dispose of this graphics context and release any system resources that it is using
     }
