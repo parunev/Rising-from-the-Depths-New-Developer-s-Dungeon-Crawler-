@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // SYSTEM
     public TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
     Sound se = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -41,6 +41,14 @@ public class GamePanel extends JPanel implements Runnable {
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
     public SuperObject[] obj = new SuperObject[10]; // Slots for objects
+
+    // GAME STATE
+    // When you play a game usually it has various game situations - title screen, main gameplay screen or in-game menu screen
+    // and depending on the situation the program draws different things on the screen and often receive diff key input
+    // Example: You can swing your sword by pressing enter in gameplay state but maybe enter works as confirm in menu screen
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
 
 
     public GamePanel(){
@@ -58,6 +66,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame(){
         aSetter.setObject();
         playMusic(0);
+        gameState = playState;
     }
 
     // passing this(Main.GamePanel) to this thread constructor, instantiate
@@ -102,7 +111,14 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update(){
-        player.update();
+        if (gameState == playState){
+            player.update();
+        }
+
+        // We don't update player's information while the game is paused
+        if (gameState == pauseState){
+
+        }
     }
 
     //Graphics - a class that has many functions to draw objects on screen

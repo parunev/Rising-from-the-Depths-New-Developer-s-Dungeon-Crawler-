@@ -18,7 +18,6 @@ public class Player extends Entity{
     // Where we draw player on the screen
     public final int screenX;
     public final int screenY;
-    public int hasKey = 0; // Indicates how many keys the player has
 
     public Player(GamePanel gp, KeyHandler keyH){
         this.gp = gp;
@@ -131,37 +130,7 @@ public class Player extends Entity{
         // it's not used by the objects arrays index
 
         if (i != 999){ // If this index is 999, that means we didn't touched any object but If we did we have touched
-            String objectName = gp.obj[i].name;
 
-            switch (objectName) {
-                case "Key" -> {
-                    gp.playSE(1);
-                    hasKey++;
-                    gp.obj[i] = null;// delete the object we just touched
-                    gp.ui.showMessage("You got a key!");
-                }
-                case "Door" -> {
-                    if (hasKey > 0) {
-                        gp.playSE(3);
-                        gp.obj[i] = null; // door will disappear (we opened it)
-                        hasKey--;
-                        gp.ui.showMessage("You opened the door!");
-                    }else{
-                        gp.ui.showMessage("You need a key!");
-                    }
-                }
-                case "Boots" -> {
-                    gp.playSE(2);
-                    speed += 2; // boots gives us more speed (power up item), you can make it faster
-                    gp.obj[i] = null; // keep in mind faster moving leads to controls becoming difficult
-                    gp.ui.showMessage("SPEED UPP!!!");
-                }
-                case "Chest" -> {
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSE(4);
-                }
-            }
         }
     }
 
