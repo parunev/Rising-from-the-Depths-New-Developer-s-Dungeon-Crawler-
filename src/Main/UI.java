@@ -28,7 +28,7 @@ public class UI {
         arial_80B = new Font("Arial", Font.BOLD, 80);
 
         // Again we prepare the image before the game loop starts
-        OBJ_Key key = new OBJ_Key();
+        OBJ_Key key = new OBJ_Key(gp);
         keyImage = key.image;
     }
 
