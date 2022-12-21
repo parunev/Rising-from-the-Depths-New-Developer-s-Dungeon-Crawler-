@@ -1,5 +1,6 @@
 package Main;
 
+import Entity.Entity;
 import Entity.Player;
 import Obj.SuperObject;
 import Tile.TileManager;
@@ -41,6 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
     public SuperObject[] obj = new SuperObject[10]; // Slots for objects
+    public Entity[] npc = new Entity[10];
 
     // GAME STATE
     // When you play a game usually it has various game situations - title screen, main gameplay screen or in-game menu screen
@@ -65,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable {
     // created this method, so we can add other setup stuff in the future
     public void setupGame(){
         aSetter.setObject();
+        aSetter.setNPC();
         playMusic(0);
         gameState = playState;
     }
@@ -112,7 +115,15 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update(){
         if (gameState == playState){
+            // PLAYER
             player.update();
+
+            // NPC
+            for (Entity entity : npc) {
+                if (entity != null) {
+                    entity.update();
+                }
+            }
         }
 
         // We don't update player's information while the game is paused
@@ -146,6 +157,13 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
+        // NPC
+        for (Entity entity : npc) {
+            if (entity != null) {
+                entity.draw(g2);
+            }
+        }
+
         // PLAYER
         player.draw(g2);
 
@@ -158,7 +176,6 @@ public class GamePanel extends JPanel implements Runnable {
             long passed = drawEnd - drawStart;
             g2.setColor(Color.WHITE);
             g2.drawString("Draw time: "+ passed, 10, 400);
-            System.out.println("Draw time: "+ passed);
         }
 
         g2.dispose(); // dispose of this graphics context and release any system resources that it is using
