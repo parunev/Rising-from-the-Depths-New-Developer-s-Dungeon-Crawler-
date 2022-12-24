@@ -111,7 +111,6 @@ public class Player extends Entity{
 
         // I picked 999 as index but basically any number is fine as long as
         // it's not used by the objects arrays index
-
         if (i != 999){ // If this index is 999, that means we didn't touched any object but If we did we have touched
 
         }
@@ -119,8 +118,12 @@ public class Player extends Entity{
 
     private void interactNpc(int i) {
         if (i != 999){
-            // System.out.println("You are hitting npc");
+            if (keyH.enterPressed){ // Dialogue window opens only when you press the Enter key, while NPC collision is happening
+                gp.gameState = gp.dialogueState;
+                gp.npc[i].speak();
+            }
         }
+        gp.keyH.enterPressed = false;
     }
 
     public void draw(Graphics2D g2){

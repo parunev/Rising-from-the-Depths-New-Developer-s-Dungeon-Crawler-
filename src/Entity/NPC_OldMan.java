@@ -12,6 +12,7 @@ public class NPC_OldMan extends Entity{
         direction = "down";
         speed = 1;
         getOldManImage();
+        setDialogue();
     }
 
     public void getOldManImage(){
@@ -23,6 +24,14 @@ public class NPC_OldMan extends Entity{
         left2 = setup("/Resources/NPC/oldman_left_2");
         right1 = setup("/Resources/NPC/oldman_right_1");
         right2 = setup("/Resources/NPC/oldman_right_2");
+    }
+
+    // Store character dialogues
+    public void setDialogue(){
+        dialogues[0] = "Hello, lad.";
+        dialogues[1] = "So you've come to this island to \nfind the treasure?";
+        dialogues[2] = "I used to be a great wizard but now... \nI'm a bit too old for taking an adventure.";
+        dialogues[3] = "Well, good luck on you.";
     }
 
     // Character behaviour (AI kinda)
@@ -48,5 +57,12 @@ public class NPC_OldMan extends Entity{
             }
             actionLockCounter = 0;
         }
+    }
+
+    // We still keep this subclass method because maybe we will want to add a specific stuff later
+    // Example: You have special items and different dialogue starts... etc.
+    // Makes customization easier
+    public void speak(){
+        super.speak();
     }
 }

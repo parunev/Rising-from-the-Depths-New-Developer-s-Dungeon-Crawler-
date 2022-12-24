@@ -24,12 +24,29 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
+    String[] dialogues = new String[20];
+    int dialogueIndex = 0;
 
     public Entity(GamePanel gp){
         this.gp = gp;
     }
 
-    public void setAction(){}
+    public void setAction() {}
+    public void speak() {
+        // If there is no text we go back to index zero preventing a NullPointer
+        if (dialogues[dialogueIndex] == null){
+            dialogueIndex = 0;
+        }
+        gp.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+
+        switch (gp.player.direction) {
+            case "up" -> direction = "down";
+            case "down" -> direction = "up";
+            case "left" -> direction = "right";
+            case "right" -> direction = "left";
+        }
+    }
 
     public void update(){
         // We created this method in Old Man class too and if the subclass has the same method it takes a priority
