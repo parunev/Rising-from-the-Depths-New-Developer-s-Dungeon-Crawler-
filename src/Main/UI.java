@@ -4,23 +4,26 @@ package Main;
 // So we can display messages, item icons etc.
 
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class UI {
 
     GamePanel gp;
     Graphics2D g2;
-    Font arial_40, arial_80B;
+    Font maruMonica;
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0;
     public boolean gameFinished = false;
     public String currentDialogue = "";
 
-    public UI(GamePanel gp){
+    public UI(GamePanel gp) throws IOException, FontFormatException {
         this.gp = gp;
         // Instantiating object in game loop is not recommended. Consuming time and resource.
-        arial_40 = new Font("Arial", Font.PLAIN, 40); // font name, font style, font size
-        arial_80B = new Font("Arial", Font.BOLD, 80);
+        InputStream is = getClass().getResourceAsStream("/Resources/Fonts/x12y16pxMaruMonica.ttf");
+        assert is != null;
+        maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
 
     }
 
@@ -32,7 +35,7 @@ public class UI {
     public void draw(Graphics2D g2){
         this.g2 = g2;
 
-        g2.setFont(arial_40);
+        g2.setFont(maruMonica);
         g2.setColor(Color.WHITE);
 
         // PLAY STATE
@@ -71,7 +74,7 @@ public class UI {
 
         drawSubWindow(x, y, width, height);
 
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,28F));
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
         x += gp.tileSize;
         y += gp.tileSize;
 

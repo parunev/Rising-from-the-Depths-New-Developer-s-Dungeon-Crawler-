@@ -7,6 +7,7 @@ import Tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 //works as game screen
 public class GamePanel extends JPanel implements Runnable {
@@ -54,7 +55,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int dialogueState = 3;
 
 
-    public GamePanel(){
+    public GamePanel() throws IOException, FontFormatException {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the size of this class (JPanel)
         this.setBackground(Color.black);
 
