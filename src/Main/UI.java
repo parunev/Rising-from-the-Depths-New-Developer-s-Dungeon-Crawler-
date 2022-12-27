@@ -17,6 +17,7 @@ public class UI {
     int messageCounter = 0;
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public int commandNum = 0;
 
     public UI(GamePanel gp) throws IOException, FontFormatException {
         this.gp = gp;
@@ -37,6 +38,11 @@ public class UI {
 
         g2.setFont(maruMonica);
         g2.setColor(Color.WHITE);
+        
+        // TITLE STATE
+        if (gp.gameState == gp.titleState){
+            drawTitleScreen();
+        }
 
         // PLAY STATE
         if (gp.gameState == gp.playState){
@@ -54,6 +60,57 @@ public class UI {
         }
     }
 
+    public void drawTitleScreen(){
+        // BACKGROUND COLOR
+        g2.setColor(new Color(70,120,80));
+        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+
+        // TITLE NAME
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+        String text = "Blueprint Game";
+        int x = getXForCenteredText(text);
+        int y = gp.tileSize * 3;
+
+        // SHADOW
+        g2.setColor(Color.BLACK);
+        g2.drawString(text, x +5, y+5);
+
+        // MAIN COLOR
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
+
+        // CHARACTER IMAGE
+        x = gp.screenWidth/2 - (gp.tileSize * 2)/2;
+        y += gp.tileSize * 2;
+        g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+
+        // MENU
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
+
+        text = "NEW GAME";
+        x = getXForCenteredText(text);
+        y += gp.tileSize * 3.5;
+        g2.drawString(text, x, y);
+        if (commandNum == 0){
+            g2.drawString(">", x-gp.tileSize, y);
+        }
+
+        text = "LOAD GAME";
+        x = getXForCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if (commandNum == 1){
+            g2.drawString(">", x-gp.tileSize, y);
+        }
+
+        text = "QUIT";
+        x = getXForCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if (commandNum == 2){
+            g2.drawString(">", x-gp.tileSize, y);
+        }
+    }
 
     public void drawPauseScreen(){
 
@@ -94,7 +151,6 @@ public class UI {
         g2.setStroke(new BasicStroke(5)); // Defines the width of outlines of graphics which are rendered with a Graphics2D
         g2.drawRoundRect(x+5,y+5,width-10,height-10,25,25);
     }
-
 
     public int getXForCenteredText(String text){
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();

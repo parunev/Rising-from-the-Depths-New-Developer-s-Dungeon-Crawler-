@@ -50,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable {
     // and depending on the situation the program draws different things on the screen and often receive diff key input
     // Example: You can swing your sword by pressing enter in gameplay state but maybe enter works as confirm in menu screen
     public int gameState;
+    public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
@@ -71,7 +72,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setObject();
         aSetter.setNPC();
        // playMusic(0);
-        gameState = playState;
+        gameState = titleState;
     }
 
     // passing this(Main.GamePanel) to this thread constructor, instantiate
@@ -149,28 +150,27 @@ public class GamePanel extends JPanel implements Runnable {
             drawStart = System.nanoTime();
         }
 
-        // TILE
-        tileM.draw(g2); // first tiles, it's like a layout
-
-        // OBJECT
-        for (SuperObject superObject : obj) {
-            if (superObject != null) { // otherwise we might get NullPoint error
-                superObject.draw(g2, this);
-            }
+        // TITLE SCREEN
+        if (gameState == titleState){
+            ui.draw(g2);
         }
-
-        // NPC
-        for (Entity entity : npc) {
-            if (entity != null) {
-                entity.draw(g2);
+        // OTHERS
+        else{
+            // TILE
+            tileM.draw(g2); // first tiles, it's like a layout
+            for (SuperObject superObject : obj) { // OBJECT
+                if (superObject != null) { // otherwise we might get NullPoint error
+                    superObject.draw(g2, this);
+                }
             }
+            for (Entity entity : npc) { // NPC
+                if (entity != null) {
+                    entity.draw(g2);
+                }
+            }
+            player.draw(g2); // PLAYER
+            ui.draw(g2);// UI
         }
-
-        // PLAYER
-        player.draw(g2);
-
-        // UI
-        ui.draw(g2);
 
         // DEBUG
         if (keyH.checkDrawTime){
