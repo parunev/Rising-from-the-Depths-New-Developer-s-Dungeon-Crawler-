@@ -55,4 +55,12 @@ public class MON_GreenSlime extends Entity {
             actionLockCounter = 0;
         }
     }
+
+    // Monsters react to damage
+    public void damageReaction(){
+        actionLockCounter = 0;
+        // When the monster receive damage it starts moving away from the player
+        direction = gp.player.direction;
+
+    }
 }

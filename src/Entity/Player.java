@@ -206,7 +206,8 @@ public class Player extends Entity{
                     gp.gameState = gp.dialogueState;
                     gp.npc[i].speak();
             }else{ // If player is not getting any npc index, and we pressed enter then he starts attacking
-                    attacking = true;
+                gp.playSE(7);
+                attacking = true;
             }
         }
     }
@@ -214,6 +215,7 @@ public class Player extends Entity{
     public void contactMonster(int i) {
         if (i != 999){
             if (!invincible){
+                gp.playSE(6);
                 life--;
                 invincible = true;
             }
@@ -223,11 +225,13 @@ public class Player extends Entity{
     public void damageMonster(int i){
         if (i != 999){
             if (!gp.monster[i].invincible){
+                gp.playSE(5);
                 gp.monster[i].life--;
                 gp.monster[i].invincible = true;
+                gp.monster[i].damageReaction();
 
                 if (gp.monster[i].life <= 0){
-                    gp.monster[i] = null; // dead
+                    gp.monster[i].dying = true;
                 }
             }
         }
