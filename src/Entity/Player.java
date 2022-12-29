@@ -62,7 +62,7 @@ public class Player extends Entity{
 
         // This If statement checks is any keys are pressed. If so the player moves and if it's not the player stays
         // at one position (etc. the sprites are not updating if we do not press buttons)
-        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed){
+        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.enterPressed){
 
             // Direction if statement
             // Based on this direction we check collision
@@ -72,7 +72,7 @@ public class Player extends Entity{
                 direction = "down";
             }else if (keyH.leftPressed){
                 direction = "left";
-            }else {
+            }else if (keyH.rightPressed){
                 direction = "right";
             }
 
@@ -95,10 +95,8 @@ public class Player extends Entity{
             // CHECK EVENT
             gp.eHandler.checkEvent();
 
-            gp.keyH.enterPressed = false;
-
             // IF COLLISION IS FALSE, PLAYER CAN MOVE
-            if (!collisionOn){
+            if (!collisionOn && !keyH.enterPressed){
                 switch (direction) {
                     case "up" -> worldY -= speed;
                     case "down" -> worldY += speed;
@@ -106,6 +104,8 @@ public class Player extends Entity{
                     case "right" -> worldX += speed;
                 }
             }
+
+            gp.keyH.enterPressed = false;
 
             // Player image chances in every 10 frames
             spriteCounter++;
