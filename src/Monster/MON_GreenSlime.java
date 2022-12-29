@@ -6,9 +6,11 @@ import Main.GamePanel;
 import java.util.Random;
 
 public class MON_GreenSlime extends Entity {
-
+    GamePanel gp;
     public MON_GreenSlime(GamePanel gp) {
         super(gp);
+        this.gp = gp;
+
         type = 2;
         name = "Green Slime";
         speed = 1;
@@ -28,14 +30,14 @@ public class MON_GreenSlime extends Entity {
     // Loading and scaling
     public void getImage(){
         // Using two images (down1, down2) for all directions
-        up1 = setup("/Resources/Monsters/greenslime_down_1");
-        up2 = setup("/Resources/Monsters/greenslime_down_2");
-        down1 = setup("/Resources/Monsters/greenslime_down_1");
-        down2 = setup("/Resources/Monsters/greenslime_down_2");
-        left1 = setup("/Resources/Monsters/greenslime_down_1");
-        left2 = setup("/Resources/Monsters/greenslime_down_2");
-        right1 = setup("/Resources/Monsters/greenslime_down_1");
-        right2 = setup("/Resources/Monsters/greenslime_down_2");
+        up1 = setup("/Resources/Monsters/greenslime_down_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/Resources/Monsters/greenslime_down_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/Resources/Monsters/greenslime_down_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/Resources/Monsters/greenslime_down_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/Resources/Monsters/greenslime_down_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/Resources/Monsters/greenslime_down_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/Resources/Monsters/greenslime_down_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/Resources/Monsters/greenslime_down_2", gp.tileSize, gp.tileSize);
     }
 
     // Setting Slime behaviour
