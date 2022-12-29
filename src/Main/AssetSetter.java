@@ -12,7 +12,6 @@ public class AssetSetter {
 
     // What object you want to place on the map and on what coordinates
     public void setObject(){
-
     }
 
     public void setNPC(){

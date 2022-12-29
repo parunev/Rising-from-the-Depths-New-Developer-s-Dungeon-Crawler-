@@ -3,8 +3,8 @@ package Main;
 // Handles all the on-screen User Interface
 // So we can display messages, item icons etc.
 
+import Entity.Entity;
 import Obj.OBJ_Heart;
-import Obj.SuperObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -32,7 +32,7 @@ public class UI {
         maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
 
         // CREATE HUD OBJECT
-        SuperObject heart = new OBJ_Heart(gp);
+        Entity heart = new OBJ_Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;

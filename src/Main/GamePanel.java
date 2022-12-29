@@ -2,12 +2,13 @@ package Main;
 
 import Entity.Entity;
 import Entity.Player;
-import Obj.SuperObject;
 import Tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 //works as game screen
 public class GamePanel extends JPanel implements Runnable {
@@ -43,8 +44,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
-    public SuperObject[] obj = new SuperObject[10]; // Slots for objects
+    public Entity[] obj = new Entity[10]; // Slots for objects
     public Entity[] npc = new Entity[10];
+    ArrayList<Entity> entityList = new ArrayList<>();
 
     // GAME STATE
     // When you play a game usually it has various game situations - title screen, main gameplay screen or in-game menu screen
@@ -159,18 +161,37 @@ public class GamePanel extends JPanel implements Runnable {
         else{
             // TILE
             tileM.draw(g2); // first tiles, it's like a layout
-            for (SuperObject superObject : obj) { // OBJECT
-                if (superObject != null) { // otherwise we might get NullPoint error
-                    superObject.draw(g2, this);
+
+            // ADD ENTITIES TO THE LIST
+            entityList.add(player);
+
+            for (Entity item : npc) {
+                if (item != null) {
+                    entityList.add(item);
                 }
             }
-            for (Entity entity : npc) { // NPC
-                if (entity != null) {
-                    entity.draw(g2);
+
+            for (Entity value : obj) {
+                if (value != null) {
+                    entityList.add(value);
                 }
             }
-            player.draw(g2); // PLAYER
-            ui.draw(g2);// UI
+
+            // SORT
+            entityList.sort(Comparator.comparingInt((Entity e) -> e.worldY));
+
+            // DRAW ENTITIES
+            for (Entity entity : entityList) {
+                entity.draw(g2);
+            }
+
+            // EMPTY ENTITY LIST
+            for (int i = 0; i < entityList.size(); i++) {
+                entityList.remove(i);
+            }
+
+            // UI
+            ui.draw(g2);
         }
 
         // DEBUG
