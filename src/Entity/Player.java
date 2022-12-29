@@ -88,6 +88,10 @@ public class Player extends Entity{
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNpc(npcIndex);
 
+            // CHECK MONSTER COLLISION
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            contactMonster(monsterIndex);
+
             // CHECK EVENT
             gp.eHandler.checkEvent();
 
@@ -114,8 +118,15 @@ public class Player extends Entity{
                 spriteCounter = 0;
             }
         }
+        // This needs to be outside of key if statement
+        if (invincible){
+            invincibleCounter++;
+            if (invincibleCounter > 60){
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
     }
-
     public void pickupObject(int i){
 
         // I picked 999 as index but basically any number is fine as long as
@@ -125,11 +136,20 @@ public class Player extends Entity{
         }
     }
 
-    private void interactNpc(int i) {
+    public void interactNpc(int i) {
         if (i != 999){
             if (keyH.enterPressed){ // Dialogue window opens only when you press the Enter key, while NPC collision is happening
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
+            }
+        }
+    }
+
+    public void contactMonster(int i) {
+        if (i != 999){
+            if (!invincible){
+                life--;
+                invincible = true;
             }
         }
     }
@@ -156,6 +176,19 @@ public class Player extends Entity{
             }
         }
 
+        // Visual effect, making the player half transparent when he's invincible
+        if (invincible){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+        }
+
         g2.drawImage(image, screenX, screenY,null); // image observer
+
+        // RESET ALPHA
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
+        // DEBUG
+        //  g2.setFont(new Font("Arial", Font.PLAIN, 26));
+        //  g2.setColor(Color.white);
+        //  g2.drawString("Invincible:" + invincibleCounter, 10, 400);
     }
 }

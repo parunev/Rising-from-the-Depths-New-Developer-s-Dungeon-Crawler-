@@ -24,11 +24,14 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
+    public boolean invincible = false;
+    public int invincibleCounter = 0;
     String[] dialogues = new String[20];
     int dialogueIndex = 0;
     public BufferedImage image, image2, image3;
     public String name;
     public boolean collision = false;
+    public int type; // 0 = player, 1 = NPC, 2 = monster
 
     // CHARACTER STATUS - Shared by players and monsters
     public int maxLife;
@@ -61,7 +64,17 @@ public class Entity {
         collisionOn = false;
         gp.cChecker.checkTile(this); // going to pass the Old Man class as Entity
         gp.cChecker.checkObject(this, false); // checking if the npc is hitting doors maybe
-        gp.cChecker.checkPlayer(this); // checking if the npc is hitting player
+        gp.cChecker.checkEntity(this, gp.npc); // collision happens between monsters and NPCs
+        gp.cChecker.checkEntity(this, gp.monster);
+        boolean contactPlayer = gp.cChecker.checkPlayer(this); // checking if the npc is hitting player
+
+        // If this class is monster, and we contacted player we deal damage
+        if (this.type == 2 && contactPlayer){
+            if (!gp.player.invincible){ // we can give damage
+                gp.player.life--;
+                gp.player.invincible = true;
+            }
+        }
 
         // IF COLLISION IS FALSE, PLAYER CAN MOVE
         if (!collisionOn){

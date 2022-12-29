@@ -67,7 +67,7 @@ public class CollisionChecker {
         }
     }
 
-    // In this method we check if player is hitting any object and if he is we return the index of the object
+    // In this method we check if player is hitting any object and if he is we return the index of the object,
     // so we can process the reaction accordingly.
     public int checkObject(Entity entity, boolean player){ // we're going to check if this entity is player or not
 
@@ -90,41 +90,22 @@ public class CollisionChecker {
                 // Simulating entity's movement and check where it will be after it moved.
                 // Rectangle class has a beautiful method called "Intersects"
                 // this method automatically check if two rectangles are colliding or not
-
                 switch (entity.direction) {
-                    case "up" -> {
-                        entity.solidArea.y -= entity.speed;
-                        if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
-                            if (gp.obj[i].collision) { // solid or not
-                                entity.collisionOn = true;
-                            }
-                            if (player) { // we get the index and return it
-                                index = i;
-                            } // non-player characters cannot pickup objects
-                        }
-                    }
-                    case "down" -> {
-                        entity.solidArea.y += entity.speed;
-                        if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
-                            if (gp.obj[i].collision) {entity.collisionOn = true;}
-                            if (player) {index = i;}
-                        }
-                    }
-                    case "left" -> {
-                        entity.solidArea.x -= entity.speed;
-                        if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
-                            if (gp.obj[i].collision) {entity.collisionOn = true;}
-                            if (player) {index = i;}
-                        }
-                    }
-                    case "right" -> {
-                        entity.solidArea.x += entity.speed;
-                        if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
-                            if (gp.obj[i].collision) {entity.collisionOn = true;}
-                            if (player) {index = i;}
-                        }
-                    }
+                    case "up" -> entity.solidArea.y -= entity.speed;
+                    case "down" -> entity.solidArea.y += entity.speed;
+                    case "left" -> entity.solidArea.x -= entity.speed;
+                    case "right" -> entity.solidArea.x += entity.speed;
                 }
+
+                if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
+                    if (gp.obj[i].collision) { // solid or not
+                        entity.collisionOn = true;
+                    }
+                    if (player) { // we get the index and return it
+                        index = i;
+                    } // non-player characters cannot pickup objects
+                }
+
                 // We reset entity and object solid area otherwise the x and y keeps increasing
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
@@ -156,36 +137,19 @@ public class CollisionChecker {
                 // Simulating entity's movement and check where it will be after it moved.
                 // Rectangle class has a beautiful method called "Intersects"
                 // this method automatically check if two rectangles are colliding or not
-
                 switch (entity.direction) {
-                    case "up" -> {
-                        entity.solidArea.y -= entity.speed;
-                        if (entity.solidArea.intersects(target[i].solidArea)) {
-                                entity.collisionOn = true;
-                                index = i;
-                        }
+                    case "up" -> entity.solidArea.y -= entity.speed;
+                    case "down" -> entity.solidArea.y += entity.speed;
+                    case "left" -> entity.solidArea.x -= entity.speed;
+                    case "right" -> entity.solidArea.x += entity.speed;
+                }
+                if (entity.solidArea.intersects(target[i].solidArea)) {
+                    // If the intersected target is equal to this entity then collision doesn't happen
+                    // This way we can avoid this entity to include itself as a collision target
+                    if (target[i] != entity){
+                        entity.collisionOn = true;
                     }
-                    case "down" -> {
-                        entity.solidArea.y += entity.speed;
-                        if (entity.solidArea.intersects(target[i].solidArea)) {
-                            entity.collisionOn = true;
-                            index = i;
-                        }
-                    }
-                    case "left" -> {
-                        entity.solidArea.x -= entity.speed;
-                        if (entity.solidArea.intersects(target[i].solidArea)) {
-                           entity.collisionOn = true;
-                           index = i;
-                        }
-                    }
-                    case "right" -> {
-                        entity.solidArea.x += entity.speed;
-                        if (entity.solidArea.intersects(target[i].solidArea)) {
-                           entity.collisionOn = true;
-                           index = i;
-                        }
-                    }
+                    index = i;
                 }
                 // We reset entity and object solid area otherwise the x and y keeps increasing
                 entity.solidArea.x = entity.solidAreaDefaultX;
@@ -197,8 +161,10 @@ public class CollisionChecker {
         return index;
     }
 
-    // Similar to other checks but we don't scan array and we don't return any indexes
-    public void checkPlayer(Entity entity){
+    // Similar to other checks but we don't scan array, and we don't return any indexes
+    public boolean checkPlayer(Entity entity){
+
+        boolean contactPlayer = false;
 
         entity.solidArea.x = entity.worldX + entity.solidArea.x;
         entity.solidArea.y = entity.worldY + entity.solidArea.y;
@@ -207,35 +173,21 @@ public class CollisionChecker {
         gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
 
         switch (entity.direction) {
-            case "up" -> {
-                entity.solidArea.y -= entity.speed;
-                if (entity.solidArea.intersects(gp.player.solidArea)) {
-                    entity.collisionOn = true;
-                }
-            }
-            case "down" -> {
-                entity.solidArea.y += entity.speed;
-                if (entity.solidArea.intersects(gp.player.solidArea)) {
-                    entity.collisionOn = true;
-                }
-            }
-            case "left" -> {
-                entity.solidArea.x -= entity.speed;
-                if (entity.solidArea.intersects(gp.player.solidArea)) {
-                    entity.collisionOn = true;
-                }
-            }
-            case "right" -> {
-                entity.solidArea.x += entity.speed;
-                if (entity.solidArea.intersects(gp.player.solidArea)) {
-                    entity.collisionOn = true;
-                }
-            }
+            case "up" -> entity.solidArea.y -= entity.speed;
+            case "down" -> entity.solidArea.y += entity.speed;
+            case "left" -> entity.solidArea.x -= entity.speed;
+            case "right" -> entity.solidArea.x += entity.speed;
+        }
+        if (entity.solidArea.intersects(gp.player.solidArea)) {
+            entity.collisionOn = true;
+            contactPlayer = true;
         }
 
         entity.solidArea.x = entity.solidAreaDefaultX;
         entity.solidArea.y = entity.solidAreaDefaultY;
         gp.player.solidArea.x = gp.player.solidAreaDefaultX;
         gp.player.solidArea.y = gp.player.solidAreaDefaultY;
+
+        return contactPlayer;
     }
 }
