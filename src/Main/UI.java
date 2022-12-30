@@ -110,7 +110,7 @@ public class UI {
         }
     }
 
-    public void  drawMessage(){
+    public void drawMessage(){
         int messageX = gp.tileSize;
         int messageY = gp.tileSize * 4;
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 28F));
@@ -330,6 +330,14 @@ public class UI {
 
         // DRAW PLAYER ITEMS
         for (int i = 0; i < gp.player.inventory.size(); i++) {
+
+            // EQUIP CURSOR
+            if (gp.player.inventory.get(i) == gp.player.currentWeapon ||
+            gp.player.inventory.get(i) == gp.player.currentShield){
+                // Currently equipped items are highlighted
+                g2.setColor(new Color(240,190,90));
+                g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
+            }
             g2.drawImage(gp.player.inventory.get(i).down1, slotX, slotY, null);
             slotX += slotSize;
 

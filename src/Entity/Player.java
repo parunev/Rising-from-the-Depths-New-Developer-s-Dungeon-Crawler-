@@ -35,10 +35,6 @@ public class Player extends Entity{
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        // Player attack area
-        attackArea.width = 36;
-        attackArea.height = 36;
-
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
@@ -76,6 +72,7 @@ public class Player extends Entity{
     }
 
     public int getAttack(){
+        attackArea = currentWeapon.attackArea;
         return attack = strength * currentWeapon.attackValue;
     }
 
@@ -95,14 +92,28 @@ public class Player extends Entity{
     }
 
     public void getPlayerAttackImage(){
-        attackUp1 = setup("/Resources/Player/boy_attack_up_1", gp.tileSize, gp.tileSize*2);
-        attackUp2 = setup("/Resources/Player/boy_attack_up_2", gp.tileSize, gp.tileSize*2);
-        attackDown1 = setup("/Resources/Player/boy_attack_down_1", gp.tileSize, gp.tileSize*2);
-        attackDown2 = setup("/Resources/Player/boy_attack_down_2", gp.tileSize, gp.tileSize*2);
-        attackLeft1 = setup("/Resources/Player/boy_attack_left_1", gp.tileSize*2, gp.tileSize);
-        attackLeft2 = setup("/Resources/Player/boy_attack_left_2", gp.tileSize*2, gp.tileSize);
-        attackRight1 = setup("/Resources/Player/boy_attack_right_1", gp.tileSize*2, gp.tileSize);
-        attackRight2 = setup("/Resources/Player/boy_attack_right_2", gp.tileSize*2, gp.tileSize);
+
+        if (currentWeapon.type == type_sword){
+            attackUp1 = setup("/Resources/Player/boy_attack_up_1", gp.tileSize, gp.tileSize*2);
+            attackUp2 = setup("/Resources/Player/boy_attack_up_2", gp.tileSize, gp.tileSize*2);
+            attackDown1 = setup("/Resources/Player/boy_attack_down_1", gp.tileSize, gp.tileSize*2);
+            attackDown2 = setup("/Resources/Player/boy_attack_down_2", gp.tileSize, gp.tileSize*2);
+            attackLeft1 = setup("/Resources/Player/boy_attack_left_1", gp.tileSize*2, gp.tileSize);
+            attackLeft2 = setup("/Resources/Player/boy_attack_left_2", gp.tileSize*2, gp.tileSize);
+            attackRight1 = setup("/Resources/Player/boy_attack_right_1", gp.tileSize*2, gp.tileSize);
+            attackRight2 = setup("/Resources/Player/boy_attack_right_2", gp.tileSize*2, gp.tileSize);
+        }
+
+        if (currentWeapon.type == type_axe){
+            attackUp1 = setup("/Resources/Player/boy_axe_up_1", gp.tileSize, gp.tileSize*2);
+            attackUp2 = setup("/Resources/Player/boy_axe_up_2", gp.tileSize, gp.tileSize*2);
+            attackDown1 = setup("/Resources/Player/boy_axe_down_1", gp.tileSize, gp.tileSize*2);
+            attackDown2 = setup("/Resources/Player/boy_axe_down_2", gp.tileSize, gp.tileSize*2);
+            attackLeft1 = setup("/Resources/Player/boy_axe_left_1", gp.tileSize*2, gp.tileSize);
+            attackLeft2 = setup("/Resources/Player/boy_axe_left_2", gp.tileSize*2, gp.tileSize);
+            attackRight1 = setup("/Resources/Player/boy_axe_right_1", gp.tileSize*2, gp.tileSize);
+            attackRight2 = setup("/Resources/Player/boy_axe_right_2", gp.tileSize*2, gp.tileSize);
+        }
     }
 
     // This update method gets called 60 times per sec / 60FPS
@@ -235,7 +246,16 @@ public class Player extends Entity{
         // I picked 999 as index but basically any number is fine as long as
         // it's not used by the objects arrays index
         if (i != 999){ // If this index is 999, that means we didn't touched any object but If we did we have touched
-
+            String text;
+            if (inventory.size() != maxInventorySize){ // check if inventory is full
+                inventory.add(gp.obj[i]);
+                gp.playSE(1);
+                text = "Got a " + gp.obj[i].name + "!";
+            }else {
+                text = "You cannot carry any more!";
+            }
+            gp.ui.addMessage(text);
+            gp.obj[i] = null;
         }
     }
 
@@ -305,6 +325,27 @@ public class Player extends Entity{
             gp.gameState = gp.dialogueState;
             gp.ui.currentDialogue = "You are level " + level + " now!\n"
                     + "You feel stronger!";
+        }
+    }
+
+    public void selectItem(){
+        int itemIndex = gp.ui.getItemIndexOnSlot();
+        if (itemIndex < inventory.size()){
+            Entity selectedItem = inventory.get(itemIndex);
+
+            if (selectedItem.type == type_sword || selectedItem.type == type_axe){
+                currentWeapon = selectedItem;
+                attack = getAttack();
+                getPlayerAttackImage();
+            }
+            if (selectedItem.type == type_shield){
+                currentShield = selectedItem;
+                defence = getDefence();
+            }
+            if (selectedItem.type == type_consumable){
+                selectedItem.use(this);
+                inventory.remove(itemIndex);
+            }
         }
     }
 

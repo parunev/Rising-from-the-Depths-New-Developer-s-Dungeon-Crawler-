@@ -11,9 +11,7 @@ import java.util.Objects;
 
 // Stores variables that will be used in Player, Monster and NPC classes.
 public class Entity {
-
     GamePanel gp;
-
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2
             , attackLeft1, attackLeft2, attackRight1, attackRight2;
@@ -44,7 +42,6 @@ public class Entity {
     public int hpBarCounter = 0;
 
     // CHARACTER ATTRIBUTES
-    public int type; // 0 = player, 1 = NPC, 2 = monster
     public String name;
     public int speed;
     public int maxLife;
@@ -65,11 +62,24 @@ public class Entity {
     public int defenceValue;
     public String description = "";
 
+    // TYPE
+    public int type; // 0 = player, 1 = NPC, 2 = monster
+    public final int type_player = 0;
+    public final int type_npc = 1;
+    public final int type_monster = 2;
+    public final int type_sword = 3;
+    public final int type_axe = 4;
+    public final int type_shield = 5;
+    public final int type_consumable = 6;
+
     public Entity(GamePanel gp){
         this.gp = gp;
     }
+
     public void setAction() {}
+
     public void damageReaction(){}
+
     public void speak() {
         // If there is no text we go back to index zero preventing a NullPointer
         if (dialogues[dialogueIndex] == null){
@@ -86,6 +96,8 @@ public class Entity {
         }
     }
 
+    public void use(Entity entity){}
+
     public void update(){
         // We created this method in Old Man class too and if the subclass has the same method it takes a priority
         setAction();
@@ -97,7 +109,7 @@ public class Entity {
         boolean contactPlayer = gp.cChecker.checkPlayer(this); // checking if the npc is hitting player
 
         // If this class is monster, and we contacted player we deal damage
-        if (this.type == 2 && contactPlayer){
+        if (this.type == type_monster && contactPlayer){
             if (!gp.player.invincible){ // we can give damage
                 gp.playSE(6);
 

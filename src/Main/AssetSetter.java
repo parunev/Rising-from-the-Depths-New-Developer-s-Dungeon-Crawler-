@@ -2,6 +2,10 @@ package Main;
 
 import Entity.NPC_OldMan;
 import Monster.MON_GreenSlime;
+import Obj.OBJ_Axe;
+import Obj.OBJ_Key;
+import Obj.OBJ_Potion_Red;
+import Obj.OBJ_Shield_Blue;
 
 public class AssetSetter {
 
@@ -13,13 +17,42 @@ public class AssetSetter {
 
     // What object you want to place on the map and on what coordinates
     public void setObject(){
+        int i = 0;
+
+        gp.obj[i] = new OBJ_Key(gp);
+        gp.obj[i].worldX = gp.tileSize * 25;
+        gp.obj[i].worldY = gp.tileSize * 19;
+        i++;
+
+        gp.obj[i] = new OBJ_Key(gp);
+        gp.obj[i].worldX = gp.tileSize * 21;
+        gp.obj[i].worldY = gp.tileSize * 19;
+        i++;
+
+        gp.obj[i] = new OBJ_Key(gp);
+        gp.obj[i].worldX = gp.tileSize * 26;
+        gp.obj[i].worldY = gp.tileSize * 21;
+        i++;
+
+        gp.obj[i] = new OBJ_Axe(gp);
+        gp.obj[i].worldX = gp.tileSize * 32;
+        gp.obj[i].worldY = gp.tileSize * 21;
+        i++;
+
+        gp.obj[i] = new OBJ_Shield_Blue(gp);
+        gp.obj[i].worldX = gp.tileSize * 35;
+        gp.obj[i].worldY = gp.tileSize * 21;
+        i++;
+
+        gp.obj[i] = new OBJ_Potion_Red(gp);
+        gp.obj[i].worldX = gp.tileSize * 22;
+        gp.obj[i].worldY = gp.tileSize * 27;
     }
 
     public void setNPC(){
         gp.npc[0] = new NPC_OldMan(gp);
         gp.npc[0].worldX = gp.tileSize * 21; // col
         gp.npc[0].worldY = gp.tileSize * 21; // row
-
     }
 
     public void setMonster(){
