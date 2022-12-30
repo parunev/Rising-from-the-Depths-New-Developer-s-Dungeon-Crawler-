@@ -63,6 +63,7 @@ public class Entity {
     // ITEM ATTRIBUTES
     public int attackValue;
     public int defenceValue;
+    public String description = "";
 
     public Entity(GamePanel gp){
         this.gp = gp;

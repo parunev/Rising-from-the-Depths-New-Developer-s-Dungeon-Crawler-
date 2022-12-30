@@ -2,11 +2,13 @@ package Entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
+import Obj.OBJ_Key;
 import Obj.OBJ_Shield_Wood;
 import Obj.OBJ_Sword_Normal;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Player extends Entity{
     KeyHandler keyH;
@@ -15,6 +17,8 @@ public class Player extends Entity{
     public final int screenX;
     public final int screenY;
     public boolean attackCanceled = false;
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 20;
 
     public Player(GamePanel gp, KeyHandler keyH){
         super(gp); // calling the constructor of the superclass
@@ -38,6 +42,7 @@ public class Player extends Entity{
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
+        setItems();
     }
 
     public void setDefaultValues(){
@@ -62,6 +67,12 @@ public class Player extends Entity{
         currentShield = new OBJ_Shield_Wood(gp);
         attack = getAttack(); // The total attack value is decided by strength and weapon
         defence = getDefence(); // The total defence value is decided by dexterity and shield
+    }
+
+    public void setItems(){
+        inventory.add(currentWeapon);
+        inventory.add(currentShield);
+        inventory.add(new OBJ_Key(gp));
     }
 
     public int getAttack(){
