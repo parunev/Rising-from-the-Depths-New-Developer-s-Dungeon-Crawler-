@@ -12,6 +12,7 @@ public class Player extends Entity{
     // Where we draw player on the screen
     public final int screenX;
     public final int screenY;
+    public boolean attackCanceled = false;
 
     public Player(GamePanel gp, KeyHandler keyH){
         super(gp); // calling the constructor of the superclass
@@ -123,6 +124,13 @@ public class Player extends Entity{
                 }
             }
 
+            if (keyH.enterPressed && !attackCanceled){
+                gp.playSE(7);
+                attacking = true;
+                spriteCounter = 0;
+            }
+
+            attackCanceled = false;
             gp.keyH.enterPressed = false;
 
             // Player image chances in every 10 frames
@@ -203,11 +211,9 @@ public class Player extends Entity{
     public void interactNpc(int i) {
         if (gp.keyH.enterPressed){
             if (i != 999){// Dialogue window opens only when you press the Enter key, while NPC collision is happening
-                    gp.gameState = gp.dialogueState;
-                    gp.npc[i].speak();
-            }else{ // If player is not getting any npc index, and we pressed enter then he starts attacking
-                gp.playSE(7);
-                attacking = true;
+                attackCanceled = true;
+                gp.gameState = gp.dialogueState;
+                gp.npc[i].speak();
             }
         }
     }
