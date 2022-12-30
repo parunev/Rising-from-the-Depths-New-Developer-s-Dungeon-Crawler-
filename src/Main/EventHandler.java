@@ -112,6 +112,9 @@ public class EventHandler {
             gp.player.attackCanceled = true;
             gp.ui.currentDialogue = "You drink the water. \nYour life has been recovered.";
             gp.player.life = gp.player.maxLife;
+
+            // Whenever you use the event the monsters will respawn
+            gp.aSetter.setMonster();
         }
     }
 

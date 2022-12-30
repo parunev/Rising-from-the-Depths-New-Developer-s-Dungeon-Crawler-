@@ -16,6 +16,9 @@ public class MON_GreenSlime extends Entity {
         speed = 1;
         maxLife = 4;
         life = maxLife;
+        attack = 5;
+        defence = 0; // defence is 1 since the player starting damage is 1
+        exp = 2; // how much you can get when you kill the monster
 
         solidArea.x = 3;
         solidArea.y = 18;

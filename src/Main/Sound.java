@@ -19,6 +19,7 @@ public class Sound {
         soundURL[5] = getClass().getResource("/Resources/Sounds/hitmonster.wav");
         soundURL[6] = getClass().getResource("/Resources/Sounds/receivedamage.wav");
         soundURL[7] = getClass().getResource("/Resources/Sounds/swingsword.wav");
+        soundURL[8] = getClass().getResource("/Resources/Sounds/levelup.wav");
     }
 
     // FORMAT TO OPEN AUDIO FILE IN JAVA
