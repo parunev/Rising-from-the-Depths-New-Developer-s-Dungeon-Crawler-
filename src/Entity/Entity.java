@@ -238,14 +238,14 @@ public class Entity {
 
         // BLINKING DYING ANIMATION
         if (dyingCounter <= i){changeAlpha(g2,0f);}
-        if (dyingCounter > i && dyingCounter <= i*2){changeAlpha(g2,1f);}
-        if (dyingCounter > i*2 && dyingCounter <= i*3){changeAlpha(g2,0f);}
-        if (dyingCounter > i*3 && dyingCounter <= i*4){changeAlpha(g2,1f);}
-        if (dyingCounter > i*4 && dyingCounter <= i*5){changeAlpha(g2,0f);}
-        if (dyingCounter > i*5 && dyingCounter <= i*6){changeAlpha(g2,1f);}
-        if (dyingCounter > i*6 && dyingCounter <= i*7){changeAlpha(g2,0f);}
-        if (dyingCounter > i*7 && dyingCounter <= i*8){changeAlpha(g2,1f);}
-        if (dyingCounter > i*8){
+        if (dyingCounter > i && dyingCounter <= i * 2){changeAlpha(g2,1f);}
+        if (dyingCounter > i * 2 && dyingCounter <= i * 3){changeAlpha(g2,0f);}
+        if (dyingCounter > i * 3 && dyingCounter <= i * 4){changeAlpha(g2,1f);}
+        if (dyingCounter > i * 4 && dyingCounter <= i * 5){changeAlpha(g2,0f);}
+        if (dyingCounter > i * 5 && dyingCounter <= i * 6){changeAlpha(g2,1f);}
+        if (dyingCounter > i * 6 && dyingCounter <= i * 7){changeAlpha(g2,0f);}
+        if (dyingCounter > i * 7 && dyingCounter <= i * 8){changeAlpha(g2,1f);}
+        if (dyingCounter > i * 8){
             alive = false;
         }
     }
