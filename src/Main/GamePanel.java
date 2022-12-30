@@ -176,7 +176,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         // DEBUG
         long drawStart = 0;
-        if (keyH.checkDrawTime){
+        if (keyH.showDebugText){
             drawStart = System.nanoTime();
         }
 
@@ -232,11 +232,21 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         // DEBUG
-        if (keyH.checkDrawTime){
+        if (keyH.showDebugText){
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
+
+            g2.setFont(new Font("Arial", Font.PLAIN, 20));
             g2.setColor(Color.WHITE);
-            g2.drawString("Draw time: "+ passed, 10, 400);
+            int x = 10;
+            int y = 400;
+            int lineHeight = 20;
+
+            g2.drawString("WorldX" + player.worldX, x, y); y += lineHeight;
+            g2.drawString("WorldY" + player.worldY, x, y); y += lineHeight;
+            g2.drawString("COL" + (player.worldX + player.solidArea.x)/tileSize, x, y); y += lineHeight;
+            g2.drawString("ROW" + (player.worldY + player.solidArea.y)/tileSize, x, y); y += lineHeight;
+            g2.drawString("Draw time: "+ passed, x, y);
         }
 
         g2.dispose(); // dispose of this graphics context and release any system resources that it is using
