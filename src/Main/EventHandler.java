@@ -110,8 +110,9 @@ public class EventHandler {
         if (gp.keyH.enterPressed){
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
-            gp.ui.currentDialogue = "You drink the water. \nYour life has been recovered.";
+            gp.ui.currentDialogue = "You drink the water. \nYour life and mana has been recovered.";
             gp.player.life = gp.player.maxLife;
+            gp.player.mana = gp.player.maxMana;
 
             // Whenever you use the event the monsters will respawn
             gp.aSetter.setMonster();

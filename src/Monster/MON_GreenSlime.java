@@ -2,6 +2,7 @@ package Monster;
 
 import Entity.Entity;
 import Main.GamePanel;
+import Obj.OBJ_Rock;
 
 import java.util.Random;
 
@@ -19,6 +20,7 @@ public class MON_GreenSlime extends Entity {
         attack = 5;
         defence = 0; // defence is 1 since the player starting damage is 1
         exp = 2; // how much you can get when you kill the monster
+        projectile = new OBJ_Rock(gp);
 
         solidArea.x = 3;
         solidArea.y = 18;
@@ -56,6 +58,14 @@ public class MON_GreenSlime extends Entity {
             if (i > 50 && i <= 75){direction = "left";}
             if (i > 75){direction = "right";}
             actionLockCounter = 0;
+        }
+
+        // Slime randomly shoots a rock
+        int i = new Random().nextInt(100)+1;
+        if (i > 99 && !projectile.alive && shotAvailableCounter == 30){
+            projectile.set(worldX, worldY, direction, true, this);
+            gp.projectileList.add(projectile);
+            shotAvailableCounter = 0;
         }
     }
 

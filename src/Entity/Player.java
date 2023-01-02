@@ -54,6 +54,8 @@ public class Player extends Entity{
         // PLAYER STATUS
         level = 1;
         maxLife = 6; // 6 life means 3 full hearts
+        maxMana = 4;
+        mana = maxMana;
         life = maxLife; // 1 life means half heart, 2 life means 1 heart
         strength = 1; // The more strength he has, the more damage he gives
         dexterity = 1; // The more dexterity he has, the less damage he receives
@@ -191,10 +193,14 @@ public class Player extends Entity{
 
         // Seconds condition means that you cannot shoot another projectile if there's already one alive
         // This means you can shoot only one at a time
-        if (gp.keyH.shotKeyPressed && !projectile.alive && shotAvailableCounter == 30){
+        if (gp.keyH.shotKeyPressed && !projectile.alive
+                && shotAvailableCounter == 30 && projectile.hasResource(this)){
 
             // SET DEFAULT COORDINATES, DIRECTION AND USER
             projectile.set(worldX, worldY, direction, true, this);
+
+            // SUBTRACT THE COST(MANA)
+            projectile.subtractResource(this);
 
             // ADD IT TO THE LIST
             gp.projectileList.add(projectile);

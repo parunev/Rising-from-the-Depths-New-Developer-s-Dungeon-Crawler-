@@ -18,6 +18,7 @@ public class Projectile extends Entity{
     }
     public void update(){
 
+        // If player shoots
         if (user == gp.player){
             int monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
             if (monsterIndex != 999){
@@ -25,9 +26,16 @@ public class Projectile extends Entity{
                 alive = false; // If the projectile hits a monster, it dies (disappears)
             }
         }
-        if (user != gp.player){
 
+        // If monster shoots
+        if (user != gp.player){
+            boolean contactPlayer = gp.cChecker.checkPlayer(this);
+            if (!gp.player.invincible && contactPlayer){
+                damagePlayer(attack);
+                alive = false;
+            }
         }
+
         // Just like other NPCs or monsters, projectiles move based on its speed and direction
         switch (direction) {
             case "up" -> worldY -= speed;
@@ -54,4 +62,8 @@ public class Projectile extends Entity{
             spriteCounter = 0;
         }
     }
+    public boolean hasResource(Entity user){
+        return false;
+    }
+    public void subtractResource(Entity user){}
 }
