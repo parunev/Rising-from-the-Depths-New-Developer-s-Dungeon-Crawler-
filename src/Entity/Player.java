@@ -222,6 +222,12 @@ public class Player extends Entity{
         if (shotAvailableCounter < 30){
             shotAvailableCounter++;
         }
+        if (life > maxLife){
+            life = maxLife;
+        }
+        if (mana > maxMana){
+            mana = maxMana;
+        }
     }
 
     public void attacking() {
@@ -274,15 +280,21 @@ public class Player extends Entity{
         // I picked 999 as index but basically any number is fine as long as
         // it's not used by the objects arrays index
         if (i != 999){ // If this index is 999, that means we didn't touched any object but If we did we have touched
-            String text;
-            if (inventory.size() != maxInventorySize){ // check if inventory is full
-                inventory.add(gp.obj[i]);
-                gp.playSE(1);
-                text = "Got a " + gp.obj[i].name + "!";
-            }else {
-                text = "You cannot carry any more!";
+
+            if (gp.obj[i].type == type_pickupOnly){ // PICKUP ONLY ITEMS
+                gp.obj[i].use(this);
+
+            }else{ // INVENTORY ITEMS
+                String text;
+                if (inventory.size() != maxInventorySize){ // check if inventory is full
+                    inventory.add(gp.obj[i]);
+                    gp.playSE(1);
+                    text = "Got a " + gp.obj[i].name + "!";
+                }else {
+                    text = "You cannot carry any more!";
+                }
+                gp.ui.addMessage(text);
             }
-            gp.ui.addMessage(text);
             gp.obj[i] = null;
         }
     }
