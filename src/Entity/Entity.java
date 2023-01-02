@@ -126,6 +126,7 @@ public class Entity {
         gp.cChecker.checkObject(this, false); // checking if the npc is hitting doors maybe
         gp.cChecker.checkEntity(this, gp.npc); // collision happens between monsters and NPCs
         gp.cChecker.checkEntity(this, gp.monster);
+        gp.cChecker.checkEntity(this, gp.iTile); // collision happens between monsters and interactive tiles
         boolean contactPlayer = gp.cChecker.checkPlayer(this); // checking if the npc is hitting player
 
         // If this class is monster, and we contacted player we deal damage
