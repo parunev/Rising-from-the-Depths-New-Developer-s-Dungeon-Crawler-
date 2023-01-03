@@ -3,12 +3,16 @@ package Main;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import java.net.URL;
 
 public class Sound {
 
     Clip clip; // We use this to open audio files and import
     URL[] soundURL = new URL[30]; // Store file paths of the sound files
+    FloatControl fc; // Provides control over a range of floating-point values
+    int volumeScale = 3; // Default
+    float volume;
 
     public Sound(){
         soundURL[0] = getClass().getResource("/Resources/Sounds/theme_music.wav");
@@ -31,6 +35,8 @@ public class Sound {
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
             clip = AudioSystem.getClip();
             clip.open(ais);
+            fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            checkVolume();
         }catch (Exception ignored){}
     }
 
@@ -44,5 +50,19 @@ public class Sound {
 
     public void stop(){
         clip.stop();
+    }
+
+    public void checkVolume(){
+
+        // VOLUME LEVELS -80f to 6f (-30f to -70f sounds all the same)
+        switch (volumeScale) {
+            case 0 -> volume = -80f;
+            case 1 -> volume = -20f;
+            case 2 -> volume = -12f;
+            case 3 -> volume = -5f;
+            case 4 -> volume = 1f;
+            case 5 -> volume = 6f;
+        }
+        fc.setValue(volume);
     }
 }
