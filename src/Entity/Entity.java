@@ -118,6 +118,38 @@ public class Entity {
         }
     }
 
+    // BLUEPRINTS, we always override them
+    public Color getParticleColor(){
+        return null;
+    }
+    public int getParticleSize(){
+        return 0;
+    }
+    public int getParticleSpeed(){
+        return 0;
+    }
+    public int getParticleMaxLife(){
+        return 0;
+    }
+
+    public void generateParticle(Entity generator, Entity target){
+        Color color = generator.getParticleColor();
+        int size = generator.getParticleSize();
+        int speed = generator.getParticleSpeed();
+        int maxLife = generator.getParticleMaxLife();
+
+        // Last two parameters xd, yd means which direction this particle will move to
+        // The direction and speed of the particle can be adjusted
+        Particle p1 = new Particle(gp, target, color, size, speed, maxLife,-2, -1); // top left
+        Particle p2 = new Particle(gp, target, color, size, speed, maxLife,2, -1); // top right
+        Particle p3 = new Particle(gp, target, color, size, speed, maxLife,-2, 1); // down left
+        Particle p4 = new Particle(gp, target, color, size, speed, maxLife,2, 1); // down right
+        gp.particleList.add(p1);
+        gp.particleList.add(p2);
+        gp.particleList.add(p3);
+        gp.particleList.add(p4);
+    }
+
     public void update(){
         // We created this method in Old Man class too and if the subclass has the same method it takes a priority
         setAction();

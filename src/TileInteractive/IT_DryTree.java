@@ -3,6 +3,8 @@ package TileInteractive;
 import Entity.Entity;
 import Main.GamePanel;
 
+import java.awt.*;
+
 public class IT_DryTree extends InteractiveTile{
     GamePanel gp;
 
@@ -30,5 +32,20 @@ public class IT_DryTree extends InteractiveTile{
     // When you cut the tree, a trunk of a tree will appear
     public InteractiveTile getDestroyedForm(){
         return new IT_Trunk(gp, worldX/gp.tileSize, worldY/gp.tileSize);
+    }
+
+
+    // WE CHOOSE COLOR, SIZE, SPEED AND MAX LIFE OF THIS DRY TREE PARTICLE
+    public Color getParticleColor(){
+        return new Color(65,50,30);
+    }
+    public int getParticleSize(){
+        return 6; // 6 pixels
+    }
+    public int getParticleSpeed(){ // how fast the particle can fly
+        return 1;
+    }
+    public int getParticleMaxLife(){ // this indicates how long this particle lasts
+        return 20;
     }
 }
