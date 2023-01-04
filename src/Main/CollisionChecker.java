@@ -32,8 +32,8 @@ public class CollisionChecker {
         switch (entity.direction) {
             case "up" -> {
                 entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNumber[entityLeftCol][entityTopRow];
-                tileNum2 = gp.tileM.mapTileNumber[entityRightCol][entityTopRow];
+                tileNum1 = gp.tileM.mapTileNumber[gp.currentMap][entityLeftCol][entityTopRow];
+                tileNum2 = gp.tileM.mapTileNumber[gp.currentMap][entityRightCol][entityTopRow];
 
                 // if one of them or both are true, the player is hitting a solid tile, so he cannot move this direction
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
@@ -42,24 +42,24 @@ public class CollisionChecker {
             }
             case "down" -> {
                 entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNumber[entityLeftCol][entityBottomRow];
-                tileNum2 = gp.tileM.mapTileNumber[entityRightCol][entityBottomRow];
+                tileNum1 = gp.tileM.mapTileNumber[gp.currentMap][entityLeftCol][entityBottomRow];
+                tileNum2 = gp.tileM.mapTileNumber[gp.currentMap][entityRightCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
             }
             case "left" -> {
                 entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNumber[entityLeftCol][entityTopRow];
-                tileNum2 = gp.tileM.mapTileNumber[entityLeftCol][entityBottomRow];
+                tileNum1 = gp.tileM.mapTileNumber[gp.currentMap][entityLeftCol][entityTopRow];
+                tileNum2 = gp.tileM.mapTileNumber[gp.currentMap][entityLeftCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
             }
             case "right" -> {
                 entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNumber[entityRightCol][entityTopRow];
-                tileNum2 = gp.tileM.mapTileNumber[entityRightCol][entityBottomRow];
+                tileNum1 = gp.tileM.mapTileNumber[gp.currentMap][entityRightCol][entityTopRow];
+                tileNum2 = gp.tileM.mapTileNumber[gp.currentMap][entityRightCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
@@ -73,8 +73,8 @@ public class CollisionChecker {
 
         int index = 999;
 
-        for (int i = 0; i < gp.obj.length ; i++) {
-            if (gp.obj[i] != null){
+        for (int i = 0; i < gp.obj[1].length ; i++) {
+            if (gp.obj[gp.currentMap][i] != null){
 
                 // Get entity's solid area position
                 entity.solidArea.x = entity.worldX + entity.solidArea.x;
@@ -84,8 +84,8 @@ public class CollisionChecker {
                 // But it's included so the code still works even if you set specific values in each object
 
                 // Get the objects solid area position
-                gp.obj[i].solidArea.x = gp.obj[i].worldX + gp.obj[i].solidArea.x;
-                gp.obj[i].solidArea.y = gp.obj[i].worldY + gp.obj[i].solidArea.y;
+                gp.obj[gp.currentMap][i].solidArea.x = gp.obj[gp.currentMap][i].worldX + gp.obj[gp.currentMap][i].solidArea.x;
+                gp.obj[gp.currentMap][i].solidArea.y = gp.obj[gp.currentMap][i].worldY + gp.obj[gp.currentMap][i].solidArea.y;
 
                 // Simulating entity's movement and check where it will be after it moved.
                 // Rectangle class has a beautiful method called "Intersects"
@@ -97,8 +97,8 @@ public class CollisionChecker {
                     case "right" -> entity.solidArea.x += entity.speed;
                 }
 
-                if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
-                    if (gp.obj[i].collision) { // solid or not
+                if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
+                    if (gp.obj[gp.currentMap][i].collision) { // solid or not
                         entity.collisionOn = true;
                     }
                     if (player) { // we get the index and return it
@@ -109,19 +109,19 @@ public class CollisionChecker {
                 // We reset entity and object solid area otherwise the x and y keeps increasing
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
-                gp.obj[i].solidArea.x = gp.obj[i].solidAreaDefaultX;
-                gp.obj[i].solidArea.y = gp.obj[i].solidAreaDefaultY;
+                gp.obj[gp.currentMap][i].solidArea.x = gp.obj[gp.currentMap][i].solidAreaDefaultX;
+                gp.obj[gp.currentMap][i].solidArea.y = gp.obj[gp.currentMap][i].solidAreaDefaultY;
             }
         }
         return index;
     }
 
     // NPC or Monster collision
-    public int checkEntity(Entity entity, Entity[] target){
+    public int checkEntity(Entity entity, Entity[][] target){
         int index = 999;
 
-        for (int i = 0; i < target.length ; i++) {
-            if (target[i] != null){
+        for (int i = 0; i < target[1].length ; i++) {
+            if (target[gp.currentMap][i] != null){
 
                 // Get entity's solid area position
                 entity.solidArea.x = entity.worldX + entity.solidArea.x;
@@ -131,8 +131,8 @@ public class CollisionChecker {
                 // But it's included so the code still works even if you set specific values in each object
 
                 // Get the objects solid area position
-                target[i].solidArea.x = target[i].worldX + target[i].solidArea.x;
-                target[i].solidArea.y = target[i].worldY + target[i].solidArea.y;
+                target[gp.currentMap][i].solidArea.x = target[gp.currentMap][i].worldX + target[gp.currentMap][i].solidArea.x;
+                target[gp.currentMap][i].solidArea.y = target[gp.currentMap][i].worldY + target[gp.currentMap][i].solidArea.y;
 
                 // Simulating entity's movement and check where it will be after it moved.
                 // Rectangle class has a beautiful method called "Intersects"
@@ -143,10 +143,10 @@ public class CollisionChecker {
                     case "left" -> entity.solidArea.x -= entity.speed;
                     case "right" -> entity.solidArea.x += entity.speed;
                 }
-                if (entity.solidArea.intersects(target[i].solidArea)) {
+                if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
                     // If the intersected target is equal to this entity then collision doesn't happen
                     // This way we can avoid this entity to include itself as a collision target
-                    if (target[i] != entity){
+                    if (target[gp.currentMap][i] != entity){
                         entity.collisionOn = true;
                     }
                     index = i;
@@ -154,8 +154,8 @@ public class CollisionChecker {
                 // We reset entity and object solid area otherwise the x and y keeps increasing
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
-                target[i].solidArea.x = target[i].solidAreaDefaultX;
-                target[i].solidArea.y = target[i].solidAreaDefaultY;
+                target[gp.currentMap][i].solidArea.x = target[gp.currentMap][i].solidAreaDefaultX;
+                target[gp.currentMap][i].solidArea.y = target[gp.currentMap][i].solidAreaDefaultY;
             }
         }
         return index;

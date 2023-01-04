@@ -70,8 +70,6 @@ public class Entity {
 
     // TYPE
     public int type; // 0 = player, 1 = NPC, 2 = monster
-    public final int type_player = 0;
-    public final int type_npc = 1;
     public final int type_monster = 2;
     public final int type_sword = 3;
     public final int type_axe = 4;
@@ -108,11 +106,11 @@ public class Entity {
     public void checkDrop(){}
 
     public void dropItem(Entity droppedItem){
-        for (int i = 0; i < gp.obj.length; i++) {
-            if (gp.obj[i] == null){
-                gp.obj[i] = droppedItem;
-                gp.obj[i].worldX = worldX; // the dead monster worldX
-                gp.obj[i].worldY = worldY; //
+        for (int i = 0; i < gp.obj[1].length; i++) {
+            if (gp.obj[gp.currentMap][i] == null){
+                gp.obj[gp.currentMap][i] = droppedItem;
+                gp.obj[gp.currentMap][i].worldX = worldX; // the dead monster worldX
+                gp.obj[gp.currentMap][i].worldY = worldY; //
                 break;
             }
         }
@@ -131,6 +129,7 @@ public class Entity {
     public int getParticleMaxLife(){
         return 0;
     }
+    //
 
     public void generateParticle(Entity generator, Entity target){
         Color color = generator.getParticleColor();

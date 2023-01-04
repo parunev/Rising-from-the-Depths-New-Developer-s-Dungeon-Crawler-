@@ -17,7 +17,7 @@ public class IT_DryTree extends InteractiveTile{
 
         down1 = setup("/Resources/Tiles_Interactive/drytree", gp.tileSize, gp.tileSize);
         destructible = true;
-        life = 3; // How much times you have to hit the tree until you cut it
+        life = 1; // How much times you have to hit the tree until you cut it // Temporary putting health to 1
     }
 
     // If your weapon is Axe you can cut the tree, otherwise you can't

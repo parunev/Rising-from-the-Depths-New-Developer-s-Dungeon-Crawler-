@@ -28,6 +28,7 @@ public class Sound {
         soundURL[10] = getClass().getResource("/Resources/Sounds/fireball.wav");
         soundURL[11] = getClass().getResource("/Resources/Sounds/cuttree.wav");
         soundURL[12] = getClass().getResource("/Resources/Sounds/gameover.wav");
+        soundURL[13] = getClass().getResource("/Resources/Sounds/stairs.wav");
     }
 
     // FORMAT TO OPEN AUDIO FILE IN JAVA
