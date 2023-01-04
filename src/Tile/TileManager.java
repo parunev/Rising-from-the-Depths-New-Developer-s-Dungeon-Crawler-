@@ -23,14 +23,14 @@ public class TileManager {
         mapTileNumber = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
-        loadMap("/Resources/Maps/worldV2.txt");
+        loadMap("/Resources/Maps/worldV3.txt");
     }
 
     public void getTileImage(){
 
         // PLACEHOLDER
         // index, image name, collision
-        // We don't use the tile 0 to 9 but I've set a placeholder image so we can prevent NullPointer exception
+        // We don't use the tile 0 to 9, but I've set a placeholder image, so we can prevent NullPointer exception
         // Happens when we scan the array
         setup(0,"grass00", false);
         setup(1,"grass00", false);
@@ -77,6 +77,9 @@ public class TileManager {
         setup(39,"earth", false);
         setup(40,"wall", true);
         setup(41,"tree", true);
+        setup(42,"hut", true);
+        setup(43,"floor01", true);
+        setup(44,"table01", true);
     }
 
     public void setup(int index, String imageName, boolean collision){
@@ -148,7 +151,7 @@ public class TileManager {
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY){
 
-                // doesn't need to scale the images during the game-loop any more
+                // doesn't need to scale the images during the game-loop anymore
                 g2.drawImage(tile[tileNum].image, screenX, screenY, null);
             }
 
