@@ -49,7 +49,7 @@ public class UI {
        messageCounter.add(0);
     }
 
-    public void draw(Graphics2D g2){
+    public void draw(Graphics2D g2) throws IOException {
         this.g2 = g2;
 
         g2.setFont(maruMonica);
@@ -402,7 +402,7 @@ public class UI {
     }
 
     // OPTIONS SCREEN
-    public void drawOptionsScreen(){
+    public void drawOptionsScreen() throws IOException {
         g2.setColor(Color.white);
         g2.setFont(g2.getFont().deriveFont(32F));
 
@@ -422,7 +422,7 @@ public class UI {
 
         gp.keyH.enterPressed = false;
     }
-    public void options_top(int frameX, int frameY){
+    public void options_top(int frameX, int frameY) throws IOException {
         int textX;
         int textY;
 
@@ -493,6 +493,8 @@ public class UI {
         g2.drawRect(textX, textY, 120, 24);
         volumeWidth = 24 * gp.se.volumeScale;
         g2.fillRect(textX, textY, volumeWidth, 24);
+
+        gp.config.safeConfig();
     }
     public void options_control(int frameX, int frameY){
 

@@ -41,6 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
+    Config config = new Config(this);
     Thread gameThread; //it keeps your program running until you stop it
 
     // ENTITY AND OBJECT
@@ -206,7 +207,11 @@ public class GamePanel extends JPanel implements Runnable {
 
         // TITLE SCREEN
         if (gameState == titleState){
-            ui.draw(g2);
+            try {
+                ui.draw(g2);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         // OTHERS
         else{
@@ -264,7 +269,11 @@ public class GamePanel extends JPanel implements Runnable {
             entityList.clear();
 
             // UI
-            ui.draw(g2);
+            try {
+                ui.draw(g2);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         // DEBUG

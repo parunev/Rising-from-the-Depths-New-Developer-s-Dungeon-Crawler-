@@ -14,6 +14,8 @@ public class Main {
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
 
+        gamePanel.config.loadConfig();
+
         // causes this window to be sized to fit the preferred size
         // and layouts of its subcomponents (=Main.GamePanel)
         window.pack();
