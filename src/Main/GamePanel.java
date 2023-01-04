@@ -65,6 +65,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int dialogueState = 3;
     public final int characterState = 4;
     public final int optionsState = 5;
+    public final int gameOverState = 6;
 
     public GamePanel() throws IOException, FontFormatException {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the size of this class (JPanel)
@@ -84,6 +85,27 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setMonster();
         aSetter.setInteractiveTiles();
         gameState = titleState;
+    }
+
+    // If we retry the game then we're going to restore player default positions and life/mana
+    // plus NPCs and Monsters
+    public void retry(){
+        player.setDefaultPositions();
+        player.restoreLifeAndMana();
+        aSetter.setNPC();
+        aSetter.setMonster();
+    }
+
+    // If we chose to quit game, basically this means we will reset everything
+    public void restart(){
+        player.setDefaultPositions();
+        player.setDefaultValues();
+        player.restoreLifeAndMana();
+        player.setItems();
+        aSetter.setObject();
+        aSetter.setNPC();
+        aSetter.setMonster();
+        aSetter.setInteractiveTiles();
     }
 
     // passing this(Main.GamePanel) to this thread constructor, instantiate
