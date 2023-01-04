@@ -94,6 +94,7 @@ public class GamePanel extends JPanel implements Runnable {
         player.restoreLifeAndMana();
         aSetter.setNPC();
         aSetter.setMonster();
+        playMusic(0);
     }
 
     // If we chose to quit game, basically this means we will reset everything
