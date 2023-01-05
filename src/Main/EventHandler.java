@@ -1,5 +1,7 @@
 package Main;
 
+import Entity.Entity;
+
 public class EventHandler {
 
     GamePanel gp;
@@ -77,6 +79,10 @@ public class EventHandler {
             else if (hit(1,12,13,"any")){
                 teleportHut(0, 10, 39);
             }
+            // Speak to the merchant
+            else if (hit(1,12,9,"up")){
+                speak(gp.npc[1][0]);
+            }
         }
     }
 
@@ -153,5 +159,13 @@ public class EventHandler {
 
         canTouchEvent = false;
         gp.playSE(13);
+    }
+
+    public void speak(Entity entity){
+        if (gp.keyH.enterPressed){
+            gp.gameState = gp.dialogueState;
+            gp.player.attackCanceled = true;
+            entity.speak();
+        }
     }
 }

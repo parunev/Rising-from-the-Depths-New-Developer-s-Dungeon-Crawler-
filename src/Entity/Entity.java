@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 // Stores variables that will be used in Player, Monster and NPC classes.
@@ -62,11 +63,14 @@ public class Entity {
     public Projectile projectile;
 
     // ITEM ATTRIBUTES
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 20;
     public int value;
     public int attackValue;
     public int defenceValue;
     public String description = "";
     public int useCost; // how much mana it costs to shoot a projectile
+    public int price; // item price
 
     // TYPE
     public int type; // 0 = player, 1 = NPC, 2 = monster
@@ -177,7 +181,7 @@ public class Entity {
 
         // Player image chances in every 10 frames
         spriteCounter++;
-        if (spriteCounter > 12){
+        if (spriteCounter > 24){
             if (spriteNumber == 1){
                 spriteNumber = 2;
             }else if (spriteNumber == 2){
