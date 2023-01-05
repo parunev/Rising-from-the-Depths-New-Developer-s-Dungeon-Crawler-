@@ -10,6 +10,7 @@ public class EventHandler {
     // preventing the event from happening repeatedly
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
+    int tempMap, tempCol, tempRow;
 
     public EventHandler(GamePanel gp){
         this.gp = gp;
@@ -144,15 +145,13 @@ public class EventHandler {
     }
 
     public void teleportHut(int map, int col, int row){
-        gp.currentMap = map;
-        gp.player.worldX = gp.tileSize * col;
-        gp.player.worldY = gp.tileSize * row;
+        gp.gameState = gp.transitionState;
+        tempMap = map;
+        tempCol = col;
+        tempRow = row;
 
-        // This way the next event won't happen until player moves tile size length distance
-        previousEventX = gp.player.worldX;
-        previousEventY = gp.player.worldY;
+
         canTouchEvent = false;
-
         gp.playSE(13);
     }
 }

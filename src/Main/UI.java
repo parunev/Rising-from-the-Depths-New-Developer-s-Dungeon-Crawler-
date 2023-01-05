@@ -26,6 +26,7 @@ public class UI {
     public int slotCol = 0;
     public int slotRow = 0;
     int subState = 0;
+    int counter = 0;
 
     public UI(GamePanel gp) throws IOException, FontFormatException {
         this.gp = gp;
@@ -92,6 +93,11 @@ public class UI {
         // GAME OVER STATE
         if (gp.gameState == gp.gameOverState){
             drawGameOverScreen();
+        }
+
+        // TRANSITION STATE
+        if (gp.gameState == gp.transitionState){
+            drawTransition();
         }
     }
 
@@ -622,6 +628,24 @@ public class UI {
         }
     }
     //
+
+    public void drawTransition(){
+
+        // Kinda making the transition effect getting darker every frame (making it more smooth) with the counter
+        counter++;
+        g2.setColor(new Color(0,0,0, counter * 5));
+        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+
+        if (counter == 50){ // at 50 frames this alpha becomes 250 (almost completely black)
+            counter = 0;
+            gp.gameState = gp.playState;
+            gp.currentMap = gp.eHandler.tempMap;
+            gp.player.worldX = gp.tileSize * gp.eHandler.tempCol;
+            gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
+            gp.eHandler.previousEventX = gp.player.worldX;
+            gp.eHandler.previousEventY = gp.player.worldY;
+        }
+    }
 
     public int getItemIndexOnSlot(){
         return slotCol + (slotRow * 5);
