@@ -2,6 +2,7 @@ package Entity;
 
 import Main.GamePanel;
 
+import java.awt.*;
 import java.util.Random;
 
 public class NPC_OldMan extends Entity{
@@ -10,9 +11,17 @@ public class NPC_OldMan extends Entity{
         super(gp);
 
         direction = "down";
-        speed = 1;
+        speed = (int)1.2;
         getOldManImage();
         setDialogue();
+
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        solidArea.width = 30;
+        solidArea.height = 30;
     }
 
     public void getOldManImage(){
@@ -37,25 +46,37 @@ public class NPC_OldMan extends Entity{
     // Character behaviour (AI kinda)
     public void setAction(){
 
-        // For every 120 frames the NPC will move. This can be adjusted.
-        actionLockCounter++;
-        if (actionLockCounter == 120){
-            Random random = new Random();
-            int i = random.nextInt(100)+1; // if the bound is just 100 it becomes 0 to 99, that's why I added +1
+        if (onPath){
+            // MAKING THE NPC GO SOMEWHERE
+             int goalCol = 12;
+             int goalRow = 9;
 
-            if (i <= 25){ // 25% of the time it goes up
-                direction = "up";
+            // MAKING THE NPC FOLLOW THE PLAYER
+            // int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
+            // int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
+
+            searchPath(goalCol, goalRow);
+        }else{
+            // For every 120 frames the NPC will move. This can be adjusted.
+            actionLockCounter++;
+            if (actionLockCounter == 120){
+                Random random = new Random();
+                int i = random.nextInt(100)+1; // if the bound is just 100 it becomes 0 to 99, that's why I added +1
+
+                if (i <= 25){ // 25% of the time it goes up
+                    direction = "up";
+                }
+                if (i > 25 && i <= 50){ // 25% of the time it goes down
+                    direction = "down";
+                }
+                if (i > 50 && i <= 75){ // 25% of the time it goes left
+                    direction = "left";
+                }
+                if (i > 75){ // 25% of the time it goes right
+                    direction = "right";
+                }
+                actionLockCounter = 0;
             }
-            if (i > 25 && i <= 50){ // 25% of the time it goes down
-                direction = "down";
-            }
-            if (i > 50 && i <= 75){ // 25% of the time it goes left
-                direction = "left";
-            }
-            if (i > 75){ // 25% of the time it goes right
-                direction = "right";
-            }
-            actionLockCounter = 0;
         }
     }
 
@@ -64,5 +85,6 @@ public class NPC_OldMan extends Entity{
     // Makes customization easier
     public void speak(){
         super.speak();
+        onPath = true;
     }
 }

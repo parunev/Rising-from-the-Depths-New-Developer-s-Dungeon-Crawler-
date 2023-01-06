@@ -34,6 +34,7 @@ public class Entity {
     public boolean alive = true;
     public boolean dying = false;
     public boolean hpBarOn = false;
+    public boolean onPath = false;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -153,9 +154,7 @@ public class Entity {
         gp.particleList.add(p4);
     }
 
-    public void update(){
-        // We created this method in Old Man class too and if the subclass has the same method it takes a priority
-        setAction();
+    public void checkCollision(){
         collisionOn = false;
         gp.cChecker.checkTile(this); // going to pass the Old Man class as Entity
         gp.cChecker.checkObject(this, false); // checking if the npc is hitting doors maybe
@@ -168,6 +167,13 @@ public class Entity {
         if (this.type == type_monster && contactPlayer){
             damagePlayer(attack);
         }
+    }
+
+    public void update(){
+        // We created this method in Old Man class too and if the subclass has the same method it takes a priority
+        setAction();
+
+        checkCollision();
 
         // IF COLLISION IS FALSE, PLAYER CAN MOVE
         if (!collisionOn){
@@ -316,5 +322,82 @@ public class Entity {
 
     public void changeAlpha(Graphics2D g2, float alphaValue){
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
+    }
+
+    public void searchPath(int goalCol, int goalRow){
+        int startCol = (worldX + solidArea.x) / gp.tileSize;
+        int startRow = (worldY + solidArea.y) / gp.tileSize;
+
+        gp.pFinder.setNode(startCol, startRow, goalCol, goalRow);
+
+        // If it returns true this means we found the path, so we can guide this entity to the goal
+        if (gp.pFinder.search()){
+            // Next worldX and worldY
+            int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
+            int nextY = gp.pFinder.pathList.get(0).row * gp.tileSize;
+
+            // Entity's solidArea position
+            int enLeftX = worldX + solidArea.x;
+            int enRightX = worldX + solidArea.x + solidArea.width;
+            int enTopY = worldY + solidArea.y;
+            int enBottomY = worldY + solidArea.y + solidArea.height;
+
+            // Based on the current NPCs position, find out the relative direction of the next node
+
+            // If these conditions are matched the entity can go to the direction
+            if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
+                direction = "up";
+            } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
+                direction = "down";
+            } else if (enTopY >= nextY && enBottomY < nextY + gp.tileSize){
+                // left or right
+                if (enLeftX > nextX){
+                    direction = "left";
+                }
+                if (enLeftX < nextX){
+                    direction = "right";
+                }
+            } else if (enTopY > nextY && enLeftX > nextX){
+                // up or left
+                direction = "up";
+                checkCollision();
+                if (collisionOn){
+                    direction = "left";
+                }
+            } else if (enTopY > nextY && enLeftX < nextX){
+                // up or right
+                direction = "up";
+                checkCollision();
+                if (collisionOn){
+                    direction = "right";
+                }
+            } else if (enTopY < nextY && enLeftX > nextX){
+                // down or left
+                direction = "down";
+                checkCollision();
+                if (collisionOn){
+                    direction = "left";
+                }
+            } else if (enTopY < nextY && enLeftX < nextX){
+                // down or right
+                direction = "down";
+                checkCollision();
+                if (collisionOn){
+                    direction = "right";
+                }
+            }
+
+            // If goal is reached, stop the search
+            // If you want the NPC to follow the player the next lines should be disabled(comments)
+            // Because if the player is the goal whenever he touches us, or we touch him the goal is reached and
+            // the NPC stops following us
+
+             int nextCol = gp.pFinder.pathList.get(0).col;
+             int nextRow = gp.pFinder.pathList.get(0).row;
+
+             if (nextCol == goalCol && nextRow == goalRow){
+                 onPath = false;
+             }
+        }
     }
 }

@@ -20,7 +20,7 @@ public class MON_GreenSlime extends Entity {
         speed = 1;
         maxLife = 4;
         life = maxLife;
-        attack = 5;
+        attack = 2;
         defence = 0; // defence is 1 since the player starting damage is 1
         exp = 2; // how much you can get when you kill the monster
         projectile = new OBJ_Rock(gp);
@@ -48,27 +48,66 @@ public class MON_GreenSlime extends Entity {
         right2 = setup("/Resources/Monsters/greenslime_down_2", gp.tileSize, gp.tileSize);
     }
 
-    // Setting Slime behaviour
-    public void setAction(){
-        actionLockCounter++;
+    // Currently using this method for the second aggro/attack condition
+    // The game gets pretty hard if that's enabled - adjustable
+    public void update(){
+        super.update();
 
-        if (actionLockCounter == 120){
-            Random random = new Random();
-            int i = random.nextInt(100)+1;
+        int xDistance = Math.abs(worldX - gp.player.worldX);
+        int yDistance = Math.abs(worldY - gp.player.worldY);
+        int tileDistance = (xDistance + yDistance) / gp.tileSize;
 
-            if (i <= 25){direction = "up";}
-            if (i > 25 && i <= 50){direction = "down";}
-            if (i > 50 && i <= 75){direction = "left";}
-            if (i > 75){direction = "right";}
-            actionLockCounter = 0;
+        // If the player is nearby the monster, monster gets aggro - adjustable
+        if (!onPath && tileDistance < 10){
+
+            int i = new Random().nextInt(100) + 1;
+            if (i > 50){ // 50% of the time it becomes aggro - adjustable
+                onPath = true;
+            }
         }
 
-        // Slime randomly shoots a rock
-        int i = new Random().nextInt(100)+1;
-        if (i > 99 && !projectile.alive && shotAvailableCounter == 30){
-            projectile.set(worldX, worldY, direction, true, this);
-            gp.projectileList.add(projectile);
-            shotAvailableCounter = 0;
+        // If the tile distance is more than 14 tiles the monsters stop being aggro - adjustable
+        if (onPath && tileDistance > 14){
+            onPath = false;
+        }
+    }
+
+    // Setting Slime behaviour
+    public void setAction(){
+        if (onPath){
+            int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
+            int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
+
+            searchPath(goalCol, goalRow);
+
+            // Slime randomly shoots a rock
+            int i = new Random().nextInt(200)+1;
+            if (i > 197 && !projectile.alive && shotAvailableCounter == 30){
+                projectile.set(worldX, worldY, direction, true, this);
+                gp.projectileList.add(projectile);
+                shotAvailableCounter = 0;
+            }
+        }else{
+            // For every 120 frames the NPC will move. This can be adjusted.
+            actionLockCounter++;
+            if (actionLockCounter == 120){
+                Random random = new Random();
+                int i = random.nextInt(100)+1; // if the bound is just 100 it becomes 0 to 99, that's why I added +1
+
+                if (i <= 25){ // 25% of the time it goes up
+                    direction = "up";
+                }
+                if (i > 25 && i <= 50){ // 25% of the time it goes down
+                    direction = "down";
+                }
+                if (i > 50 && i <= 75){ // 25% of the time it goes left
+                    direction = "left";
+                }
+                if (i > 75){ // 25% of the time it goes right
+                    direction = "right";
+                }
+                actionLockCounter = 0;
+            }
         }
     }
 
@@ -76,7 +115,8 @@ public class MON_GreenSlime extends Entity {
     public void damageReaction(){
         actionLockCounter = 0;
         // When the monster receive damage it starts moving away from the player
-        direction = gp.player.direction;
+        // direction = gp.player.direction;
+        onPath = true; // Instantly becomes aggro when player attacks it
     }
 
     public void checkDrop(){

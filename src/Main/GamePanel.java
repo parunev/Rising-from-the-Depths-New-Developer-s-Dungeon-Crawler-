@@ -1,5 +1,6 @@
 package Main;
 
+import Ai.Pathfinder;
 import Entity.Entity;
 import Entity.Player;
 import Tile.TileManager;
@@ -44,6 +45,7 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
     Config config = new Config(this);
+    public Pathfinder pFinder = new Pathfinder(this);
     Thread gameThread; //it keeps your program running until you stop it
 
     // ENTITY AND OBJECT
