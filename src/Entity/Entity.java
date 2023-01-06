@@ -35,6 +35,7 @@ public class Entity {
     public boolean dying = false;
     public boolean hpBarOn = false;
     public boolean onPath = false;
+    public boolean knockBack = false;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -43,9 +44,11 @@ public class Entity {
     public int shotAvailableCounter = 0;
     public int dyingCounter = 0;
     public int hpBarCounter = 0;
+    public int knockBackCounter = 0;
 
     // CHARACTER ATTRIBUTES
     public String name;
+    public int defaultSpeed;
     public int speed;
     public int maxLife;
     public int life;
@@ -72,6 +75,7 @@ public class Entity {
     public String description = "";
     public int useCost; // how much mana it costs to shoot a projectile
     public int price; // item price
+    public int knockBackPower;
 
     // TYPE
     public int type; // 0 = player, 1 = NPC, 2 = monster
@@ -170,18 +174,42 @@ public class Entity {
     }
 
     public void update(){
-        // We created this method in Old Man class too and if the subclass has the same method it takes a priority
-        setAction();
+        if (knockBack){
+            checkCollision();
+            if (collisionOn){
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            }else {
+                switch (gp.player.direction){ // knocking back to where the player is facing
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
 
-        checkCollision();
+                knockBackCounter++;
+                if (knockBackCounter == 10){ // the more you increase the number the bigger the knock-back distance
+                    knockBackCounter = 0;
+                    knockBack = false;
+                    speed = defaultSpeed;
+                }
+            }
 
-        // IF COLLISION IS FALSE, PLAYER CAN MOVE
-        if (!collisionOn){
-            switch (direction) {
-                case "up" -> worldY -= speed;
-                case "down" -> worldY += speed;
-                case "left" -> worldX -= speed;
-                case "right" -> worldX += speed;
+        }else{
+            // We created this method in Old Man class too and if the subclass has the same method it takes a priority
+            setAction();
+
+            checkCollision();
+
+            // IF COLLISION IS FALSE, PLAYER CAN MOVE
+            if (!collisionOn){
+                switch (direction) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
             }
         }
 

@@ -156,7 +156,6 @@ public class EventHandler {
         tempCol = col;
         tempRow = row;
 
-
         canTouchEvent = false;
         gp.playSE(13);
     }
