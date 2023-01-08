@@ -3,6 +3,7 @@ package Main;
 import Ai.Pathfinder;
 import Entity.Entity;
 import Entity.Player;
+import Environment.EnvironmentManager;
 import Tile.TileManager;
 import TileInteractive.InteractiveTile;
 
@@ -46,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
     public EventHandler eHandler = new EventHandler(this);
     Config config = new Config(this);
     public Pathfinder pFinder = new Pathfinder(this);
+    public EnvironmentManager eManager = new EnvironmentManager(this);
     Thread gameThread; //it keeps your program running until you stop it
 
     // ENTITY AND OBJECT
@@ -91,6 +93,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setNPC();
         aSetter.setMonster();
         aSetter.setInteractiveTiles();
+        eManager.setUp();
         gameState = titleState;
     }
 
@@ -298,6 +301,9 @@ public class GamePanel extends JPanel implements Runnable {
 
             // EMPTY ENTITY LIST
             entityList.clear();
+
+            // ENVIRONMENT
+            eManager.draw(g2);
 
             // UI
             try {
