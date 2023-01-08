@@ -76,6 +76,8 @@ public class Entity {
     public int useCost; // how much mana it costs to shoot a projectile
     public int price; // item price
     public int knockBackPower;
+    public boolean stackable = false;
+    public int amount = 1;
 
     // TYPE
     public int type; // 0 = player, 1 = NPC, 2 = monster

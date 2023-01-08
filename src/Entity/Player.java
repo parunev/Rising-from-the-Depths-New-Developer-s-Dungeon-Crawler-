@@ -59,7 +59,7 @@ public class Player extends Entity{
         dexterity = 1; // The more dexterity he has, the less damage he receives
         exp = 0;
         nextLevelExp = 5; // how much exp is needed for next level
-        coin = 5;
+        coin = 500;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         projectile = new OBJ_Fireball(gp);
@@ -324,8 +324,7 @@ public class Player extends Entity{
 
             } else{ // INVENTORY ITEMS
                 String text;
-                if (inventory.size() != maxInventorySize){ // check if inventory is full
-                    inventory.add(gp.obj[gp.currentMap][i]);
+                if (canObtainItem(gp.obj[gp.currentMap][i])){ // check if inventory is full
                     gp.playSE(1);
                     text = "Got a " + gp.obj[gp.currentMap][i].name + "!";
                 }else {
@@ -458,10 +457,58 @@ public class Player extends Entity{
             }
             if (selectedItem.type == type_consumable){
                 if (selectedItem.use(this)){
-                    inventory.remove(itemIndex);
+                    if (selectedItem.amount > 1){
+                        selectedItem.amount--;
+                    } else {
+                        inventory.remove(itemIndex);
+                    }
                 }
             }
         }
+    }
+
+    // Whenever we get an item we call this method and pass the item name and scan our inventory
+    // and check if the same item is already in our inventory, and if you have the same item
+    // return the index of the item
+    // This method also can be used when you want to check if player has a certain quest item etc.
+    public int searchItemInInventory(String itemName){
+        int itemIndex = 999;
+
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i).name.equals(itemName)){
+                itemIndex = i;
+                break;
+            }
+        }
+
+        return itemIndex;
+    }
+
+    public boolean canObtainItem(Entity item){
+        boolean canObtain = false;
+
+        // CHECK IF ITEM IS STACKABLE
+        if (item.stackable){
+            int index = searchItemInInventory(item.name);
+
+            if (index != 999){ // If we already have the same item
+                inventory.get(index).amount++;
+                canObtain = true;
+
+            } else { // New item so we need to check vacancy
+                if (inventory.size() != maxInventorySize){
+                    inventory.add(item);
+                    canObtain = true;
+                }
+            }
+        } else { // NOT STACKABLE so check vacancy
+            if (inventory.size() != maxInventorySize){
+                inventory.add(item);
+                canObtain = true;
+            }
+        }
+
+        return canObtain;
     }
 
     public void draw(Graphics2D g2){

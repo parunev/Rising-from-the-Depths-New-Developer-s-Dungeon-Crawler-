@@ -400,6 +400,24 @@ public class UI {
                 g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
             }
             g2.drawImage(entity.inventory.get(i).down1, slotX, slotY, null);
+
+            // DISPLAY THE ITEM AMOUNT
+            if (entity == gp.player && entity.inventory.get(i).amount > 1){
+                g2.setFont(g2.getFont().deriveFont(32F));
+                int amountX;
+                int amountY;
+
+                String s = "" + entity.inventory.get(i).amount;
+                amountX = getXForAlignToRightText(s, slotX + 44);
+                amountY = slotY + gp.tileSize;
+
+                // SHADOW
+                g2.setColor(new Color(60,60,60));
+                g2.drawString(s, amountX, amountY);
+                // NUMBER
+                g2.setColor(Color.WHITE);
+                g2.drawString(s, amountX - 3, amountY - 3);
+            }
             slotX += slotSize;
 
             if (i == 4 || i == 9 || i == 14){
@@ -771,17 +789,14 @@ public class UI {
                     gp.gameState = gp.dialogueState;
                     currentDialogue = "You need more coins to buy that!";
                     drawDialogueScreen();
-                }
-                // Player has no slots in his inventory
-                else if (gp.player.inventory.size() == gp.player.maxInventorySize){
-                    subState = 0;
-                    gp.gameState = gp.dialogueState;
-                    currentDialogue = "You cannot carry any more!";
-                }
-                // Player has slots and has money
-                else {
-                    gp.player.coin -= npc.inventory.get(itemIndex).price;
-                    gp.player.inventory.add(npc.inventory.get(itemIndex));
+                } else {
+                    if (gp.player.canObtainItem(npc.inventory.get(itemIndex))){
+                        gp.player.coin -= npc.inventory.get(itemIndex).price;
+                    } else {
+                        subState = 0;
+                        gp.gameState = gp.dialogueState;
+                        currentDialogue = "You cannot carry any more!";
+                    }
                 }
             }
         }
@@ -836,7 +851,11 @@ public class UI {
                 }
                 // If it's not equipped item
                 else {
-                    gp.player.inventory.remove(itemIndex);
+                    if (gp.player.inventory.get(itemIndex).amount > 1){
+                        gp.player.inventory.get(itemIndex).amount--;
+                    } else {
+                        gp.player.inventory.remove(itemIndex);
+                    }
                     gp.player.coin += price;
                 }
             }
