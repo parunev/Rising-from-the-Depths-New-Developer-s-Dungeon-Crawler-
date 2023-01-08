@@ -96,7 +96,7 @@ public class Player extends Entity{
         return defence = dexterity * currentShield.defenceValue;
     }
 
-    public void getPlayerImage(){
+    public void getPlayerImage() {
         up1 = setup("/Resources/Player/boy_up_1", gp.tileSize, gp.tileSize);
         up2 = setup("/Resources/Player/boy_up_2", gp.tileSize, gp.tileSize);
         down1 = setup("/Resources/Player/boy_down_1", gp.tileSize, gp.tileSize);
@@ -105,6 +105,17 @@ public class Player extends Entity{
         left2 = setup("/Resources/Player/boy_left_2", gp.tileSize, gp.tileSize);
         right1 = setup("/Resources/Player/boy_right_1", gp.tileSize, gp.tileSize);
         right2 = setup("/Resources/Player/boy_right_2", gp.tileSize, gp.tileSize);
+    }
+
+    public void getSleepingImage(BufferedImage image){
+        up1 = image;
+        up2 = image;
+        down1 = image;
+        down2 = image;
+        left1 = image;
+        left2 = image;
+        right1 = image;
+        right2 = image;
     }
 
     public void getPlayerAttackImage(){

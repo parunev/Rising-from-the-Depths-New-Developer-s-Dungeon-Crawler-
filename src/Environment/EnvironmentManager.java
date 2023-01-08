@@ -7,7 +7,7 @@ import java.awt.*;
 // This class handles all the environment filters such as Lighting, Rain, Fog etc.
 public class EnvironmentManager {
     GamePanel gp;
-    EM_Lighting lighting;
+    public EM_Lighting lighting;
 
     public EnvironmentManager(GamePanel gp){
         this.gp = gp;

@@ -18,7 +18,7 @@ public class UI {
 
     GamePanel gp;
     Graphics2D g2;
-    Font maruMonica;
+    public Font maruMonica;
     BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank, coin;
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
@@ -108,6 +108,11 @@ public class UI {
         // TRADE STATE
         if (gp.gameState == gp.tradeState){
             drawTradeScreen();
+        }
+
+        // SLEEP STATE
+        if (gp.gameState == gp.sleepState){
+            drawSleepScreen();
         }
     }
 
@@ -863,6 +868,29 @@ public class UI {
         }
     }
     //
+
+    public void drawSleepScreen(){
+        counter++;
+
+        if (counter < 120){ // screen gets darker for the next 2 seconds / 120
+            gp.eManager.lighting.filterAlpha += 0.01f;
+            if (gp.eManager.lighting.filterAlpha > 1f){
+                gp.eManager.lighting.filterAlpha = 1f;
+            }
+        }
+
+        if (counter >= 120){
+            gp.eManager.lighting.filterAlpha -= 0.01f;
+            if (gp.eManager.lighting.filterAlpha <= 0f){
+                gp.eManager.lighting.filterAlpha = 0f;
+                counter = 0;
+                gp.eManager.lighting.dayState = gp.eManager.lighting.day;
+                gp.eManager.lighting.dayCounter = 0;
+                gp.gameState = gp.playState;
+                gp.player.getPlayerImage();
+            }
+        }
+    }
 
     public int getItemIndexOnSlot(int slotCol, int slotRow){
         return slotCol + (slotRow * 5);
