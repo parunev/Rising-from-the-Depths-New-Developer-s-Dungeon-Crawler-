@@ -14,7 +14,11 @@ public class EnvironmentManager {
     }
 
     public void setUp(){
-        lighting = new EM_Lighting(gp, 400); // adjustable, do not put size larger than screenWidth or screenHeight
+        lighting = new EM_Lighting(gp);
+    }
+
+    public void update(){
+        lighting.update();
     }
 
     public void draw(Graphics2D g2){

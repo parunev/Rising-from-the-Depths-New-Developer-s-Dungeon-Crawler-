@@ -17,6 +17,7 @@ public class Player extends Entity{
     public final int screenX;
     public final int screenY;
     public boolean attackCanceled = false;
+    public boolean lightUpdated = false;
 
     public Player(GamePanel gp, KeyHandler keyH){
         super(gp); // calling the constructor of the superclass
@@ -451,10 +452,21 @@ public class Player extends Entity{
                 attack = getAttack();
                 getPlayerAttackImage();
             }
+
             if (selectedItem.type == type_shield){
                 currentShield = selectedItem;
                 defence = getDefence();
             }
+
+            if (selectedItem.type == type_light){
+                if (currentLight == selectedItem){
+                    currentLight = null;
+                } else {
+                    currentLight = selectedItem;
+                }
+                lightUpdated = true;
+            }
+
             if (selectedItem.type == type_consumable){
                 if (selectedItem.use(this)){
                     if (selectedItem.amount > 1){
