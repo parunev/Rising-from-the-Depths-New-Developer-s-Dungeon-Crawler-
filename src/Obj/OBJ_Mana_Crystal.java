@@ -4,7 +4,6 @@ import Entity.Entity;
 import Main.GamePanel;
 
 public class OBJ_Mana_Crystal extends Entity {
-
     GamePanel gp;
 
     public OBJ_Mana_Crystal(GamePanel gp) {
@@ -18,6 +17,7 @@ public class OBJ_Mana_Crystal extends Entity {
         image = setup("/Resources/Objects/manacrystal_full",gp.tileSize,gp.tileSize);
         image2 = setup("/Resources/Objects/manacrystal_blank",gp.tileSize,gp.tileSize);
     }
+
     public boolean use(Entity entity){
         gp.playSE(2);
         gp.ui.addMessage("Mana +" + value);

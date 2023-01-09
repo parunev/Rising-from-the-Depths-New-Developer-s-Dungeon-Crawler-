@@ -9,79 +9,70 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class TileManager {
-
     GamePanel gp;
     public Tile[] tile;
     public int[][][] mapTileNumber;
     boolean drawPath = true;
+    ArrayList<String> fileNames = new ArrayList<>();
+    ArrayList<String> collisionStatus = new ArrayList<>();
 
-    public TileManager(GamePanel gp){
+    public TileManager(GamePanel gp) throws IOException {
         this.gp = gp;
-        tile = new Tile[50]; // means how much tiles we will import (have) in our game. Like grass,water,sand,cobble etc.
-        mapTileNumber = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 
+        // READ TILE DATA FILE
+        InputStream is = getClass().getResourceAsStream("/Resources/Maps/tiledata.txt");
+        assert is != null;
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+        // GETTING TILE NAME AND COLLISION INFO FROM FILE
+        String line;
+
+        while ((line = br.readLine()) != null){
+            fileNames.add(line);
+            collisionStatus.add(br.readLine());
+        }
+        br.close();
+
+        tile = new Tile[fileNames.size()]; // means how much tiles we will import (have) in our game. Like grass,water,sand,cobble etc.
         getTileImage();
-        loadMap("/Resources/Maps/worldV3.txt", 0);
-        loadMap("/Resources/Maps/interior01.txt", 1);
+
+        // GET THE maxWorldCol & Row
+        is = getClass().getResourceAsStream("/Resources/Maps/worldmap.txt");
+        assert is != null;
+        br = new BufferedReader(new InputStreamReader(is));
+
+        String line2 = br.readLine();
+        String[] maxTile = line2.split(" ");
+
+        gp.maxWorldCol = maxTile.length;
+        gp.maxWorldRow = maxTile.length;
+
+        mapTileNumber = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
+        br.close();
+
+        loadMap("/Resources/Maps/worldmap.txt",0);
+        loadMap("/Resources/Maps/indoor01.txt",1);
     }
 
     public void getTileImage(){
+        for (int i = 0; i < fileNames.size() ; i++) {
 
-        // PLACEHOLDER
-        // index, image name, collision
-        // We don't use the tile 0 to 9, but I've set a placeholder image, so we can prevent NullPointer exception
-        // Happens when we scan the array
-        setup(0,"grass00", false);
-        setup(1,"grass00", false);
-        setup(2,"grass00", false);
-        setup(3,"grass00", false);
-        setup(4,"grass00", false);
-        setup(5,"grass00", false);
-        setup(6,"grass00", false);
-        setup(7,"grass00", false);
-        setup(8,"grass00", false);
-        setup(9,"grass00", false);
+            String fileName;
+            boolean collision;
 
-        // PLACEHOLDER
-        // We will use tiles from index 10
-        setup(10,"grass00", false);
-        setup(11,"grass01", false);
-        setup(12,"water00", true);
-        setup(13,"water01", true);
-        setup(14,"water02", true);
-        setup(15,"water03", true);
-        setup(16,"water04", true);
-        setup(17,"water05", true);
-        setup(18,"water06", true);
-        setup(19,"water07", true);
-        setup(20,"water08", true);
-        setup(21,"water09", true);
-        setup(22,"water10", true);
-        setup(23,"water11", true);
-        setup(24,"water12", true);
-        setup(25,"water13", true);
-        setup(26,"road00", false);
-        setup(27,"road01", false);
-        setup(28,"road02", false);
-        setup(29,"road03", false);
-        setup(30,"road04", false);
-        setup(31,"road05", false);
-        setup(32,"road06", false);
-        setup(33,"road07", false);
-        setup(34,"road08", false);
-        setup(35,"road09", false);
-        setup(36,"road10", false);
-        setup(37,"road11", false);
-        setup(38,"road12", false);
-        setup(39,"earth", false);
-        setup(40,"wall", true);
-        setup(41,"tree", true);
-        setup(42,"hut", false);
-        setup(43,"floor01", false);
-        setup(44,"table01", true);
+            // Get a file name
+            fileName = fileNames.get(i);
+
+            // Get a collision status
+            collision = collisionStatus.get(i).equals("true");
+
+            setup(i, fileName, collision);
+        }
+ 
     }
 
     public void setup(int index, String imageName, boolean collision){
@@ -89,7 +80,7 @@ public class TileManager {
 
         try{
             tile[index] = new Tile();
-            tile[index].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Resources/Tiles/"+ imageName +".png")));
+            tile[index].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Resources/Tiles/"+ imageName)));
             tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
             tile[index].collision = collision;
 
@@ -166,8 +157,9 @@ public class TileManager {
         }
 
         // Drawing the nodes in the pathList
+        // DEBUG - Whole if-statement can be commented
         if (drawPath){
-            g2.setColor(new Color(255,0,0,45));
+            g2.setColor(new Color(255,0,0,25));
 
             for (int i = 0; i < gp.pFinder.pathList.size() ; i++) {
                 int worldX = gp.pFinder.pathList.get(i).col * gp.tileSize;

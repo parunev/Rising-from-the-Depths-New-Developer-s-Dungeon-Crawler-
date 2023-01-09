@@ -154,7 +154,6 @@ public class Entity {
     public int getParticleMaxLife(){
         return 0;
     }
-    //
 
     public void generateParticle(Entity generator, Entity target){
         Color color = generator.getParticleColor();

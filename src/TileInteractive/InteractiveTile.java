@@ -9,7 +9,7 @@ public class InteractiveTile extends Entity {
     GamePanel gp;
     public boolean destructible = false;
 
-    public InteractiveTile(GamePanel gp, int col, int row) {
+    public InteractiveTile(GamePanel gp) {
         super(gp);
         this.gp = gp;
     }
@@ -18,6 +18,7 @@ public class InteractiveTile extends Entity {
     public boolean isCorrectItem(Entity entity){return false;}
     public void playSe(){}
     public InteractiveTile getDestroyedForm(){return null;}
+
     public void update(){
         if (invincible){
             invincibleCounter++;

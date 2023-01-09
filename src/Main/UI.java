@@ -679,25 +679,6 @@ public class UI {
             }
         }
     }
-    //
-
-    public void drawTransition(){
-
-        // Kinda making the transition effect getting darker every frame (making it more smooth) with the counter
-        counter++;
-        g2.setColor(new Color(0,0,0, counter * 5));
-        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
-
-        if (counter == 50){ // at 50 frames this alpha becomes 250 (almost completely black)
-            counter = 0;
-            gp.gameState = gp.playState;
-            gp.currentMap = gp.eHandler.tempMap;
-            gp.player.worldX = gp.tileSize * gp.eHandler.tempCol;
-            gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
-            gp.eHandler.previousEventX = gp.player.worldX;
-            gp.eHandler.previousEventY = gp.player.worldY;
-        }
-    }
 
     // TRADE SCREEN
     public void drawTradeScreen(){
@@ -867,7 +848,6 @@ public class UI {
             }
         }
     }
-    //
 
     public void drawSleepScreen(){
         counter++;
@@ -889,6 +869,24 @@ public class UI {
                 gp.gameState = gp.playState;
                 gp.player.getPlayerImage();
             }
+        }
+    }
+
+    public void drawTransition(){
+
+        // Kinda making the transition effect getting darker every frame (making it more smooth) with the counter
+        counter++;
+        g2.setColor(new Color(0,0,0, counter * 5));
+        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+
+        if (counter == 50){ // at 50 frames this alpha becomes 250 (almost completely black)
+            counter = 0;
+            gp.gameState = gp.playState;
+            gp.currentMap = gp.eHandler.tempMap;
+            gp.player.worldX = gp.tileSize * gp.eHandler.tempCol;
+            gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
+            gp.eHandler.previousEventX = gp.player.worldX;
+            gp.eHandler.previousEventY = gp.player.worldY;
         }
     }
 

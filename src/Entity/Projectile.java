@@ -16,6 +16,7 @@ public class Projectile extends Entity{
         this.user = user;
         this.life = this.maxLife; // Reset the life to the max value everytime you shoot it
     }
+
     public void update(){
 
         // If player shoots
@@ -64,8 +65,10 @@ public class Projectile extends Entity{
             spriteCounter = 0;
         }
     }
+
     public boolean hasResource(Entity user){
         return false;
     }
+
     public void subtractResource(Entity user){}
 }

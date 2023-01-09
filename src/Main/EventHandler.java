@@ -67,10 +67,6 @@ public class EventHandler {
             else if (hit(0,23,12,"up")){
                 healingPool(gp.dialogueState);
             }
-            // Teleport event
-            else if (hit(0,19,16, "left")){
-                teleport(0,19, 16, gp.dialogueState);
-            }
             // Hut event
             else if (hit(0,10,39,"any")){
                 teleportHut(1, 12, 13);
@@ -140,14 +136,6 @@ public class EventHandler {
             // Whenever you use the event the monsters will respawn
             gp.aSetter.setMonster();
         }
-    }
-
-    public void teleport(int map,int col, int row, int gameState){
-        gp.gameState = gameState;
-        gp.ui.currentDialogue = "Teleport!";
-        gp.player.worldX = gp.tileSize * 37;
-        gp.player.worldY = gp.tileSize * 10;
-        eventRect[map][col][row].eventDone = true;
     }
 
     public void teleportHut(int map, int col, int row){

@@ -17,6 +17,7 @@ public class Pathfinder {
         this.gp = gp;
         instantiateNode();
     }
+
     public void instantiateNode(){
         node = new Node[gp.maxWorldCol][gp.maxWorldRow];
         

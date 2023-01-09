@@ -34,6 +34,7 @@ public class OBJ_Fireball extends Projectile {
         right1 = setup("/Resources/Projectiles/fireball_right_1", gp.tileSize, gp.tileSize);
         right2 = setup("/Resources/Projectiles/fireball_right_2", gp.tileSize, gp.tileSize);
     }
+
     public boolean hasResource(Entity user){
         return user.mana >= useCost;
     }
@@ -42,6 +43,7 @@ public class OBJ_Fireball extends Projectile {
         user.mana -= useCost;
     }
 
+    // PARTICLE COLOR/SIZE/SPEED/LIFE
     public Color getParticleColor(){
         return new Color(240,50,0);
     }

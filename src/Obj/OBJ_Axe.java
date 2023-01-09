@@ -4,7 +4,6 @@ import Entity.Entity;
 import Main.GamePanel;
 
 public class OBJ_Axe extends Entity {
-
     public OBJ_Axe(GamePanel gp) {
         super(gp);
 

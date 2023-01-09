@@ -4,7 +4,6 @@ import Entity.Entity;
 import Main.GamePanel;
 
 public class OBJ_Shield_Wood extends Entity {
-
     public OBJ_Shield_Wood(GamePanel gp) {
         super(gp);
 

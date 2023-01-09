@@ -28,8 +28,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
     // WORLD SETTINGS
-    public final int maxWorldCol = 50;
-    public final int maxWorldRow = 50;
+    public int maxWorldCol;
+    public int maxWorldRow;
     public final int maxMap = 10; // we can create 10 different maps - can be adjusted
     public int currentMap = 0; // indicates the current map number
 
@@ -248,11 +248,9 @@ public class GamePanel extends JPanel implements Runnable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
-        // OTHERS
-        else{
+        } else { // OTHERS
             // TILE
-            tileM.draw(g2); // first tiles, it's like a layout
+            tileM.draw(g2);
 
             // INTERACTIVE TILES
             for (int i = 0; i < iTile[1].length ; i++) {

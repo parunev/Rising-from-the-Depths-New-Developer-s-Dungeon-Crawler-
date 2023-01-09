@@ -4,7 +4,6 @@ import Entity.Entity;
 import Main.GamePanel;
 
 public class OBJ_Sword_Normal extends Entity {
-
     public OBJ_Sword_Normal(GamePanel gp) {
         super(gp);
 

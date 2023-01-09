@@ -46,7 +46,7 @@ public class AssetSetter {
 
         gp.obj[mapNum][i] = new OBJ_Chest(gp, new OBJ_Key(gp));
         gp.obj[mapNum][i].worldX = gp.tileSize * 30;
-        gp.obj[mapNum][i].worldY = gp.tileSize * 28;
+        gp.obj[mapNum][i].worldY = gp.tileSize * 29;
     }
 
     public void setNPC(){
@@ -123,8 +123,8 @@ public class AssetSetter {
         gp.iTile[mapNum][i] = new IT_DryTree(gp, 26, 27);i++;
         gp.iTile[mapNum][i] = new IT_DryTree(gp, 27, 28);i++;
         gp.iTile[mapNum][i] = new IT_DryTree(gp, 27, 29);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 28, 30);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 29, 30);i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 30, 29);
+        gp.iTile[mapNum][i] = new IT_DryTree(gp, 28, 31);i++;
+        gp.iTile[mapNum][i] = new IT_DryTree(gp, 29, 31);i++;
+        gp.iTile[mapNum][i] = new IT_DryTree(gp, 30, 30);
     }
 }

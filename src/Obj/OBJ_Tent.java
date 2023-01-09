@@ -4,7 +4,6 @@ import Entity.Entity;
 import Main.GamePanel;
 
 public class OBJ_Tent extends Entity {
-
     GamePanel gp;
 
     public OBJ_Tent(GamePanel gp) {

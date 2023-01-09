@@ -6,12 +6,10 @@ import Main.GamePanel;
 import java.awt.*;
 
 public class OBJ_Rock extends Projectile {
-
     GamePanel gp;
 
     public OBJ_Rock(GamePanel gp) {
         super(gp);
-
         this.gp = gp;
 
         name = "Rock";
@@ -23,6 +21,7 @@ public class OBJ_Rock extends Projectile {
         alive = false;
         getImage();
     }
+
     public void getImage(){
         up1 = setup("/Resources/Projectiles/rock_down_1", gp.tileSize, gp.tileSize);
         up2 = setup("/Resources/Projectiles/rock_down_1", gp.tileSize, gp.tileSize);
@@ -34,6 +33,7 @@ public class OBJ_Rock extends Projectile {
         right2 = setup("/Resources/Projectiles/rock_down_1", gp.tileSize, gp.tileSize);
     }
 
+    // PARTICLE COLOR/SIZE/SPEED/LIFE
     public Color getParticleColor(){
         return new Color(40,50,0);
     }
