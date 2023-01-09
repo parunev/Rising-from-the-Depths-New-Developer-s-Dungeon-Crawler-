@@ -6,7 +6,7 @@ public class IT_Trunk extends InteractiveTile {
     GamePanel gp;
 
     public IT_Trunk(GamePanel gp, int col, int row) {
-        super(gp, col, row);
+        super(gp);
         this.gp = gp;
 
         this.worldX = gp.tileSize * col;
