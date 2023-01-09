@@ -442,9 +442,7 @@ public class Player extends Entity{
             nextLevelExp = nextLevelExp * 2;
             maxLife += 2;
             strength++;
-            dexterity++;
             attack = getAttack();
-            dexterity = getDefence();
 
             gp.playSE(8);
             gp.gameState = gp.dialogueState;
