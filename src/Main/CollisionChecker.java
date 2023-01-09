@@ -28,8 +28,14 @@ public class CollisionChecker {
         // we only need to check 2 tiles for each direction
         int tileNum1, tileNum2;
 
+        // Use a temporal direction when it's being knockbacked
+        String direction = entity.direction;
+        if (entity.knockBack){
+            direction = entity.knockBackDirection;
+        }
+
         // we predict where the player will be after he moved
-        switch (entity.direction) {
+        switch (direction) {
             case "up" -> {
                 entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNumber[gp.currentMap][entityLeftCol][entityTopRow];
@@ -120,6 +126,12 @@ public class CollisionChecker {
     public int checkEntity(Entity entity, Entity[][] target){
         int index = 999;
 
+        // Use a temporal direction when it's being knockbacked
+        String direction = entity.direction;
+        if (entity.knockBack){
+            direction = entity.knockBackDirection;
+        }
+
         for (int i = 0; i < target[1].length ; i++) {
             if (target[gp.currentMap][i] != null){
 
@@ -137,7 +149,7 @@ public class CollisionChecker {
                 // Simulating entity's movement and check where it will be after it moved.
                 // Rectangle class has a beautiful method called "Intersects"
                 // this method automatically check if two rectangles are colliding or not
-                switch (entity.direction) {
+                switch (direction) {
                     case "up" -> entity.solidArea.y -= entity.speed;
                     case "down" -> entity.solidArea.y += entity.speed;
                     case "left" -> entity.solidArea.x -= entity.speed;

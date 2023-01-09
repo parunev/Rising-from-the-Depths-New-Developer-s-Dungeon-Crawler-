@@ -21,7 +21,7 @@ public class MON_GreenSlime extends Entity {
         speed = defaultSpeed;
         maxLife = 4;
         life = maxLife;
-        attack = 2;
+        attack = 5;
         defence = 0; // defence is 1 since the player starting damage is 1
         exp = 2; // how much you can get when you kill the monster
         projectile = new OBJ_Rock(gp);
@@ -36,7 +36,6 @@ public class MON_GreenSlime extends Entity {
         getImage();
     }
 
-    // Loading and scaling
     public void getImage(){
         // Using two images (down1, down2) for all directions
         up1 = setup("/Resources/Monsters/greenslime_down_1", gp.tileSize, gp.tileSize);
@@ -49,82 +48,32 @@ public class MON_GreenSlime extends Entity {
         right2 = setup("/Resources/Monsters/greenslime_down_2", gp.tileSize, gp.tileSize);
     }
 
-    // Currently using this method for the second aggro/attack condition
-    // The game gets pretty hard if that's enabled - adjustable
-    public void update(){
-        super.update();
-
-        int xDistance = Math.abs(worldX - gp.player.worldX);
-        int yDistance = Math.abs(worldY - gp.player.worldY);
-        int tileDistance = (xDistance + yDistance) / gp.tileSize;
-
-        // If the player is nearby the monster, monster gets aggro - adjustable
-        if (!onPath && tileDistance < 10){
-
-            int i = new Random().nextInt(100) + 1;
-            if (i > 50){ // 50% of the time it becomes aggro - adjustable
-                onPath = true;
-            }
-        }
-
-        // If the tile distance is more than 14 tiles the monsters stop being aggro - adjustable
-        if (onPath && tileDistance > 14){
-            onPath = false;
-        }
-    }
-
-    // Setting Slime behaviour
     public void setAction(){
         if (onPath){
-            int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
-            int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
+            // Check if it stops chasing
+            checkStopChasingOrNot(gp.player, 15, 100);
 
-            searchPath(goalCol, goalRow);
+            // Search the direction to go
+            searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
 
-            // Slime randomly shoots a rock
-            int i = new Random().nextInt(200)+1;
-            if (i > 197 && !projectile.alive && shotAvailableCounter == 30){
-                projectile.set(worldX, worldY, direction, true, this);
+            // Checks if shoots a projectile
+            checkShootOrNot(200, 30);
 
-                // CHECK VACANCY
-                for (int ii = 0; ii < gp.projectile[1].length; ii++) {
-                    if (gp.projectile[gp.currentMap][ii] == null){
-                        gp.projectile[gp.currentMap][ii] = projectile;
-                        break;
-                    }
-                }
+        } else {
+            // If the player is nearby the monster, monster gets aggro(chasing) - adjustable
+            checkStartChasingOrNot(gp.player, 5, 100);
 
-                shotAvailableCounter = 0;
-            }
-        }else{
-            // For every 120 frames the NPC will move. This can be adjusted.
-            actionLockCounter++;
-            if (actionLockCounter == 120){
-                Random random = new Random();
-                int i = random.nextInt(100)+1; // if the bound is just 100 it becomes 0 to 99, that's why I added +1
-
-                if (i <= 25){ // 25% of the time it goes up
-                    direction = "up";
-                }
-                if (i > 25 && i <= 50){ // 25% of the time it goes down
-                    direction = "down";
-                }
-                if (i > 50 && i <= 75){ // 25% of the time it goes left
-                    direction = "left";
-                }
-                if (i > 75){ // 25% of the time it goes right
-                    direction = "right";
-                }
-                actionLockCounter = 0;
-            }
+            // For every 120 frames the NPC will move. This can be adjusted. Gets a random direction
+            getRandomDirection();
         }
     }
 
-    // Monsters react to damage
     public void damageReaction(){
         actionLockCounter = 0;
+
         // When the monster receive damage it starts moving away from the player
         // direction = gp.player.direction;
+
         onPath = true; // Instantly becomes aggro when player attacks it
     }
 
