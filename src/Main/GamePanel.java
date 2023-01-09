@@ -4,6 +4,7 @@ import Ai.Pathfinder;
 import Entity.Entity;
 import Entity.Player;
 import Environment.EnvironmentManager;
+import Tile.Map;
 import Tile.TileManager;
 import TileInteractive.InteractiveTile;
 
@@ -48,6 +49,7 @@ public class GamePanel extends JPanel implements Runnable {
     Config config = new Config(this);
     public Pathfinder pFinder = new Pathfinder(this);
     public EnvironmentManager eManager = new EnvironmentManager(this);
+    Map map = new Map(this);
     Thread gameThread; //it keeps your program running until you stop it
 
     // ENTITY AND OBJECT
@@ -76,6 +78,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int transitionState = 7;
     public final int tradeState = 8;
     public final int sleepState = 9;
+    public final int mapState = 10;
 
     public GamePanel() throws IOException, FontFormatException {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the size of this class (JPanel)
@@ -248,6 +251,8 @@ public class GamePanel extends JPanel implements Runnable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        } else if(gameState == mapState){ // MAP SCREEN
+            map.drawFullMapScreen(g2);
         } else { // OTHERS
             // TILE
             tileM.draw(g2);
@@ -305,6 +310,9 @@ public class GamePanel extends JPanel implements Runnable {
 
             // ENVIRONMENT
             eManager.draw(g2);
+
+            // MINI MAP
+            map.drawMiniMap(g2);
 
             // UI
             try {

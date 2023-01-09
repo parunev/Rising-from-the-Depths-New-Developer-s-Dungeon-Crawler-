@@ -604,6 +604,7 @@ public class UI {
 
         int textX;
         int textY;
+        g2.setFont(g2.getFont().deriveFont(28f));
 
         // TITLE
         String text = "Control";
@@ -618,7 +619,8 @@ public class UI {
         g2.drawString("Shoot/Cast", textX, textY); textY += gp.tileSize;
         g2.drawString("Character Screen", textX, textY); textY += gp.tileSize;
         g2.drawString("Pause", textX, textY); textY += gp.tileSize;
-        g2.drawString("Option", textX, textY);
+        g2.drawString("Option", textX, textY); textY += gp.tileSize;
+        g2.drawString("Map/MiniMap", textX, textY);
 
         textX = frameX + gp.tileSize * 6;
         textY = frameY + gp.tileSize * 2;
@@ -627,7 +629,8 @@ public class UI {
         g2.drawString("F", textX, textY); textY += gp.tileSize;
         g2.drawString("C", textX, textY); textY += gp.tileSize;
         g2.drawString("P", textX, textY); textY += gp.tileSize;
-        g2.drawString("ESC", textX, textY);
+        g2.drawString("ESC", textX, textY);textY += gp.tileSize;
+        g2.drawString("X/M", textX, textY);
 
         // BACK
         textX = frameX + gp.tileSize;
