@@ -15,7 +15,7 @@ public class Entity {
     GamePanel gp;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2
-            , attackLeft1, attackLeft2, attackRight1, attackRight2;
+            , attackLeft1, attackLeft2, attackRight1, attackRight2, guardUp, guardDown, guardLeft, guardRight;
     public BufferedImage image, image2, image3;
     public Rectangle solidArea = new Rectangle(0,0,48,48); // with this class we can create invisible or abstract rectangle used for collision
     public Rectangle attackArea = new Rectangle(0,0,0,0); // entities attack area
@@ -38,6 +38,9 @@ public class Entity {
     public boolean onPath = false;
     public boolean knockBack = false;
     public String knockBackDirection;
+    public boolean guarding = false;
+    public boolean transparent = false;
+    public boolean offBalance = false;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -47,6 +50,8 @@ public class Entity {
     public int dyingCounter = 0;
     public int hpBarCounter = 0;
     public int knockBackCounter = 0;
+    public int guardCounter = 0;
+    int offBalanceCounter = 0;
 
     // CHARACTER ATTRIBUTES
     public String name;
@@ -255,6 +260,14 @@ public class Entity {
         if (shotAvailableCounter < 30){
             shotAvailableCounter++;
         }
+
+        if (offBalance){
+            offBalanceCounter++;
+            if (offBalanceCounter > 60){ // continues for a second
+                offBalance = false;
+                offBalanceCounter = 0;
+            }
+        }
     }
 
     // Straight - straight line distance, Horizontal - wide distance
@@ -354,6 +367,16 @@ public class Entity {
         }
     }
 
+    public String getOppositeDirection(String direction){
+        return switch (direction) {
+            case "up" -> "down";
+            case "down" -> "up";
+            case "left" -> "right";
+            case "right" -> "left";
+            default -> "";
+        };
+    }
+
     public void attacking() {
         spriteCounter++;
         if (spriteCounter <= motionDuration){ // showing attacking pic 1 during the first 5 frames
@@ -415,11 +438,45 @@ public class Entity {
 
     public void damagePlayer(int attack){
         if (!gp.player.invincible){ // we can give damage
-            gp.playSE(6);
 
             int damage = attack - gp.player.defence;
-            if (damage < 0){
-                damage = 0;
+
+            // Get an opposite direction of this attacker
+            String canGuardDirection = getOppositeDirection(direction);
+            if (gp.player.guarding && gp.player.direction.equals(canGuardDirection)){
+
+                // Parry
+                // If you pressed the guard key less than 20 frames before this attack hit you can Parry
+                // If you increase this number the Parry becomes easier
+                if (gp.player.guardCounter < 20){
+                    damage = 0;
+                    gp.playSE(16);
+                    setKnockBack(this, gp.player, gp.player.knockBackPower);
+                    offBalance = true;
+
+                    // Kinda of a temporal stun effect
+                    spriteCounter -= 60; // attacking sprite returns to motion one, the monster will look like he's frozen
+
+                // Normal guard
+                } else {
+                    damage /= 3;
+                    gp.playSE(15);
+                }
+
+            } else { // NOT GUARDING
+                gp.playSE(6);
+
+                // Increased to one, if you're not guarding then no matter how high your defence is
+                // you at least receive one damage otherwise when you become a certain level you don't receive damage at all
+                // from weak monsters
+                if (damage < 1){
+                    damage = 1;
+                }
+            }
+
+            if (damage != 0){
+                gp.player.transparent = true;
+                setKnockBack(gp.player, this, knockBackPower); // Knock-back happens only when you receive damage
             }
 
             gp.player.life -= damage;

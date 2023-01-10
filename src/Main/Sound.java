@@ -30,6 +30,8 @@ public class Sound {
         soundURL[12] = getClass().getResource("/Resources/Sounds/gameover.wav");
         soundURL[13] = getClass().getResource("/Resources/Sounds/stairs.wav");
         soundURL[14] = getClass().getResource("/Resources/Sounds/sleep.wav");
+        soundURL[15] = getClass().getResource("/Resources/Sounds/blocked.wav");
+        soundURL[16] = getClass().getResource("/Resources/Sounds/parry.wav");
     }
 
     // FORMAT TO OPEN AUDIO FILE IN JAVA

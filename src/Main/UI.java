@@ -604,7 +604,7 @@ public class UI {
 
         int textX;
         int textY;
-        g2.setFont(g2.getFont().deriveFont(28f));
+        g2.setFont(g2.getFont().deriveFont(22f));
 
         // TITLE
         String text = "Control";
@@ -614,22 +614,24 @@ public class UI {
 
         textX = frameX + gp.tileSize;
         textY += gp.tileSize;
-        g2.drawString("Move", textX, textY); textY += gp.tileSize;
-        g2.drawString("Confirm/Attack", textX, textY); textY += gp.tileSize;
-        g2.drawString("Shoot/Cast", textX, textY); textY += gp.tileSize;
-        g2.drawString("Character Screen", textX, textY); textY += gp.tileSize;
-        g2.drawString("Pause", textX, textY); textY += gp.tileSize;
-        g2.drawString("Option", textX, textY); textY += gp.tileSize;
+        g2.drawString("Move", textX, textY); textY += gp.tileSize - 10;
+        g2.drawString("Confirm/Attack", textX, textY); textY += gp.tileSize - 10;
+        g2.drawString("Shoot/Cast", textX, textY); textY += gp.tileSize- 10;
+        g2.drawString("Guard/Parry", textX, textY); textY += gp.tileSize- 10;
+        g2.drawString("Character Screen", textX, textY); textY += gp.tileSize- 10;
+        g2.drawString("Pause", textX, textY); textY += gp.tileSize- 10;
+        g2.drawString("Option", textX, textY); textY += gp.tileSize- 10;
         g2.drawString("Map/MiniMap", textX, textY);
 
         textX = frameX + gp.tileSize * 6;
         textY = frameY + gp.tileSize * 2;
-        g2.drawString("WASD", textX, textY); textY += gp.tileSize;
-        g2.drawString("ENTER", textX, textY); textY += gp.tileSize;
-        g2.drawString("F", textX, textY); textY += gp.tileSize;
-        g2.drawString("C", textX, textY); textY += gp.tileSize;
-        g2.drawString("P", textX, textY); textY += gp.tileSize;
-        g2.drawString("ESC", textX, textY);textY += gp.tileSize;
+        g2.drawString("WASD", textX, textY); textY += gp.tileSize- 10;
+        g2.drawString("ENTER", textX, textY); textY += gp.tileSize- 10;
+        g2.drawString("F", textX, textY); textY += gp.tileSize- 10;
+        g2.drawString("SPACE", textX, textY); textY += gp.tileSize- 10;
+        g2.drawString("C", textX, textY); textY += gp.tileSize- 10;
+        g2.drawString("P", textX, textY); textY += gp.tileSize- 10;
+        g2.drawString("ESC", textX, textY);textY += gp.tileSize- 10;
         g2.drawString("X/M", textX, textY);
 
         // BACK
@@ -870,7 +872,7 @@ public class UI {
                 gp.eManager.lighting.dayState = gp.eManager.lighting.day;
                 gp.eManager.lighting.dayCounter = 0;
                 gp.gameState = gp.playState;
-                gp.player.getPlayerImage();
+                gp.player.getImage();
             }
         }
     }

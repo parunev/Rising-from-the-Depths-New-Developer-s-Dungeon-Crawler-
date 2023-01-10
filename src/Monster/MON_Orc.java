@@ -23,6 +23,7 @@ public class MON_Orc extends Entity {
         attack = 8;
         defence = 2;
         exp = 10;
+        knockBackPower = 5;
 
         solidArea.x = 4;
         solidArea.y = 4;
@@ -55,6 +56,7 @@ public class MON_Orc extends Entity {
         attackUp2 = setup("/Resources/Monsters/orc_attack_up_2", gp.tileSize, gp.tileSize*2);
         attackDown1 = setup("/Resources/Monsters/orc_attack_down_1", gp.tileSize, gp.tileSize*2);
         attackDown2 = setup("/Resources/Monsters/orc_attack_down_2", gp.tileSize, gp.tileSize*2);
+        attackLeft1 = setup("/Resources/Monsters/orc_attack_left_1", gp.tileSize*2, gp.tileSize);
         attackLeft2 = setup("/Resources/Monsters/orc_attack_left_2", gp.tileSize*2, gp.tileSize);
         attackRight1 = setup("/Resources/Monsters/orc_attack_right_1", gp.tileSize*2, gp.tileSize);
         attackRight2 = setup("/Resources/Monsters/orc_attack_right_2", gp.tileSize*2, gp.tileSize);

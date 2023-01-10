@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 // The listener interface for receiving keyboard events (keystrokes)
 public class KeyHandler implements KeyListener {
     GamePanel gp;
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed, spacePressed;
     boolean showDebugText = false; // DEBUG
 
     public KeyHandler(GamePanel gp){
@@ -104,6 +104,9 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_X){
             gp.map.miniMapOn = !gp.map.miniMapOn;
+        }
+        if (code == KeyEvent.VK_SPACE){
+            spacePressed = true;
         }
 
         // DEBUG
@@ -336,6 +339,12 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_F){
             shotKeyPressed = false;
+        }
+        if (code == KeyEvent.VK_ENTER){
+            enterPressed = false;
+        }
+        if (code == KeyEvent.VK_SPACE){
+            spacePressed = false;
         }
     }
 }
