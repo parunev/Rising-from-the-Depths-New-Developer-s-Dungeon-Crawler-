@@ -101,26 +101,20 @@ public class GamePanel extends JPanel implements Runnable {
         gameState = titleState;
     }
 
-    // If we retry the game then we're going to restore player default positions and life/mana
-    // plus NPCs and Monsters
-    public void retry(){
+    public void resetGame(boolean restart){
         player.setDefaultPositions();
-        player.restoreLifeAndMana();
+        player.restoreStatus();
         aSetter.setNPC();
         aSetter.setMonster();
-        playMusic(0);
-    }
 
-    // If we chose to quit game, basically this means we will reset everything
-    public void restart(){
-        player.setDefaultPositions();
-        player.setDefaultValues();
-        player.restoreLifeAndMana();
-        player.setItems();
-        aSetter.setObject();
-        aSetter.setNPC();
-        aSetter.setMonster();
-        aSetter.setInteractiveTiles();
+        if (restart){
+            player.setDefaultValues();
+            aSetter.setObject();
+            aSetter.setInteractiveTiles();
+            eManager.lighting.resetDay();
+        }
+
+        playMusic(0);
     }
 
     // passing this(Main.GamePanel) to this thread constructor, instantiate
