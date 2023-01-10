@@ -133,7 +133,9 @@ public class KeyHandler implements KeyListener {
 
     public void dialogueState(int code){
         if (code == KeyEvent.VK_ENTER){
-            gp.gameState = gp.playState;
+            // Maybe the text requires multiple pages to display so we cannot just return to the playState
+            // everytime we press enter
+            enterPressed = true;
         }
     }
 

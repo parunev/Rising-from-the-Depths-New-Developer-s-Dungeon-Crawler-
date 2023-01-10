@@ -12,8 +12,6 @@ public class NPC_OldMan extends Entity{
 
         direction = "down";
         speed = (int)1.2;
-        getOldManImage();
-        setDialogue();
 
         solidArea = new Rectangle();
         solidArea.x = 8;
@@ -22,6 +20,11 @@ public class NPC_OldMan extends Entity{
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 30;
         solidArea.height = 30;
+
+        dialogueSet = -1;
+
+        getOldManImage();
+        setDialogue();
     }
 
     public void getOldManImage(){
@@ -37,10 +40,16 @@ public class NPC_OldMan extends Entity{
 
     // Store character dialogues
     public void setDialogue(){
-        dialogues[0] = "Hello, lad.";
-        dialogues[1] = "So you've come to this island to \nfind the treasure?";
-        dialogues[2] = "I used to be a great wizard but now... \nI'm a bit too old for taking an adventure.";
-        dialogues[3] = "Well, good luck on you.";
+        dialogues[0][0] = "Hello, lad.";
+        dialogues[0][1] = "So you've come to this island to \nfind the treasure?";
+        dialogues[0][2] = "I used to be a great wizard but now... \nI'm a bit too old for taking an adventure.";
+        dialogues[0][3] = "Well, good luck on you.";
+
+        dialogues[1][0] = "If you become tired, rest at the water";
+        dialogues[1][1] = "However, the monsters reappear if you rest.\nI don't know why but that's how it works.";
+        dialogues[1][2] = "In any case, don't push yourself too hard.";
+
+        dialogues[2][0] = "I wonder how to open that door...";
     }
 
     // Character behaviour (AI kinda)
@@ -84,7 +93,19 @@ public class NPC_OldMan extends Entity{
     // Example: You have special items and different dialogue starts... etc.
     // Makes customization easier
     public void speak(){
-        super.speak();
+        facePlayer(); // npc facing the player
+        startDialogue(this, dialogueSet); // we switch to dialogue state and handle the rest
+
+        // The dialogues can be adjusted with any conditions
+        // If the player health is lower, if its nighttime etc. etc.
+        dialogueSet++;
+
+        if (dialogues[dialogueSet][0] == null){
+
+        //  dialogueSet = 0;  // Starts the conversations again and again
+            dialogueSet--; // Repeats the last dialogue again and again
+        }
+
         onPath = true;
     }
 }

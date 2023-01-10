@@ -8,6 +8,7 @@ public class EventHandler {
 
     GamePanel gp;
     EventRect[][][] eventRect;
+    Entity eventMaster;
 
     // Setting some kind of margin and make it so if an event happened it won't happen again
     // until player character move away from the event rectangle by one tile distance
@@ -18,6 +19,8 @@ public class EventHandler {
 
     public EventHandler(GamePanel gp){
         this.gp = gp;
+
+        eventMaster = new Entity(gp);
 
         // Event Rectangle on every single tile basically
         eventRect = new EventRect[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
@@ -48,6 +51,18 @@ public class EventHandler {
                 }
             }
         }
+
+        setDialogue();
+    }
+
+    public void setDialogue(){
+        eventMaster.dialogues[0][0] = "You fall into a pit!";
+        eventMaster.dialogues[1][0] = """
+                    You drink the water.\s
+                    Your life and mana has been recovered.
+                    (The progress has been saved)""";
+
+        eventMaster.dialogues[1][1] = "Refreshing!";
     }
 
     public void checkEvent() throws IOException {
@@ -122,7 +137,7 @@ public class EventHandler {
 
     public void damagePit(int gameState){
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "You fall into a pit!";
+        eventMaster.startDialogue(eventMaster, 0);
         gp.player.life--;
         canTouchEvent = false;
     }
@@ -131,10 +146,8 @@ public class EventHandler {
         if (gp.keyH.enterPressed){
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
-            gp.ui.currentDialogue = """
-                    You drink the water.\s
-                    Your life and mana has been recovered.
-                    (The progress has been saved)""";
+            gp.playSE(2);
+            eventMaster.startDialogue(eventMaster, 1);
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
 

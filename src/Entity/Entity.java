@@ -21,14 +21,15 @@ public class Entity {
     public Rectangle attackArea = new Rectangle(0,0,0,0); // entities attack area
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision = false;
-    String[] dialogues = new String[20];
+    public String[][] dialogues = new String[20][20]; // First dimension indicates the dialogue set (Flipping pages)
     public Entity attacker;
 
     // STATE
     public int worldX, worldY;
     public String direction = "down";
     public int spriteNumber = 1;
-    int dialogueIndex = 0;
+    public int dialogueSet = 0;
+    public int dialogueIndex = 0;
     public boolean collisionOn = false;
     public boolean invincible = false;
     public boolean attacking = false;
@@ -120,24 +121,36 @@ public class Entity {
     public int getGoalCol(Entity target){return (target.worldX + target.solidArea.x) / gp.tileSize;}
     public int getGoalRow(Entity target){return (target.worldY + target.solidArea.y) / gp.tileSize;}
 
+    public void resetCounter(){
+        spriteCounter = 0;
+        actionLockCounter = 0;
+        invincibleCounter = 0;
+        shotAvailableCounter = 0;
+        dyingCounter = 0;
+        hpBarCounter = 0;
+        knockBackCounter = 0;
+        guardCounter = 0;
+        offBalanceCounter = 0;
+    }
     public void setLoot(Entity loot){}
     public void setAction() {}
     public void damageReaction(){}
 
-    public void speak() {
-        // If there is no text we go back to index zero preventing a NullPointer
-        if (dialogues[dialogueIndex] == null){
-            dialogueIndex = 0;
-        }
-        gp.ui.currentDialogue = dialogues[dialogueIndex];
-        dialogueIndex++;
+    public void speak() {}
 
+    public void facePlayer(){
         switch (gp.player.direction) {
             case "up" -> direction = "down";
             case "down" -> direction = "up";
             case "left" -> direction = "right";
             case "right" -> direction = "left";
         }
+    }
+
+    public void startDialogue(Entity entity, int setNum){
+        gp.gameState = gp.dialogueState;
+        gp.ui.npc = entity;
+        dialogueSet = setNum;
     }
 
     public void interact(){}
