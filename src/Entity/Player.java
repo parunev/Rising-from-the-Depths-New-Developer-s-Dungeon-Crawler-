@@ -9,6 +9,7 @@ import Obj.OBJ_Sword_Normal;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Player extends Entity{
     KeyHandler keyH;
@@ -80,6 +81,7 @@ public class Player extends Entity{
     public void restoreStatus(){
         life = maxLife;
         mana = maxMana;
+        speed = defaultSpeed;
         invincible = false;
         transparent = false;
         attacking = false;
@@ -104,6 +106,28 @@ public class Player extends Entity{
 
     public int getDefence(){
         return defence = dexterity * currentShield.defenceValue;
+    }
+
+    public int getCurrentWeaponSlot(){
+        int currentWeaponSlot = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i) == currentWeapon){
+                currentWeaponSlot = i;
+            }
+        }
+
+        return currentWeaponSlot;
+    }
+
+    public int getCurrentShieldSlot(){
+        int currentShieldSlot = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i) == currentShield){
+                currentShieldSlot = i;
+            }
+        }
+
+        return currentShieldSlot;
     }
 
     public void getImage() {
@@ -161,7 +185,7 @@ public class Player extends Entity{
     }
 
     // This update method gets called 60 times per sec / 60FPS
-    public void update(){
+    public void update() throws IOException {
 
         if (knockBack) {
             collisionOn = false;

@@ -16,7 +16,7 @@ public class TileManager {
     GamePanel gp;
     public Tile[] tile;
     public int[][][] mapTileNumber;
-    boolean drawPath = true;
+    // boolean drawPath = true;
     ArrayList<String> fileNames = new ArrayList<>();
     ArrayList<String> collisionStatus = new ArrayList<>();
 
@@ -158,7 +158,7 @@ public class TileManager {
 
         // Drawing the nodes in the pathList
         // DEBUG - Whole if-statement can be commented
-        if (drawPath){
+        /* if (drawPath){
             g2.setColor(new Color(255,0,0,25));
 
             for (int i = 0; i < gp.pFinder.pathList.size() ; i++) {
@@ -170,5 +170,6 @@ public class TileManager {
                 g2.fillRect(screenX, screenY, gp.tileSize, gp.tileSize);
             }
         }
+         */
     }
 }

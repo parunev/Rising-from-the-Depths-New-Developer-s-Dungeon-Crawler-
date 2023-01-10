@@ -1,6 +1,7 @@
 package Main;
 
 import Ai.Pathfinder;
+import Data.SaveLoad;
 import Entity.Entity;
 import Entity.Player;
 import Environment.EnvironmentManager;
@@ -50,6 +51,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Pathfinder pFinder = new Pathfinder(this);
     public EnvironmentManager eManager = new EnvironmentManager(this);
     Map map = new Map(this);
+    SaveLoad saveLoad = new SaveLoad(this);
     Thread gameThread; //it keeps your program running until you stop it
 
     // ENTITY AND OBJECT
@@ -135,7 +137,11 @@ public class GamePanel extends JPanel implements Runnable {
         while (gameThread != null){
 
             // UPDATE: update information such as character position
-            update();
+            try {
+                update();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
             // DRAW: draw the screen with the updated information
             repaint();
@@ -158,7 +164,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    public void update(){
+    public void update() throws IOException {
         if (gameState == playState){
             // PLAYER
             player.update();

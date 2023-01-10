@@ -2,6 +2,7 @@ package Main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 // The listener interface for receiving keyboard events (keystrokes)
 public class KeyHandler implements KeyListener {
@@ -21,7 +22,11 @@ public class KeyHandler implements KeyListener {
         int code = e.getKeyCode(); // returns the integer keyCode associated with the key in this event
 
         if (gp.gameState == gp.titleState){ // TITLE STATE
-            titleState(code);
+            try {
+                titleState(code);
+            } catch (IOException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (gp.gameState == gp.playState){ // PLAY STATE
             playState(code);
         } else if (gp.gameState == gp.pauseState){ // PAUSE STATE
@@ -41,7 +46,7 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-    public void titleState(int code){
+    public void titleState(int code) throws IOException, ClassNotFoundException {
         if (code == KeyEvent.VK_W){
             gp.ui.commandNum--;
             if (gp.ui.commandNum < 0){
@@ -55,17 +60,17 @@ public class KeyHandler implements KeyListener {
             }
         }
         if (code == KeyEvent.VK_ENTER){
-            switch (gp.ui.commandNum){
-                case 0:
+            switch (gp.ui.commandNum) {
+                case 0 -> {
                     gp.gameState = gp.playState;
                     gp.playMusic(0);
-                    break;
-                case 1:
-                    // add later
-                    break;
-                case 2:
-                    System.exit(0);
-                    break;
+                }
+                case 1 -> {
+                    gp.saveLoad.load();
+                    gp.gameState = gp.playState;
+                    gp.playMusic(0);
+                }
+                case 2 -> System.exit(0);
             }
         }
     }

@@ -2,6 +2,8 @@ package Main;
 
 import Entity.Entity;
 
+import java.io.IOException;
+
 public class EventHandler {
 
     GamePanel gp;
@@ -48,7 +50,7 @@ public class EventHandler {
         }
     }
 
-    public void checkEvent(){
+    public void checkEvent() throws IOException {
 
         //Check if the player character is more than 1 tile away from the last event
         int xDistance = Math.abs(gp.player.worldX - previousEventX);
@@ -125,16 +127,21 @@ public class EventHandler {
         canTouchEvent = false;
     }
 
-    public void healingPool(int gameState){
+    public void healingPool(int gameState) throws IOException {
         if (gp.keyH.enterPressed){
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
-            gp.ui.currentDialogue = "You drink the water. \nYour life and mana has been recovered.";
+            gp.ui.currentDialogue = """
+                    You drink the water.\s
+                    Your life and mana has been recovered.
+                    (The progress has been saved)""";
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
 
             // Whenever you use the event the monsters will respawn
             gp.aSetter.setMonster();
+
+            gp.saveLoad.save();
         }
     }
 

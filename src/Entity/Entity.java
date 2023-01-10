@@ -41,6 +41,8 @@ public class Entity {
     public boolean guarding = false;
     public boolean transparent = false;
     public boolean offBalance = false;
+    public Entity loot;
+    public boolean opened = false;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -118,9 +120,8 @@ public class Entity {
     public int getGoalCol(Entity target){return (target.worldX + target.solidArea.x) / gp.tileSize;}
     public int getGoalRow(Entity target){return (target.worldY + target.solidArea.y) / gp.tileSize;}
 
-
+    public void setLoot(Entity loot){}
     public void setAction() {}
-
     public void damageReaction(){}
 
     public void speak() {
@@ -195,7 +196,7 @@ public class Entity {
         }
     }
 
-    public void update(){
+    public void update() throws IOException {
         if (knockBack){
             checkCollision();
             if (collisionOn){
