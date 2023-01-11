@@ -537,9 +537,11 @@ public class Player extends Entity{
     public boolean canObtainItem(Entity item){
         boolean canObtain = false;
 
+        Entity newItem = gp.eGenerator.getObject(item.name);
+
         // CHECK IF ITEM IS STACKABLE
-        if (item.stackable){
-            int index = searchItemInInventory(item.name);
+        if (newItem.stackable){
+            int index = searchItemInInventory(newItem.name);
 
             if (index != 999){ // If we already have the same item
                 inventory.get(index).amount++;
@@ -547,13 +549,13 @@ public class Player extends Entity{
 
             } else { // New item so we need to check vacancy
                 if (inventory.size() != maxInventorySize){
-                    inventory.add(item);
+                    inventory.add(newItem);
                     canObtain = true;
                 }
             }
         } else { // NOT STACKABLE so check vacancy
             if (inventory.size() != maxInventorySize){
-                inventory.add(item);
+                inventory.add(newItem);
                 canObtain = true;
             }
         }
