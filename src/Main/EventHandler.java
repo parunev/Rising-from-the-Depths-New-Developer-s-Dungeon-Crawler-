@@ -84,17 +84,33 @@ public class EventHandler {
             else if (hit(0,23,12,"up")){
                 healingPool(gp.dialogueState);
             }
-            // Hut event
+            // To the Merchant
             else if (hit(0,10,39,"any")){
-                teleportHut(1, 12, 13);
+                teleport(1, 12, 13);
             }
-            // Leave Hut event
+            // To leave the Merchant
             else if (hit(1,12,13,"any")){
-                teleportHut(0, 10, 39);
+                teleport(0, 10, 39);
             }
             // Speak to the merchant
             else if (hit(1,12,9,"up")){
                 speak(gp.npc[1][0]);
+            }
+            // Entering the dungeon
+            else if (hit(0, 12, 9, "any")) {
+                teleport(2, 9, 41);
+            }
+            // Leaving the dungeon
+            else if (hit(2, 9, 41, "any")){
+                teleport(0, 12, 9);
+            }
+            // To the second dungeon floor
+            else if (hit(2, 8, 7, "any")){
+                teleport(3, 26, 41);
+            }
+            // To the first dungeon floor
+            else if (hit(3, 26, 41, "any")){
+                teleport(2, 8, 7);
             }
         }
     }
@@ -158,7 +174,7 @@ public class EventHandler {
         }
     }
 
-    public void teleportHut(int map, int col, int row){
+    public void teleport(int map, int col, int row){
         gp.gameState = gp.transitionState;
         tempMap = map;
         tempCol = col;
