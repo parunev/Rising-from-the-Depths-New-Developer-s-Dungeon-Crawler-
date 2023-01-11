@@ -86,11 +86,11 @@ public class EventHandler {
             }
             // To the Merchant
             else if (hit(0,10,39,"any")){
-                teleport(1, 12, 13);
+                teleport(1, 12, 13, gp.indoor);
             }
             // To leave the Merchant
             else if (hit(1,12,13,"any")){
-                teleport(0, 10, 39);
+                teleport(0, 10, 39, gp.outside);
             }
             // Speak to the merchant
             else if (hit(1,12,9,"up")){
@@ -98,19 +98,19 @@ public class EventHandler {
             }
             // Entering the dungeon
             else if (hit(0, 12, 9, "any")) {
-                teleport(2, 9, 41);
+                teleport(2, 9, 41, gp.dungeon);
             }
             // Leaving the dungeon
             else if (hit(2, 9, 41, "any")){
-                teleport(0, 12, 9);
+                teleport(0, 12, 9, gp.outside);
             }
             // To the second dungeon floor
             else if (hit(2, 8, 7, "any")){
-                teleport(3, 26, 41);
+                teleport(3, 26, 41, gp.dungeon);
             }
             // To the first dungeon floor
             else if (hit(3, 26, 41, "any")){
-                teleport(2, 8, 7);
+                teleport(2, 8, 7, gp.dungeon);
             }
         }
     }
@@ -174,8 +174,9 @@ public class EventHandler {
         }
     }
 
-    public void teleport(int map, int col, int row){
+    public void teleport(int map, int col, int row, int area){
         gp.gameState = gp.transitionState;
+        gp.nextArea = area;
         tempMap = map;
         tempCol = col;
         tempRow = row;

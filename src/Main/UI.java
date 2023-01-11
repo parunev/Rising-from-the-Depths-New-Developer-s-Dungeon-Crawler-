@@ -915,6 +915,7 @@ public class UI {
         g2.setColor(new Color(0,0,0, counter * 5));
         g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
 
+        // The transition is done
         if (counter == 50){ // at 50 frames this alpha becomes 250 (almost completely black)
             counter = 0;
             gp.gameState = gp.playState;
@@ -923,6 +924,7 @@ public class UI {
             gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
             gp.eHandler.previousEventX = gp.player.worldX;
             gp.eHandler.previousEventY = gp.player.worldY;
+            gp.changeArea();
         }
     }
 
