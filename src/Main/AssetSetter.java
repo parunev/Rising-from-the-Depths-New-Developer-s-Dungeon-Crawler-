@@ -101,7 +101,13 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldY = gp.tileSize * 7;
 
         // MAP 2
-        mapNum = 2;
+        setDungeonRocks();
+    }
+
+    public void setDungeonRocks(){
+        int mapNum = 2;
+        int i = 0;
+
         gp.npc[mapNum][i] = new NPC_BigRock(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize * 20;
         gp.npc[mapNum][i].worldY = gp.tileSize * 25;

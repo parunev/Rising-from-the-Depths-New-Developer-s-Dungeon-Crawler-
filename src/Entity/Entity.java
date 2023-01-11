@@ -23,6 +23,7 @@ public class Entity {
     public boolean collision = false;
     public String[][] dialogues = new String[20][20]; // First dimension indicates the dialogue set (Flipping pages)
     public Entity attacker;
+    public Entity linkedEntity;
 
     // STATE
     public int worldX, worldY;
@@ -135,6 +136,7 @@ public class Entity {
     }
     public void setLoot(Entity loot){}
     public void setAction() {}
+    public void move(String direction){}
     public void damageReaction(){}
 
     public void speak() {}

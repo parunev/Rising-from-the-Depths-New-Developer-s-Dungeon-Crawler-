@@ -389,11 +389,13 @@ public class Player extends Entity{
     }
 
     public void interactNpc(int i) {
-        if (gp.keyH.enterPressed){
-            if (i != 999){// Dialogue window opens only when you press the Enter key, while NPC collision is happening
+        if (i != 999){ // Dialogue window opens only when you press the Enter key, while NPC collision is happening
+            if (gp.keyH.enterPressed) {
                 attackCanceled = true;
                 gp.npc[gp.currentMap][i].speak();
             }
+
+            gp.npc[gp.currentMap][i].move(direction);
         }
     }
 

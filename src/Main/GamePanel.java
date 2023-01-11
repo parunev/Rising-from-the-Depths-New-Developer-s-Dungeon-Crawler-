@@ -385,6 +385,9 @@ public class GamePanel extends JPanel implements Runnable {
             if (nextArea == dungeon){
                 playMusic(17);
             }
+
+            // If you want to reset other NPCs such as OldMan, you can call setNpc method
+            aSetter.setDungeonRocks();
         }
         currentArea = nextArea;
         aSetter.setMonster();
