@@ -2,10 +2,7 @@ package Entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
-import Obj.OBJ_Fireball;
-import Obj.OBJ_Key;
-import Obj.OBJ_Shield_Wood;
-import Obj.OBJ_Sword_Normal;
+import Obj.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -101,6 +98,8 @@ public class Player extends Entity{
         inventory.add(currentWeapon);
         inventory.add(currentShield);
         inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Axe(gp));
     }
 
     public int getAttack(){

@@ -35,6 +35,7 @@ public class Sound {
         soundURL[17] = getClass().getResource("/Resources/Sounds/Dungeon.wav");
         soundURL[18] = getClass().getResource("/Resources/Sounds/Merchant.wav");
         soundURL[19] = getClass().getResource("/Resources/Sounds/chipwall.wav");
+        soundURL[20] = getClass().getResource("/Resources/Sounds/dooropen.wav");
     }
 
     // FORMAT TO OPEN AUDIO FILE IN JAVA
