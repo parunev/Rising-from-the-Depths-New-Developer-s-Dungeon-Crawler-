@@ -125,8 +125,6 @@ public class GamePanel extends JPanel implements Runnable {
             aSetter.setInteractiveTiles();
             eManager.lighting.resetDay();
         }
-
-        playMusic(0);
     }
 
     // passing this(Main.GamePanel) to this thread constructor, instantiate
