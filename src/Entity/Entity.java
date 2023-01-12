@@ -362,9 +362,9 @@ public class Entity {
         }
     }
 
-    public void getRandomDirection(){
+    public void getRandomDirection(int interval){
         actionLockCounter++;
-        if (actionLockCounter == 120){
+        if (actionLockCounter == interval){
             Random random = new Random();
             int i = random.nextInt(100)+1; // if the bound is just 100 it becomes 0 to 99, that's why I added +1
 

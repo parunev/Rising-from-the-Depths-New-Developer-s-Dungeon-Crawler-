@@ -75,7 +75,7 @@ public class MON_Orc extends Entity {
             checkStartChasingOrNot(gp.player, 5, 100);
 
             // For every 120 frames the NPC will move. This can be adjusted. Gets a random direction
-            getRandomDirection();
+            getRandomDirection(120);
         }
 
         // Check if it attacks

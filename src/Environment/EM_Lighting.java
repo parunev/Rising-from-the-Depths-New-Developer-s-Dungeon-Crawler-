@@ -30,7 +30,7 @@ public class EM_Lighting {
         Graphics2D g2 = (Graphics2D) darknessFilter.getGraphics();
 
         if (gp.player.currentLight == null){
-            g2.setColor(new Color(0,0, 0, 240));
+            g2.setColor(new Color(0,0, 0, 230));
         } else { // player has equipped a lighting item
 
             // Get the center x and y of the light circle
@@ -48,7 +48,7 @@ public class EM_Lighting {
             color[1] = new Color(0,0,0.01f,0.25f);
             color[2] = new Color(0,0,0.01f,0.5f);
             color[3] = new Color(0,0,0.01f,0.75f);
-            color[4] = new Color(0,0,0.01f,0.98f);
+            color[4] = new Color(0,0,0.01f,0.94f);
 
             // ADJUSTABLE
             // These numbers indicate the distance from the center of the light circle
