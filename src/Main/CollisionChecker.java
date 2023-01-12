@@ -28,7 +28,7 @@ public class CollisionChecker {
         // we only need to check 2 tiles for each direction
         int tileNum1, tileNum2;
 
-        // Use a temporal direction when it's being knockbacked
+        // Use a temporal direction when it's being knock-backed
         String direction = entity.direction;
         if (entity.knockBack){
             direction = entity.knockBackDirection;
@@ -79,6 +79,12 @@ public class CollisionChecker {
 
         int index = 999;
 
+        // Use a temporal direction when it's being knock-backed
+        String direction = entity.direction;
+        if (entity.knockBack){
+            direction = entity.knockBackDirection;
+        }
+
         for (int i = 0; i < gp.obj[1].length ; i++) {
             if (gp.obj[gp.currentMap][i] != null){
 
@@ -96,7 +102,7 @@ public class CollisionChecker {
                 // Simulating entity's movement and check where it will be after it moved.
                 // Rectangle class has a beautiful method called "Intersects"
                 // this method automatically check if two rectangles are colliding or not
-                switch (entity.direction) {
+                switch (direction) {
                     case "up" -> entity.solidArea.y -= entity.speed;
                     case "down" -> entity.solidArea.y += entity.speed;
                     case "left" -> entity.solidArea.x -= entity.speed;

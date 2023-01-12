@@ -22,7 +22,7 @@ public class DataStorage implements Serializable {
     // PLAYER INVENTORY
     // Since you can only read variables and not classes in serialized object we declare two ArrayList holding their names and amounts
     ArrayList<String> itemNames = new ArrayList<>();
-    ArrayList<Integer> itemAmount = new ArrayList<>();
+    ArrayList<Integer> itemAmounts = new ArrayList<>();
     int currentWeaponSlot;
     int currentShieldSlot;
 

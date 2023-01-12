@@ -31,7 +31,7 @@ public class SaveLoad {
         // PLAYER INVENTORY
         for (int i = 0; i < gp.player.inventory.size(); i++) {
             ds.itemNames.add(gp.player.inventory.get(i).name);
-            ds.itemAmount.add(gp.player.inventory.get(i).amount);
+            ds.itemAmounts.add(gp.player.inventory.get(i).amount);
         }
 
         // PLAYER EQUIPMENT
@@ -90,7 +90,7 @@ public class SaveLoad {
         gp.player.inventory.clear();
         for (int i = 0; i < ds.itemNames.size(); i++) {
             gp.player.inventory.add(gp.eGenerator.getObject(ds.itemNames.get(i)));
-            gp.player.inventory.get(i).amount = ds.itemAmount.get(i);
+            gp.player.inventory.get(i).amount = ds.itemAmounts.get(i);
         }
 
         // PLAYER EQUIPMENT
@@ -112,10 +112,11 @@ public class SaveLoad {
                     gp.obj[mapNum][i].worldY = ds.mapObjectWorldY[mapNum][i];
 
                     if (ds.mapObjectLootNames[mapNum][i] != null){
-                        gp.obj[mapNum][i].loot = gp.eGenerator.getObject(ds.mapObjectLootNames[mapNum][i]);
+                        gp.obj[mapNum][i].setLoot(gp.eGenerator.getObject(ds.mapObjectLootNames[mapNum][i]));
                     }
 
                     gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
+
                     if (gp.obj[mapNum][i].opened){
                         gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2;
                     }
