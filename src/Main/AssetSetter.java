@@ -3,10 +3,7 @@ package Main;
 import Entity.NPC_BigRock;
 import Entity.NPC_Merchant;
 import Entity.NPC_OldMan;
-import Monster.MON_Bat;
-import Monster.MON_GreenSlime;
-import Monster.MON_Orc;
-import Monster.MON_RedSlime;
+import Monster.*;
 import Obj.*;
 import TileInteractive.IT_DestructibleWall;
 import TileInteractive.IT_DryTree;
@@ -198,6 +195,13 @@ public class AssetSetter {
         gp.monster[mapNum][i] = new MON_Bat(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 10;
         gp.monster[mapNum][i].worldY = gp.tileSize * 19;
+
+        mapNum = 3;
+        i = 0;
+
+        gp.monster[mapNum][i] = new MON_Skeletonlord(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 16;
     }
 
     public void setInteractiveTiles(){

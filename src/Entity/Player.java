@@ -352,11 +352,13 @@ public class Player extends Entity{
         if (mana > maxMana){
             mana = maxMana;
         }
-        if (life <= 0){
-            gp.gameState = gp.gameOverState;
-            gp.ui.commandNum = -1; // prevents you from resetting the game immediately
-            gp.stopMusic();
-            gp.playSE(12);
+        if (!keyH.godModeOn){
+            if (life <= 0){
+                gp.gameState = gp.gameOverState;
+                gp.ui.commandNum = -1; // prevents you from resetting the game immediately
+                gp.stopMusic();
+                gp.playSE(12);
+            }
         }
     }
 

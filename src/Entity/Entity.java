@@ -45,6 +45,7 @@ public class Entity {
     public boolean offBalance = false;
     public Entity loot;
     public boolean opened = false;
+    public boolean inRage = false;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -117,8 +118,14 @@ public class Entity {
     public int getBottomY(){return worldY + solidArea.y + solidArea.height;}
     public int getCol(){return (worldX + solidArea.x) / gp.tileSize;}
     public int getRow(){return (worldY + solidArea.y) / gp.tileSize;}
-    public int getXDistance(Entity target){return Math.abs(worldX - target.worldX);}
-    public int getYDistance(Entity target){return Math.abs(worldY - target.worldY);}
+    public int getCenteredX(){
+        return worldX + left1.getWidth() / 2;
+    }
+    public int getCenteredY(){
+        return worldY + up1.getHeight() / 2;
+    }
+    public int getXDistance(Entity target){return Math.abs(getCenteredX() - target.getCenteredX());}
+    public int getYDistance(Entity target){return Math.abs(getCenteredY() - target.getCenteredY());}
     public int getTileDistance(Entity target){return (getXDistance(target) + getYDistance(target)) / gp.tileSize;}
     public int getGoalCol(Entity target){return (target.worldX + target.solidArea.x) / gp.tileSize;}
     public int getGoalRow(Entity target){return (target.worldY + target.solidArea.y) / gp.tileSize;}
@@ -295,22 +302,22 @@ public class Entity {
 
         switch (direction){
             case "up":
-                if (gp.player.worldY < worldY && yDistance < straight && xDistance < horizontal){
+                if (gp.player.getCenteredY() < getCenteredY() && yDistance < straight && xDistance < horizontal){
                     targetInRange = true;
                 }
                 break;
             case "down":
-                if (gp.player.worldY > worldY && yDistance < straight && xDistance < horizontal){
+                if (gp.player.getCenteredY() > getCenteredY() && yDistance < straight && xDistance < horizontal){
                     targetInRange = true;
                 }
                 break;
             case "left":
-                if (gp.player.worldX < worldX && xDistance < straight && yDistance < horizontal){
+                if (gp.player.getCenteredX() < getCenteredX() && xDistance < straight && yDistance < horizontal){
                     targetInRange = true;
                 }
                 break;
             case "right":
-                if (gp.player.worldX > worldX && xDistance < straight && yDistance < horizontal){
+                if (gp.player.getCenteredX() > getCenteredX() && xDistance < straight && yDistance < horizontal){
                     targetInRange = true;
                 }
                 break;
@@ -364,7 +371,7 @@ public class Entity {
 
     public void getRandomDirection(int interval){
         actionLockCounter++;
-        if (actionLockCounter == interval){
+        if (actionLockCounter > interval){
             Random random = new Random();
             int i = random.nextInt(100)+1; // if the bound is just 100 it becomes 0 to 99, that's why I added +1
 
@@ -380,6 +387,36 @@ public class Entity {
             if (i > 75){ // 25% of the time it goes right
                 direction = "right";
             }
+            actionLockCounter = 0;
+        }
+    }
+
+    // BOSS AI
+    // Makes the entity moves towards the player
+    // So when the player gets in range it triggers entity aggro effect
+    public void moveTowardPlayer(int interval){
+        actionLockCounter++;
+
+        if (actionLockCounter > interval){
+            // If X Distance is longer the entity moves either left or right
+            if (getXDistance(gp.player) > getYDistance(gp.player)){
+                // This means the player is on the left side
+                if (gp.player.getCenteredX() < getCenteredX()){
+                    direction = "left";
+                } else {
+                    direction = "right";
+                }
+
+            // If Y Distance is longer the entity moves either up or down
+            } else if (getXDistance(gp.player) < getYDistance(gp.player)){
+                // This means the player is above
+                if (gp.player.getCenteredY() < getCenteredY()){
+                    direction = "up";
+                } else {
+                    direction = "down";
+                }
+            }
+
             actionLockCounter = 0;
         }
     }
@@ -528,9 +565,9 @@ public class Entity {
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
+        if (worldX + gp.tileSize * 5 > gp.player.worldX - gp.player.screenX &&
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+                worldY + gp.tileSize * 5 > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY){
 
             int tempScreenX = screenX;
@@ -543,7 +580,7 @@ public class Entity {
                         if (spriteNumber == 2) {image = up2;}
                     }
                     if (attacking){
-                        tempScreenY = screenY - gp.tileSize;
+                        tempScreenY = screenY - up1.getHeight(); // this way we handle larger entities
                         if (spriteNumber == 1) {image = attackUp1;}
                         if (spriteNumber == 2) {image = attackUp2;}
                     }
@@ -564,7 +601,7 @@ public class Entity {
                         if (spriteNumber == 2) {image = left2;}
                     }
                     if (attacking){
-                        tempScreenX = screenX - gp.tileSize;
+                        tempScreenX = screenX - left1.getWidth(); // handling large entities
                         if (spriteNumber == 1) {image = attackLeft1;}
                         if (spriteNumber == 2) {image = attackLeft2;}
                     }
