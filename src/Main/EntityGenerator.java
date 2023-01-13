@@ -17,6 +17,7 @@ public class EntityGenerator {
         // Not really flexible solution, but it works for now
         return switch (itemName) {
             case OBJ_Axe.objName -> new OBJ_Axe(gp);
+            case OBJ_BlueHeart.objName -> new OBJ_BlueHeart(gp);
             case OBJ_Boots.objName -> new OBJ_Boots(gp);
             case OBJ_Chest.objName -> new OBJ_Chest(gp);
             case OBJ_Coin_Bronze.objName -> new OBJ_Coin_Bronze(gp);
