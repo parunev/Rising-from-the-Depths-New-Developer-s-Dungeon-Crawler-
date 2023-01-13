@@ -80,6 +80,7 @@ public class Entity {
     public Entity currentShield;
     public Entity currentLight;
     public Projectile projectile;
+    public boolean boss;
 
     // ITEM ATTRIBUTES
     public ArrayList<Entity> inventory = new ArrayList<>();
@@ -112,6 +113,12 @@ public class Entity {
     }
 
     // BLUEPRINTS
+    public int getScreenX(){
+        return worldX - gp.player.worldX + gp.player.screenX;
+    }
+    public int getScreenY(){
+        return worldY - gp.player.worldY + gp.player.screenY;
+    }
     public int getLeftX(){return worldX + solidArea.x;}
     public int getRightX(){return worldX + solidArea.x + solidArea.width;}
     public int getTopY(){return worldY + solidArea.y;}
@@ -545,33 +552,21 @@ public class Entity {
         target.knockBack = true;
     }
 
-    public BufferedImage setup(String imagePath, int width, int height){
-        UtilityTool uTool = new UtilityTool();
-        BufferedImage image = null;
-
-        try{
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(imagePath +".png")));
-            image = uTool.scaleImage(image, width, height);
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-
-        return image;
+    public boolean inCamera(){
+        return worldX + gp.tileSize * 5 > gp.player.worldX - gp.player.screenX &&
+                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
+                worldY + gp.tileSize * 5 > gp.player.worldY - gp.player.screenY &&
+                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY;
     }
 
     public void draw(Graphics2D g2) {
         BufferedImage image = null;
-        int screenX = worldX - gp.player.worldX + gp.player.screenX;
-        int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        if (worldX + gp.tileSize * 5 > gp.player.worldX - gp.player.screenX &&
-                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                worldY + gp.tileSize * 5 > gp.player.worldY - gp.player.screenY &&
-                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY){
 
-            int tempScreenX = screenX;
-            int tempScreenY = screenY;
+        if (inCamera()){
+
+            int tempScreenX = getScreenX();
+            int tempScreenY = getScreenY();
 
             switch (direction) {
                 case "up" -> {
@@ -580,7 +575,7 @@ public class Entity {
                         if (spriteNumber == 2) {image = up2;}
                     }
                     if (attacking){
-                        tempScreenY = screenY - up1.getHeight(); // this way we handle larger entities
+                        tempScreenY = getScreenY() - up1.getHeight(); // this way we handle larger entities
                         if (spriteNumber == 1) {image = attackUp1;}
                         if (spriteNumber == 2) {image = attackUp2;}
                     }
@@ -601,7 +596,7 @@ public class Entity {
                         if (spriteNumber == 2) {image = left2;}
                     }
                     if (attacking){
-                        tempScreenX = screenX - left1.getWidth(); // handling large entities
+                        tempScreenX = getScreenX() - left1.getWidth(); // handling large entities
                         if (spriteNumber == 1) {image = attackLeft1;}
                         if (spriteNumber == 2) {image = attackLeft2;}
                     }
@@ -615,26 +610,6 @@ public class Entity {
                         if (spriteNumber == 1) {image = attackRight1;}
                         if (spriteNumber == 2) {image = attackRight2;}
                     }
-                }
-            }
-
-            // Monster HP bar
-            if (type == 2 && hpBarOn){
-
-                double oneScale = (double) gp.tileSize/maxLife;
-                double hpBarValue = oneScale * life; // bar length
-
-                g2.setColor(new Color(35,35,35));
-                g2.fillRect(screenX-1, screenY-16, gp.tileSize+2, 12);
-
-                g2.setColor(new Color(255,0,30));
-                g2.fillRect(screenX, screenY - 15, (int)hpBarValue, 10);
-
-                // The hp bar will not disappear as long we engage
-                hpBarCounter++;
-                if (hpBarCounter > 600){ // 10 seconds
-                    hpBarCounter = 0;
-                    hpBarOn = false;
                 }
             }
 
@@ -669,6 +644,21 @@ public class Entity {
         if (dyingCounter > i * 8){
             alive = false;
         }
+    }
+
+    public BufferedImage setup(String imagePath, int width, int height){
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try{
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(imagePath +".png")));
+            image = uTool.scaleImage(image, width, height);
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return image;
     }
 
     public void changeAlpha(Graphics2D g2, float alphaValue){
