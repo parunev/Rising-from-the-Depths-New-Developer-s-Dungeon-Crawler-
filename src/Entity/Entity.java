@@ -24,6 +24,7 @@ public class Entity {
     public String[][] dialogues = new String[20][20]; // First dimension indicates the dialogue set (Flipping pages)
     public Entity attacker;
     public Entity linkedEntity;
+    public boolean temp = false;
 
     // STATE
     public int worldX, worldY;
@@ -46,6 +47,8 @@ public class Entity {
     public Entity loot;
     public boolean opened = false;
     public boolean inRage = false;
+    public boolean sleep = false; // we don't want the boss to move around until the cutscene is over
+    public boolean drawing = true;
 
     // COUNTER
     public int spriteCounter = 0;
@@ -227,76 +230,78 @@ public class Entity {
     }
 
     public void update() throws IOException {
-        if (knockBack){
-            checkCollision();
-            if (collisionOn){
-                knockBackCounter = 0;
-                knockBack = false;
-                speed = defaultSpeed;
-            }else {
-                switch (knockBackDirection){ // knocking back to where the player is facing
-                    case "up" -> worldY -= speed;
-                    case "down" -> worldY += speed;
-                    case "left" -> worldX -= speed;
-                    case "right" -> worldX += speed;
-                }
-
-                knockBackCounter++;
-                if (knockBackCounter == 10){ // the more you increase the number the bigger the knock-back distance
+        if (!sleep){
+            if (knockBack){
+                checkCollision();
+                if (collisionOn){
                     knockBackCounter = 0;
                     knockBack = false;
                     speed = defaultSpeed;
+                }else {
+                    switch (knockBackDirection){ // knocking back to where the player is facing
+                        case "up" -> worldY -= speed;
+                        case "down" -> worldY += speed;
+                        case "left" -> worldX -= speed;
+                        case "right" -> worldX += speed;
+                    }
+
+                    knockBackCounter++;
+                    if (knockBackCounter == 10){ // the more you increase the number the bigger the knock-back distance
+                        knockBackCounter = 0;
+                        knockBack = false;
+                        speed = defaultSpeed;
+                    }
+                }
+
+            } else if (attacking){
+                attacking();
+
+            } else{
+                // We created this method in Old Man class too and if the subclass has the same method it takes a priority
+                setAction();
+
+                checkCollision();
+
+                // IF COLLISION IS FALSE, PLAYER CAN MOVE
+                if (!collisionOn){
+                    switch (direction) {
+                        case "up" -> worldY -= speed;
+                        case "down" -> worldY += speed;
+                        case "left" -> worldX -= speed;
+                        case "right" -> worldX += speed;
+                    }
+                }
+
+                // Player image chances in every 10 frames
+                spriteCounter++;
+                if (spriteCounter > 24){
+                    if (spriteNumber == 1){
+                        spriteNumber = 2;
+                    }else if (spriteNumber == 2){
+                        spriteNumber = 1;
+                    }
+                    spriteCounter = 0;
                 }
             }
 
-        } else if (attacking){
-            attacking();
-
-        } else{
-            // We created this method in Old Man class too and if the subclass has the same method it takes a priority
-            setAction();
-
-            checkCollision();
-
-            // IF COLLISION IS FALSE, PLAYER CAN MOVE
-            if (!collisionOn){
-                switch (direction) {
-                    case "up" -> worldY -= speed;
-                    case "down" -> worldY += speed;
-                    case "left" -> worldX -= speed;
-                    case "right" -> worldX += speed;
+            if (invincible){
+                invincibleCounter++;
+                if (invincibleCounter > 40){
+                    invincible = false;
+                    invincibleCounter = 0;
                 }
             }
 
-            // Player image chances in every 10 frames
-            spriteCounter++;
-            if (spriteCounter > 24){
-                if (spriteNumber == 1){
-                    spriteNumber = 2;
-                }else if (spriteNumber == 2){
-                    spriteNumber = 1;
+            if (shotAvailableCounter < 30){
+                shotAvailableCounter++;
+            }
+
+            if (offBalance){
+                offBalanceCounter++;
+                if (offBalanceCounter > 60){ // continues for a second
+                    offBalance = false;
+                    offBalanceCounter = 0;
                 }
-                spriteCounter = 0;
-            }
-        }
-
-        if (invincible){
-            invincibleCounter++;
-            if (invincibleCounter > 40){
-                invincible = false;
-                invincibleCounter = 0;
-            }
-        }
-
-        if (shotAvailableCounter < 30){
-            shotAvailableCounter++;
-        }
-
-        if (offBalance){
-            offBalanceCounter++;
-            if (offBalanceCounter > 60){ // continues for a second
-                offBalance = false;
-                offBalanceCounter = 0;
             }
         }
     }

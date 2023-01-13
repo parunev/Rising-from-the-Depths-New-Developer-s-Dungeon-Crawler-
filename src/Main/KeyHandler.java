@@ -32,7 +32,7 @@ public class KeyHandler implements KeyListener {
             playState(code);
         } else if (gp.gameState == gp.pauseState){ // PAUSE STATE
             pauseState(code);
-        } else if (gp.gameState == gp.dialogueState){ // DIALOGUE STATE
+        } else if (gp.gameState == gp.dialogueState || gp.gameState == gp.cutsceneState){ // DIALOGUE STATE
             dialogueState(code);
         } else if (gp.gameState == gp.characterState){ // CHARACTER STATE
             characterState(code);

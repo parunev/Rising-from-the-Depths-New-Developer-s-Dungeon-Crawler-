@@ -1,5 +1,6 @@
 package Main;
 
+import Data.Progress;
 import Entity.Entity;
 
 import java.io.IOException;
@@ -112,6 +113,10 @@ public class EventHandler {
             else if (hit(3, 26, 41, "any")){
                 teleport(2, 8, 7, gp.dungeon);
             }
+            // To the first dungeon floor
+            else if (hit(3, 25, 27, "any")){
+                skeletonLord();
+            }
         }
     }
 
@@ -190,6 +195,15 @@ public class EventHandler {
             gp.gameState = gp.dialogueState;
             gp.player.attackCanceled = true;
             entity.speak();
+        }
+    }
+
+    public void skeletonLord(){
+
+        // If you have defeated the boss this start scene won't start again.
+        if (!gp.bossBattleOn && !Progress.skeletonLordDefeated){
+            gp.gameState = gp.cutsceneState;
+            gp.csManager.sceneNum = gp.csManager.skeletonLord;
         }
     }
 }

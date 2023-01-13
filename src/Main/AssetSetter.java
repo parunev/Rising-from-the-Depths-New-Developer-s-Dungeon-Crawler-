@@ -78,9 +78,16 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = gp.tileSize * 15;
         i++;
 
+       gp.obj[mapNum][i] = new OBJ_Door_Iron(gp);
+       gp.obj[mapNum][i].worldX = gp.tileSize * 18;
+       gp.obj[mapNum][i].worldY = gp.tileSize * 23;
+
+        mapNum = 3;
+        i = 0;
+
         gp.obj[mapNum][i] = new OBJ_Door_Iron(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize * 18;
-        gp.obj[mapNum][i].worldY = gp.tileSize * 23;
+        gp.obj[mapNum][i].worldX = gp.tileSize * 25;
+        gp.obj[mapNum][i].worldY = gp.tileSize * 15;
     }
 
     public void setNPC(){
