@@ -1,3 +1,8 @@
+## Rising from the Depths: New Developer's Dungeon Crawler ##
+
+The story behind the game is that a new, independent game developer has decided to take on the challenge of creating a classic dungeon crawler game. The game takes place in an ancient underground complex, where the player takes on the role of an adventurer who is searching for a powerful artifact said to be hidden deep within the depths of the dungeon. The developer, who has always been fascinated by the genre, want to bring a fresh perspective and new ideas to the classic dungeon crawler formula. The player will have to fight off dangerous monsters, solve challenging puzzles, and explore the mysterious and dark depths of the dungeon while uncovering the secrets of the artifact, and the developer's unique vision.
+
+
 >###### I wanted to give an update on my current game development project. ######
 
 I'm happy to announce that the game is now in version 2.0 and has come a long way since its initial release. 
