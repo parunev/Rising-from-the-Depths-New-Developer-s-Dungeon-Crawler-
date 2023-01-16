@@ -1,6 +1,5 @@
 package Main;
 
-import Data.Progress;
 import Entity.Entity;
 
 import java.io.IOException;
@@ -57,13 +56,9 @@ public class EventHandler {
     }
 
     public void setDialogue(){
-        eventMaster.dialogues[0][0] = "You fall into a pit!";
-        eventMaster.dialogues[1][0] = """
-                    You drink the water.\s
-                    Your life and mana has been recovered.
-                    (The progress has been saved)""";
-
-        eventMaster.dialogues[1][1] = "Refreshing!";
+        eventMaster.dialogues[0][0] = "Ouch!!!";
+        eventMaster.dialogues[1][0] = "Rejuvenate your body, replenish your magic and preserve your progress.\n" +
+                "Your game progress is saved!";
     }
 
     public void checkEvent() throws IOException {
@@ -78,44 +73,38 @@ public class EventHandler {
 
         if (canTouchEvent){
             // Damage pit event
-            if (hit(0,27, 16, "right")){ // Map, Map column, Map row and direction
-                damagePit(gp.dialogueState);
+            if (hit(0,2, 12, "any") || hit(0,2, 15, "any")
+                    || hit(0,9, 14, "any") || hit(0,30, 19, "any")
+                    || hit(0,31, 24, "any") || hit(0,36, 27, "any")
+                    || hit(0,26, 27, "any") || hit(0,23, 29, "any")
+                    || hit(0,27, 31, "any") || hit(0,25, 33, "any")
+                    || hit(0,20, 33, "any") || hit(0,14, 30, "any")
+                    || hit(0,11, 30, "any") || hit(0,16, 25, "any")
+                    || hit(0,14, 23, "any") || hit(0,7, 22, "any")
+                    || hit(0,8, 23, "any")  || hit(0,6, 26, "any")
+                    || hit(0,7, 27, "any")  || hit(0,14, 30, "any")
+                    || hit(0,11, 22, "any")){ // Map, Map column, Map row and direction
+                spikeHit(gp.dialogueState);
             }
-            // Drinking water event
-            else if (hit(0,23,12,"up")){
+             //Drinking water event
+            else if (hit(0,28,2,"up") || hit(0,44,14,"up")){
                 healingPool(gp.dialogueState);
             }
-            // To the Merchant
-            else if (hit(0,10,39,"any")){
-                teleport(1, 12, 13, gp.indoor);
-            }
-            // To leave the Merchant
-            else if (hit(1,12,13,"any")){
-                teleport(0, 10, 39, gp.outside);
-            }
             // Speak to the merchant
-            else if (hit(1,12,9,"up")){
+           else if (hit(1,12,9,"up")){
                 speak(gp.npc[1][0]);
             }
-            // Entering the dungeon
-            else if (hit(0, 12, 9, "any")) {
-                teleport(2, 9, 41, gp.dungeon);
+
+            else if (hit(0, 4, 5, "any")) {
+                teleport(0, 4, 12, gp.dungeon);
             }
-            // Leaving the dungeon
-            else if (hit(2, 9, 41, "any")){
-                teleport(0, 12, 9, gp.outside);
+            else if (hit(0, 4, 12, "any")) {
+                teleport(0, 4, 5, gp.dungeon);
             }
-            // To the second dungeon floor
-            else if (hit(2, 8, 7, "any")){
-                teleport(3, 26, 41, gp.dungeon);
-            }
-            // To the first dungeon floor
-            else if (hit(3, 26, 41, "any")){
-                teleport(2, 8, 7, gp.dungeon);
-            }
-            // To the first dungeon floor
-            else if (hit(3, 25, 27, "any")){
-                skeletonLord();
+            else if (hit(0, 46, 36, "any")) {
+                teleport(0, 44, 17, gp.dungeon);
+            }else if (hit(0, 44, 17, "any")) {
+                teleport(0, 46, 36, gp.dungeon);
             }
         }
     }
@@ -156,7 +145,7 @@ public class EventHandler {
         return hit;
     }
 
-    public void damagePit(int gameState){
+    public void spikeHit(int gameState){
         gp.gameState = gameState;
         eventMaster.startDialogue(eventMaster, 0);
         gp.player.life--;
@@ -195,15 +184,6 @@ public class EventHandler {
             gp.gameState = gp.dialogueState;
             gp.player.attackCanceled = true;
             entity.speak();
-        }
-    }
-
-    public void skeletonLord(){
-
-        // If you have defeated the boss this start scene won't start again.
-        if (!gp.bossBattleOn && !Progress.skeletonLordDefeated){
-            gp.gameState = gp.cutsceneState;
-            gp.csManager.sceneNum = gp.csManager.skeletonLord;
         }
     }
 }

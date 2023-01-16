@@ -1,7 +1,10 @@
 package Entity;
 
 import Main.GamePanel;
-import Obj.*;
+import Obj.OBJ_Health_Potion;
+import Obj.OBJ_Key;
+import Obj.OBJ_Mana_Potion;
+import Obj.OBJ_Shield_Blue;
 
 public class NPC_Merchant extends Entity{
 
@@ -14,6 +17,8 @@ public class NPC_Merchant extends Entity{
         setDialogue();
         setItems();
     }
+
+    public void update(){}
 
     public void getOldManImage(){
         up1 = setup("/Resources/NPC/merchant_down_1", gp.tileSize, gp.tileSize);
@@ -36,11 +41,9 @@ public class NPC_Merchant extends Entity{
     }
 
     public void setItems(){
-        inventory.add(new OBJ_Potion_Red(gp));
+        inventory.add(new OBJ_Health_Potion(gp));
+        inventory.add(new OBJ_Mana_Potion(gp));
         inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Sword_Normal(gp));
-        inventory.add(new OBJ_Axe(gp));
-        inventory.add(new OBJ_Tent(gp));
         inventory.add(new OBJ_Shield_Blue(gp));
     }
 

@@ -2,7 +2,7 @@ package Monster;
 
 import Entity.Entity;
 import Main.GamePanel;
-import Obj.OBJ_Coin_Bronze;
+import Obj.OBJ_Coin;
 import Obj.OBJ_Heart;
 import Obj.OBJ_Mana_Crystal;
 import java.util.Random;
@@ -101,7 +101,7 @@ public class MON_Orc extends Entity {
 
         // SET THE MONSTER DROP - 50% of the time the monster drops a bronze coin and 2x25% for mana or heart
         if (i < 50){
-            dropItem(new OBJ_Coin_Bronze(gp));
+            dropItem(new OBJ_Coin(gp));
         }
         if (i >= 50 && i < 75){
             dropItem(new OBJ_Heart(gp));

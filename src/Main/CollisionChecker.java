@@ -132,7 +132,7 @@ public class CollisionChecker {
     public int checkEntity(Entity entity, Entity[][] target){
         int index = 999;
 
-        // Use a temporal direction when it's being knockbacked
+        // Use a temporal direction when it's being knock-backed
         String direction = entity.direction;
         if (entity.knockBack){
             direction = entity.knockBackDirection;

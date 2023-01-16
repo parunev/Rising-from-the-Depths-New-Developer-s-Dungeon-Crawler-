@@ -114,11 +114,11 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setInteractiveTiles();
         eManager.setUp();
         gameState = titleState;
-        currentArea = outside;
+        currentArea = dungeon;
     }
 
     public void resetGame(boolean restart){
-        currentArea = outside;
+        currentArea = dungeon;
         removeTempEntity();
         bossBattleOn = false;
         player.setDefaultPositions();
@@ -386,15 +386,13 @@ public class GamePanel extends JPanel implements Runnable {
         if (nextArea != currentArea){
             stopMusic();
 
-            if (nextArea == outside){
+            if (nextArea == outside || nextArea == dungeon){
                 playMusic(0);
             }
             if (nextArea == indoor){
                 playMusic(18);
             }
-            if (nextArea == dungeon){
-                playMusic(17);
-            }
+
 
             // If you want to reset other NPCs such as OldMan, you can call setNpc method
             aSetter.setDungeonRocks();

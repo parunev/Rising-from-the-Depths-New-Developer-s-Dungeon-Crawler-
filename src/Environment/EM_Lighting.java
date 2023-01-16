@@ -24,13 +24,14 @@ public class EM_Lighting {
         setLightSource();
     }
 
+
     public void setLightSource(){
         // Create a buffered image
         darknessFilter = new BufferedImage(gp.screenWidth, gp.screenHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = (Graphics2D) darknessFilter.getGraphics();
 
         if (gp.player.currentLight == null){
-            g2.setColor(new Color(0,0, 0, 230));
+            g2.setColor(new Color(0,0, 0, 190));
         } else { // player has equipped a lighting item
 
             // Get the center x and y of the light circle
@@ -118,10 +119,10 @@ public class EM_Lighting {
     public void draw(Graphics2D g2){
 
         if (gp.currentArea == gp.outside){
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.94f));
         }
 
-        if (gp.currentArea == gp.outside || gp.currentArea == gp.dungeon){
+        if (gp.currentArea == gp.dungeon){
             g2.drawImage(darknessFilter,0,0,null);
         }
 

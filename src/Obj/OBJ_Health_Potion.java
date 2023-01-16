@@ -3,18 +3,18 @@ package Obj;
 import Entity.Entity;
 import Main.GamePanel;
 
-public class OBJ_Potion_Red extends Entity {
+public class OBJ_Health_Potion extends Entity {
     GamePanel gp;
-    public static final String objName = "Red Potion";
+    public static final String objName = "Health Potion";
 
-    public OBJ_Potion_Red(GamePanel gp) {
+    public OBJ_Health_Potion(GamePanel gp) {
         super(gp);
         this.gp = gp;
 
         type = type_consumable;
         name = objName;
-        value = 5;
-        down1 = setup("/Resources/Objects/potion_red",gp.tileSize, gp.tileSize);
+        value = 4;
+        down1 = setup("/Resources/Objects/health_potion",gp.tileSize, gp.tileSize);
         description = "[" + name + "]\nHeals your life by " + value + ".";
         price = 25;
         stackable = true;

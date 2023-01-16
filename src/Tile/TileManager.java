@@ -41,7 +41,7 @@ public class TileManager {
         getTileImage();
 
         // GET THE maxWorldCol & Row
-        is = getClass().getResourceAsStream("/Resources/Maps/worldmap.txt");
+        is = getClass().getResourceAsStream("/Resources/Maps/dungeonMapNew.txt");
         assert is != null;
         br = new BufferedReader(new InputStreamReader(is));
 
@@ -54,10 +54,8 @@ public class TileManager {
         mapTileNumber = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
         br.close();
 
-        loadMap("/Resources/Maps/worldmap.txt",0);
-        loadMap("/Resources/Maps/indoor01.txt",1);
-        loadMap("/Resources/Maps/dungeon01.txt",2);
-        loadMap("/Resources/Maps/dungeon02.txt",3);
+        loadMap("/Resources/Maps/dungeonMapNew.txt",0);
+
     }
 
     public void getTileImage(){

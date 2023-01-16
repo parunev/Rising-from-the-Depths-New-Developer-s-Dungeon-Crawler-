@@ -2,7 +2,7 @@ package Monster;
 
 import Entity.Entity;
 import Main.GamePanel;
-import Obj.OBJ_Coin_Bronze;
+import Obj.OBJ_Coin;
 import Obj.OBJ_Heart;
 import Obj.OBJ_Mana_Crystal;
 import Obj.OBJ_Rock;
@@ -10,17 +10,17 @@ import Obj.OBJ_Rock;
 import java.util.Random;
 
 // SAME AS GREEN SLIME
-public class MON_RedSlime extends Entity {
+public class MON_Muddy extends Entity {
 
     GamePanel gp;
 
-    public MON_RedSlime(GamePanel gp) {
+    public MON_Muddy(GamePanel gp) {
         super(gp);
         this.gp = gp;
 
         type = type_monster;
-        name = "Red Slime";
-        defaultSpeed = 2;
+        name = "Muddy";
+        defaultSpeed = (int)1.2;
         speed = defaultSpeed;
         maxLife = 8;
         life = maxLife;
@@ -40,14 +40,14 @@ public class MON_RedSlime extends Entity {
     }
 
     public void getImage(){
-        up1 = setup("/Resources/Monsters/redslime_down_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/Resources/Monsters/redslime_down_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/Resources/Monsters/redslime_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/Resources/Monsters/redslime_down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/Resources/Monsters/redslime_down_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/Resources/Monsters/redslime_down_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/Resources/Monsters/redslime_down_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/Resources/Monsters/redslime_down_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/Resources/Monsters/muddy_image_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/Resources/Monsters/muddy_image_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/Resources/Monsters/muddy_image_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/Resources/Monsters/muddy_image_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/Resources/Monsters/muddy_image_3", gp.tileSize, gp.tileSize);
+        left2 = setup("/Resources/Monsters/muddy_image_4", gp.tileSize, gp.tileSize);
+        right1 = setup("/Resources/Monsters/muddy_image_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/Resources/Monsters/muddy_image_2", gp.tileSize, gp.tileSize);
     }
 
     public void setAction(){
@@ -70,7 +70,7 @@ public class MON_RedSlime extends Entity {
 
     public void checkDrop(){
         int i = new Random().nextInt(100)+1;
-        if (i < 50){dropItem(new OBJ_Coin_Bronze(gp));}
+        if (i < 50){dropItem(new OBJ_Coin(gp));}
         if (i >= 50 && i < 75){dropItem(new OBJ_Heart(gp));}
         if (i >= 75 && i < 100){dropItem(new OBJ_Mana_Crystal(gp));}
     }

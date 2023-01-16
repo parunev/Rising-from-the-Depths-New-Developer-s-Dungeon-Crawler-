@@ -4,7 +4,7 @@ package Main;
 // So we can display messages, item icons etc.
 
 import Entity.Entity;
-import Obj.OBJ_Coin_Bronze;
+import Obj.OBJ_Coin;
 import Obj.OBJ_Heart;
 import Obj.OBJ_Mana_Crystal;
 
@@ -49,7 +49,7 @@ public class UI {
         Entity crystal = new OBJ_Mana_Crystal(gp);
         crystal_full = crystal.image;
         crystal_blank = crystal.image2;
-        Entity bronzeCoin = new OBJ_Coin_Bronze(gp);
+        Entity bronzeCoin = new OBJ_Coin(gp);
         coin = bronzeCoin.down1;
     }
 
@@ -309,7 +309,7 @@ public class UI {
 
         drawSubWindow(x, y, width, height);
 
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,22F));
         x += gp.tileSize;
         y += gp.tileSize;
 

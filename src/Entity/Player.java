@@ -39,8 +39,8 @@ public class Player extends Entity{
 
         // Player starting position on world map
         // You can also type worldX = 1000, it doesn't really matter works fine both ways.
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+        worldX = gp.tileSize * 4;
+        worldY = gp.tileSize * 3;
         defaultSpeed = 4;
         speed = defaultSpeed;
         direction = "down"; //any directions are fine
@@ -73,8 +73,8 @@ public class Player extends Entity{
     public void setDefaultPositions(){
 
         gp.currentMap = 0;
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+        worldX = gp.tileSize * 4;
+        worldY = gp.tileSize * 3;
         direction = "down";
     }
 
@@ -99,6 +99,7 @@ public class Player extends Entity{
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
+        inventory.add(new OBJ_Key(gp));
     }
 
     public int getAttack(){
@@ -369,13 +370,14 @@ public class Player extends Entity{
                 gp.obj[gp.currentMap][i].use(this);
                 gp.obj[gp.currentMap][i] = null; // DON'T FORGET THIS
 
-            }else if (gp.obj[gp.currentMap][i].type == type_obstacle){
+            } else if (gp.obj[gp.currentMap][i].type == type_obstacle){
                 if (keyH.enterPressed){
+                    opened = true;
                     attackCanceled = true;
                     gp.obj[gp.currentMap][i].interact();
                 }
 
-            } else{ // INVENTORY ITEMS
+            } else { // INVENTORY ITEMS
                 String text;
                 if (canObtainItem(gp.obj[gp.currentMap][i])){ // check if inventory is full
                     gp.playSE(1);
@@ -383,6 +385,7 @@ public class Player extends Entity{
                 }else {
                     text = "You cannot carry any more!";
                 }
+
                 gp.ui.addMessage(text);
                 gp.obj[gp.currentMap][i] = null; // DON'T FORGET THIS
             }

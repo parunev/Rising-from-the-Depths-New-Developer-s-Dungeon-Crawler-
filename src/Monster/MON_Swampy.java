@@ -2,21 +2,21 @@ package Monster;
 
 import Entity.Entity;
 import Main.GamePanel;
-import Obj.OBJ_Coin_Bronze;
+import Obj.OBJ_Coin;
 import Obj.OBJ_Heart;
 import Obj.OBJ_Mana_Crystal;
 import Obj.OBJ_Rock;
 
 import java.util.Random;
 
-public class MON_GreenSlime extends Entity {
+public class MON_Swampy extends Entity {
     GamePanel gp;
-    public MON_GreenSlime(GamePanel gp) {
+    public MON_Swampy(GamePanel gp) {
         super(gp);
         this.gp = gp;
 
         type = type_monster;
-        name = "Green Slime";
+        name = "Swampy";
         defaultSpeed = 1;
         speed = defaultSpeed;
         maxLife = 4;
@@ -38,14 +38,14 @@ public class MON_GreenSlime extends Entity {
 
     public void getImage(){
         // Using two images (down1, down2) for all directions
-        up1 = setup("/Resources/Monsters/greenslime_down_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/Resources/Monsters/greenslime_down_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/Resources/Monsters/greenslime_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/Resources/Monsters/greenslime_down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/Resources/Monsters/greenslime_down_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/Resources/Monsters/greenslime_down_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/Resources/Monsters/greenslime_down_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/Resources/Monsters/greenslime_down_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/Resources/Monsters/swampy_image_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/Resources/Monsters/swampy_image_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/Resources/Monsters/swampy_image_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/Resources/Monsters/swampy_image_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/Resources/Monsters/swampy_image_3", gp.tileSize, gp.tileSize);
+        left2 = setup("/Resources/Monsters/swampy_image_4", gp.tileSize, gp.tileSize);
+        right1 = setup("/Resources/Monsters/swampy_image_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/Resources/Monsters/swampy_image_2", gp.tileSize, gp.tileSize);
     }
 
     public void setAction(){
@@ -81,7 +81,7 @@ public class MON_GreenSlime extends Entity {
 
         // SET THE MONSTER DROP - 50% of the time the monster drops a bronze coin and 2x25% for mana or heart
         if (i < 50){
-            dropItem(new OBJ_Coin_Bronze(gp));
+            dropItem(new OBJ_Coin(gp));
         }
         if (i >= 50 && i < 75){
             dropItem(new OBJ_Heart(gp));
