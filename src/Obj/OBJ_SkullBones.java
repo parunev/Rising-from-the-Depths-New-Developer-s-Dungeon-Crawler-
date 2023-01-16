@@ -21,7 +21,6 @@ public class OBJ_SkullBones extends Entity {
     }
 
     public void setDialogues(){
-
         dialogues[0][0] = "Agh! A game of dice or dominoes!";
     }
 

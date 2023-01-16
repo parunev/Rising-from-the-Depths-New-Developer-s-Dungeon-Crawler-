@@ -45,8 +45,28 @@ public class AssetSetter {
         i++;
 
         gp.obj[mapNum][i] = new OBJ_SkullBones(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize * 27;
+        gp.obj[mapNum][i].worldY = gp.tileSize * 2;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_SkullBones(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize * 19;
         gp.obj[mapNum][i].worldY = gp.tileSize * 31;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Bones(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize * 42;
+        gp.obj[mapNum][i].worldY = gp.tileSize * 13;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Coin(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize * 34;
+        gp.obj[mapNum][i].worldY = gp.tileSize * 3;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Coin(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize * 33;
+        gp.obj[mapNum][i].worldY = gp.tileSize * 2;
     }
 
     public void setNPC(){

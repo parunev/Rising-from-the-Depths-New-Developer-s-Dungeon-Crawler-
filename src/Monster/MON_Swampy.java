@@ -23,7 +23,7 @@ public class MON_Swampy extends Entity {
         life = maxLife;
         attack = 5;
         defence = 0; // defence is 1 since the player starting damage is 1
-        exp = 2; // how much you can get when you kill the monster
+        exp = 1; // how much you can get when you kill the monster
         projectile = new OBJ_Rock(gp);
 
         solidArea.x = 3;

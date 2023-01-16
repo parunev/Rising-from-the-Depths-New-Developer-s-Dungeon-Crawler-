@@ -9,15 +9,7 @@ public class EM_Lighting {
 
     GamePanel gp;
     BufferedImage darknessFilter;
-    public int dayCounter;
     public float filterAlpha = 0f;
-
-    // DAY STATE
-    public final int day = 0;
-    public final int dusk = 1;
-    public final int night = 2;
-    public final int dawn = 3;
-    public int dayState = day;
 
     public EM_Lighting(GamePanel gp){
         this.gp = gp;
@@ -72,47 +64,10 @@ public class EM_Lighting {
         g2.dispose();
     }
 
-    public void resetDay(){
-        dayState = day;
-        filterAlpha = 0f;
-    }
-
     public void update(){
         if (gp.player.lightUpdated){
             setLightSource();
             gp.player.lightUpdated = false;
-        }
-
-        // Check the state of the day
-        if (dayState == day){
-            dayCounter++;
-            if (dayCounter > 3600){ // adjustable - 600 means 10sec ,1200 means 20sec, 1800 means 30sec etc.
-                dayState = dusk;
-                dayCounter = 0;
-            }
-        }
-        if (dayState == dusk){
-            filterAlpha += 0.0001f; // adjustable - how fast the effect occurs
-            if (filterAlpha > 1f){
-                filterAlpha = 1f;
-                dayState = night;
-            }
-        }
-        if (dayState == night){
-            dayCounter++;
-
-            if (dayCounter > 3600){ // adjustable - 3600/one min
-                dayState = dawn;
-                dayCounter = 0;
-            }
-        }
-        if (dayState == dawn){
-            filterAlpha -= 0.0001f; // adjustable
-
-            if (filterAlpha < 0){
-                filterAlpha = 0f;
-                dayState = day;
-            }
         }
     }
 
@@ -127,23 +82,5 @@ public class EM_Lighting {
         }
 
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-
-        // DEBUG
-        String situation = switch (dayState) {
-            case day -> "Day";
-            case dusk -> "Dusk";
-            case night -> "Night";
-            case dawn -> "Dawn";
-            default -> "";
-        };
-
-        g2.setColor(Color.BLACK);
-        g2.setFont(gp.ui.maruMonica);
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
-        g2.drawString(situation, 800, 500);
-
-        g2.setColor(Color.WHITE);
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
-        g2.drawString(situation, 800 + 3, 500 + 3);
     }
 }

@@ -240,12 +240,12 @@ public class UI {
 
     public void drawTitleScreen(){
         // BACKGROUND COLOR
-        g2.setColor(new Color(70,120,80));
+        g2.setColor(new Color(105,105,105));
         g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
 
         // TITLE NAME
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
-        String text = "Blueprint Game";
+        String text = "Rising from the Depths";
         int x = getXForCenteredText(text);
         int y = gp.tileSize * 3;
 
@@ -257,17 +257,27 @@ public class UI {
         g2.setColor(Color.white);
         g2.drawString(text, x, y);
 
-        // CHARACTER IMAGE
-        x = gp.screenWidth/2 - (gp.tileSize * 2)/2;
-        y += gp.tileSize * 2;
-        g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+        // SECOND TITLE NAME
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 46F));
+        text = "New Developer's Dungeon Crawler";
+        x = getXForCenteredText(text);
+        y += gp.tileSize * 1.5;
+        g2.drawString(text, x, y);
+        g2.setColor(Color.BLACK);
+        g2.drawString(text, x +5, y+5);
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
 
         // MENU
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
 
         text = "NEW GAME";
         x = getXForCenteredText(text);
-        y += gp.tileSize * 3.5;
+        y += gp.tileSize * 3;
+        g2.drawString(text, x, y);
+        g2.setColor(Color.BLACK);
+        g2.drawString(text, x +5, y+5);
+        g2.setColor(Color.white);
         g2.drawString(text, x, y);
         if (commandNum == 0){
             g2.drawString(">", x-gp.tileSize, y);
@@ -277,6 +287,10 @@ public class UI {
         x = getXForCenteredText(text);
         y += gp.tileSize;
         g2.drawString(text, x, y);
+        g2.setColor(Color.BLACK);
+        g2.drawString(text, x +5, y+5);
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
         if (commandNum == 1){
             g2.drawString(">", x-gp.tileSize, y);
         }
@@ -284,6 +298,10 @@ public class UI {
         text = "QUIT";
         x = getXForCenteredText(text);
         y += gp.tileSize;
+        g2.drawString(text, x, y);
+        g2.setColor(Color.BLACK);
+        g2.drawString(text, x +5, y+5);
+        g2.setColor(Color.white);
         g2.drawString(text, x, y);
         if (commandNum == 2){
             g2.drawString(">", x-gp.tileSize, y);
@@ -951,8 +969,6 @@ public class UI {
             if (gp.eManager.lighting.filterAlpha <= 0f){
                 gp.eManager.lighting.filterAlpha = 0f;
                 counter = 0;
-                gp.eManager.lighting.dayState = gp.eManager.lighting.day;
-                gp.eManager.lighting.dayCounter = 0;
                 gp.gameState = gp.playState;
                 gp.player.getImage();
             }

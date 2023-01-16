@@ -10,7 +10,7 @@ public class Main {
         window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("Blueprint Adventure Game");
+        window.setTitle("Rising from the Depths: New Developer's Dungeon Crawler");
         new Main().setIcon();
 
         GamePanel gamePanel = new GamePanel();

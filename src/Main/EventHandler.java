@@ -87,7 +87,7 @@ public class EventHandler {
                 spikeHit(gp.dialogueState);
             }
              //Drinking water event
-            else if (hit(0,28,2,"up") || hit(0,44,14,"up")){
+            else if (hit(0,44,14,"up")){
                 healingPool(gp.dialogueState);
             }
             // Speak to the merchant
@@ -103,7 +103,8 @@ public class EventHandler {
             }
             else if (hit(0, 46, 36, "any")) {
                 teleport(0, 44, 17, gp.dungeon);
-            }else if (hit(0, 44, 17, "any")) {
+            }
+            else if (hit(0, 44, 17, "any")) {
                 teleport(0, 46, 36, gp.dungeon);
             }
         }

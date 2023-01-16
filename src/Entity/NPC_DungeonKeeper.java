@@ -47,33 +47,24 @@ public class NPC_DungeonKeeper extends Entity {
     public void speak(){
         facePlayer();
         startDialogue(this, 0);
+
         dialogueSet++;
         if (dialogues[dialogueSet][0] == null){
             dialogueSet--;
         }
-
-        onPath = true;
     }
 
     // Character behaviour (AI kinda)
-    public void setAction(){
-
-        if (onPath){
-            int goalCol = 2;
-            int goalRow = 5;
-
-            searchPath(goalCol, goalRow);
-        }else{
-            actionLockCounter++;
-            if (actionLockCounter == 120){
-                Random random = new Random();
-                int i = random.nextInt(100)+1;
-                if (i <= 25){direction = "up";}
-                if (i > 25 && i <= 50){direction = "down";}
-                if (i > 50 && i <= 75){direction = "left";}
-                if (i > 75){direction = "right";}
-                actionLockCounter = 0;
-            }
+    public void setAction() {
+        actionLockCounter++;
+        if (actionLockCounter == 120){
+            Random random = new Random();
+            int i = random.nextInt(100)+1;
+            if (i <= 25){direction = "up";}
+            if (i > 25 && i <= 50){direction = "down";}
+            if (i > 50 && i <= 75){direction = "left";}
+            if (i > 75){direction = "right";}
+            actionLockCounter = 0;
         }
     }
 }

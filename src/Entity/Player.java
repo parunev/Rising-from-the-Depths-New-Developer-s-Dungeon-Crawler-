@@ -71,7 +71,6 @@ public class Player extends Entity{
     }
 
     public void setDefaultPositions(){
-
         gp.currentMap = 0;
         worldX = gp.tileSize * 4;
         worldY = gp.tileSize * 3;
@@ -482,11 +481,12 @@ public class Player extends Entity{
     public void checkLevelUp(){
         if (exp >= nextLevelExp){
             level++;
-            nextLevelExp = nextLevelExp * 2;
+            nextLevelExp = nextLevelExp * 5;
             maxLife += 2;
             strength++;
             dexterity++;
             attack = getAttack();
+            defence = getDefence();
 
             gp.playSE(8);
             gp.gameState = gp.dialogueState;

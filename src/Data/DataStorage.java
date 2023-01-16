@@ -19,6 +19,11 @@ public class DataStorage implements Serializable {
     int nextLevelExp;
     int coin;
 
+    // PLAYER POS
+    int currentPlayerX;
+    int currentPlayerY;
+    int currentPlayerMap;
+
     // PLAYER INVENTORY
     // Since you can only read variables and not classes in serialized object we declare two ArrayList holding their names and amounts
     ArrayList<String> itemNames = new ArrayList<>();
