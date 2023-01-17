@@ -108,9 +108,14 @@ public class EventHandler {
             else if (hit(0, 44, 11, "any")) {
                 teleport(1, 9, 4, gp.dungeon);
             }
-            else if (hit(1, 28, 21, "up") || (hit(1, 30, 21, "up")
-                    || (hit(1, 32, 21, "up")))){
-                regenerate(gp.dialogueState);
+            else if (hit(1, 28, 21, "up")){
+                regenerate(gp.dialogueState, 1,28, 21);
+            }
+            else if (hit(1, 32, 21, "up")){
+                regenerate(gp.dialogueState, 1, 32, 21);
+            }
+            else if (hit(1, 30, 21, "up")){
+                regenerate(gp.dialogueState, 1, 30, 21);
             }
             else if (hit(1,42,44,"up")){
                 healingPool(gp.dialogueState);
@@ -230,7 +235,7 @@ public class EventHandler {
         }
     }
 
-    public void regenerate(int gameState) {
+    public void regenerate(int gameState, int map, int col, int row) {
         if (gp.keyH.enterPressed){
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
@@ -238,6 +243,7 @@ public class EventHandler {
             eventMaster.startDialogue(eventMaster, 2);
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
+            eventRect[map][col][row].eventDone = true;
         }
     }
 
