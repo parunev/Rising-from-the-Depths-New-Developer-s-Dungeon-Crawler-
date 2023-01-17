@@ -31,7 +31,7 @@ public class Main {
     }
 
     public void setIcon(){
-        ImageIcon icon = new ImageIcon("/Resources/Player/boy_down_1.png");
+        ImageIcon icon = new ImageIcon("/Resources/Player/p_down_1.png");
         window.setIconImage(icon.getImage());
     }
 }

@@ -37,31 +37,31 @@ public class Player extends Entity{
 
     public void setDefaultValues(){
 
-        // Player starting position on world map
-        // You can also type worldX = 1000, it doesn't really matter works fine both ways.
-        worldX = gp.tileSize * 4;
-        worldY = gp.tileSize * 3;
+        // START POS
+        worldX = gp.tileSize * 9;
+        worldY = gp.tileSize * 4;
+        gp.currentMap = 2;
         defaultSpeed = 4;
         speed = defaultSpeed;
-        direction = "down"; //any directions are fine
+        direction = "down";
 
         // PLAYER STATUS
         level = 1;
-        maxLife = 6; // 6 life means 3 full hearts
+        maxLife = 6; // 6 = 3 full
         maxMana = 4;
         mana = maxMana;
-        life = maxLife; // 1 life means half heart, 2 life means 1 heart
-        strength = 1; // The more strength he has, the more damage he gives
-        dexterity = 1; // The more dexterity he has, the less damage he receives
+        life = maxLife; // 1 = half, 2 = full
+        strength = 1;
+        dexterity = 1;
         exp = 0;
-        nextLevelExp = 5; // how much exp is needed for next level
+        nextLevelExp = 5;
         coin = 50;
-        currentWeapon = new OBJ_Sword_Normal(gp);
-        currentShield = new OBJ_Shield_Wood(gp);
-        currentLight = null; // if not reset the lighting is still rendered
+        currentWeapon = new OBJ_Sword_Rusty(gp);
+        currentShield = new OBJ_Shield_Oak(gp);
+        currentLight = null;
         projectile = new OBJ_Fireball(gp);
-        attack = getAttack(); // The total attack value is decided by strength and weapon
-        defence = getDefence(); // The total defence value is decided by dexterity and shield
+        attack = getAttack();
+        defence = getDefence();
 
         getImage();
         getAttackImage();
@@ -98,7 +98,6 @@ public class Player extends Entity{
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
-        inventory.add(new OBJ_Sleeping_Tent(gp));
     }
 
     public int getAttack(){
@@ -135,14 +134,14 @@ public class Player extends Entity{
     }
 
     public void getImage() {
-        up1 = setup("/Resources/Player/boy_up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/Resources/Player/boy_up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/Resources/Player/boy_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/Resources/Player/boy_down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/Resources/Player/boy_left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/Resources/Player/boy_left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/Resources/Player/boy_right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/Resources/Player/boy_right_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/Resources/Player/p_up_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/Resources/Player/p_up_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/Resources/Player/p_down_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/Resources/Player/p_down_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/Resources/Player/p_left_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/Resources/Player/p_left_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/Resources/Player/p_right_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/Resources/Player/p_right_2", gp.tileSize, gp.tileSize);
     }
 
     public void getSleepingImage(BufferedImage image){
@@ -158,15 +157,24 @@ public class Player extends Entity{
 
     public void getAttackImage(){
 
-        if (currentWeapon.type == type_sword){
-            attackUp1 = setup("/Resources/Player/boy_attack_up_1", gp.tileSize, gp.tileSize*2);
-            attackUp2 = setup("/Resources/Player/boy_attack_up_2", gp.tileSize, gp.tileSize*2);
-            attackDown1 = setup("/Resources/Player/boy_attack_down_1", gp.tileSize, gp.tileSize*2);
-            attackDown2 = setup("/Resources/Player/boy_attack_down_2", gp.tileSize, gp.tileSize*2);
-            attackLeft1 = setup("/Resources/Player/boy_attack_left_1", gp.tileSize*2, gp.tileSize);
-            attackLeft2 = setup("/Resources/Player/boy_attack_left_2", gp.tileSize*2, gp.tileSize);
-            attackRight1 = setup("/Resources/Player/boy_attack_right_1", gp.tileSize*2, gp.tileSize);
-            attackRight2 = setup("/Resources/Player/boy_attack_right_2", gp.tileSize*2, gp.tileSize);
+        if (currentWeapon.type == type_sword && currentWeapon.name.equals("Rusty Sword")){
+            attackUp1 = setup("/Resources/Player/rusty_attack_up_1", gp.tileSize, gp.tileSize*2);
+            attackUp2 = setup("/Resources/Player/rusty_attack_up_2", gp.tileSize, gp.tileSize*2);
+            attackDown1 = setup("/Resources/Player/rusty_attack_down_1", gp.tileSize, gp.tileSize*2);
+            attackDown2 = setup("/Resources/Player/rusty_attack_down_2", gp.tileSize, gp.tileSize*2);
+            attackLeft1 = setup("/Resources/Player/rusty_attack_left_1", gp.tileSize*2, gp.tileSize);
+            attackLeft2 = setup("/Resources/Player/rusty_attack_left_2", gp.tileSize*2, gp.tileSize);
+            attackRight1 = setup("/Resources/Player/rusty_attack_right_1", gp.tileSize*2, gp.tileSize);
+            attackRight2 = setup("/Resources/Player/rusty_attack_right_2", gp.tileSize*2, gp.tileSize);
+        } else if (currentWeapon.type == type_sword && currentWeapon.name.equals("Steel Sword")){
+            attackUp1 = setup("/Resources/Player/steel_attack_up_1", gp.tileSize, gp.tileSize*2);
+            attackUp2 = setup("/Resources/Player/steel_attack_up_2", gp.tileSize, gp.tileSize*2);
+            attackDown1 = setup("/Resources/Player/steel_attack_down_1", gp.tileSize, gp.tileSize*2);
+            attackDown2 = setup("/Resources/Player/steel_attack_down_2", gp.tileSize, gp.tileSize*2);
+            attackLeft1 = setup("/Resources/Player/steel_attack_left_1", gp.tileSize*2, gp.tileSize);
+            attackLeft2 = setup("/Resources/Player/steel_attack_left_2", gp.tileSize*2, gp.tileSize);
+            attackRight1 = setup("/Resources/Player/steel_attack_right_1", gp.tileSize*2, gp.tileSize);
+            attackRight2 = setup("/Resources/Player/steel_attack_right_2", gp.tileSize*2, gp.tileSize);
         }
 
         if (currentWeapon.type == type_axe){
@@ -192,10 +200,20 @@ public class Player extends Entity{
     }
 
     public void getGuardImage(){
-        guardUp = setup("/Resources/Player/boy_guard_up", gp.tileSize, gp.tileSize);
-        guardDown = setup("/Resources/Player/boy_guard_down", gp.tileSize, gp.tileSize);
-        guardLeft = setup("/Resources/Player/boy_guard_left", gp.tileSize, gp.tileSize);
-        guardRight = setup("/Resources/Player/boy_guard_right", gp.tileSize, gp.tileSize);
+        switch (currentShield.name) {
+            case "Oak Defender" -> {
+                guardUp = setup("/Resources/Player/oak_guard_up", gp.tileSize, gp.tileSize);
+                guardDown = setup("/Resources/Player/oak_guard_down", gp.tileSize, gp.tileSize);
+                guardLeft = setup("/Resources/Player/oak_guard_left", gp.tileSize, gp.tileSize);
+                guardRight = setup("/Resources/Player/oak_guard_right", gp.tileSize, gp.tileSize);
+            }
+            case "Iron Bulwark" -> {
+                guardUp = setup("/Resources/Player/iron_guard_up", gp.tileSize, gp.tileSize);
+                guardDown = setup("/Resources/Player/iron_guard_down", gp.tileSize, gp.tileSize);
+                guardLeft = setup("/Resources/Player/iron_guard_left", gp.tileSize, gp.tileSize);
+                guardRight = setup("/Resources/Player/iron_guard_right", gp.tileSize, gp.tileSize);
+            }
+        }
     }
 
     // This update method gets called 60 times per sec / 60FPS
@@ -510,6 +528,7 @@ public class Player extends Entity{
             if (selectedItem.type == type_shield){
                 currentShield = selectedItem;
                 defence = getDefence();
+                getGuardImage();
             }
 
             if (selectedItem.type == type_consumable){

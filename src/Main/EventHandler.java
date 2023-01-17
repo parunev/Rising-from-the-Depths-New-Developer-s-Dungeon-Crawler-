@@ -176,6 +176,9 @@ public class EventHandler {
             else if (hit(1, 42, 45, "any")) {
                 teleport(2, 9, 4, gp.dungeon);
             }
+            else if (hit(2, 21, 35, "up")) {
+                healingPool(gp.dialogueState);
+            }
         }
     }
 

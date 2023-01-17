@@ -30,12 +30,13 @@ public class EntityGenerator {
             case OBJ_Pickaxe.objName -> new OBJ_Pickaxe(gp);
             case OBJ_Health_Potion.objName -> new OBJ_Health_Potion(gp);
             case OBJ_Rock.objName -> new OBJ_Rock(gp);
-            case OBJ_Shield_Blue.objName -> new OBJ_Shield_Blue(gp);
-            case OBJ_Shield_Wood.objName -> new OBJ_Shield_Wood(gp);
+            case OBJ_Shield_Iron.objName -> new OBJ_Shield_Iron(gp);
+            case OBJ_Shield_Oak.objName -> new OBJ_Shield_Oak(gp);
             case OBJ_SkullBones.objName -> new OBJ_SkullBones(gp);
             case OBJ_Speed_Up_Potion.objName -> new OBJ_Speed_Up_Potion(gp);
             case OBJ_Strength_Up_Potion.objName -> new OBJ_Strength_Up_Potion(gp);
-            case OBJ_Sword_Normal.objName -> new OBJ_Sword_Normal(gp);
+            case OBJ_Sword_Rusty.objName -> new OBJ_Sword_Rusty(gp);
+            case OBJ_Sword_Steel.objName -> new OBJ_Sword_Steel(gp);
             case OBJ_Sleeping_Tent.objName -> new OBJ_Sleeping_Tent(gp);
             default -> null;
         };

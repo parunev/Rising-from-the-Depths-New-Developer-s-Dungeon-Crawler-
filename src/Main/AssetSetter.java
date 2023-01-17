@@ -83,13 +83,14 @@ public class AssetSetter {
         objSetter(new OBJ_BlankCandle(gp), mapNum, i, 33, 37);i++;
         objSetter(new OBJ_BlankCandle(gp), mapNum, i, 47, 23);i++;
         objSetter(new OBJ_BlankCandle(gp), mapNum, i, 33, 23);i++;
-        objSetter(new OBJ_BlankCandle(gp), mapNum, i, 55, 23);
+        objSetter(new OBJ_BlankCandle(gp), mapNum, i, 55, 23);i++;
 
         objSetter(new OBJ_Chest(gp), mapNum, i, 17, 13);
-        gp.obj[mapNum][i].setLoot(new OBJ_Sleeping_Tent(gp));
+        gp.obj[mapNum][i].setLoot(new OBJ_Sword_Steel(gp));
+        i++;
 
         objSetter(new OBJ_Chest(gp), mapNum, i, 22, 34);
-        gp.obj[mapNum][i].setLoot(new OBJ_Sleeping_Tent(gp));
+        gp.obj[mapNum][i].setLoot(new OBJ_Shield_Iron(gp));
     }
     public void setNPC(){
         int mapNum = 0;
