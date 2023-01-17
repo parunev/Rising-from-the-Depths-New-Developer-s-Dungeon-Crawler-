@@ -108,7 +108,7 @@ public class EventHandler {
             else if (hit(0, 44, 11, "any")) {
                 teleport(1, 9, 4, gp.dungeon);
             }
-            else if (hit(1, 28, 20, "up") || (hit(1, 30, 21, "up")
+            else if (hit(1, 28, 21, "up") || (hit(1, 30, 21, "up")
                     || (hit(1, 32, 21, "up")))){
                 regenerate(gp.dialogueState);
             }
@@ -166,6 +166,10 @@ public class EventHandler {
                     ){
 
                 spikeHit(gp.dialogueState);
+            }
+            // MAP 2
+            else if (hit(1, 42, 45, "any")) {
+                teleport(2, 9, 4, gp.dungeon);
             }
         }
     }
@@ -245,6 +249,6 @@ public class EventHandler {
         tempRow = row;
 
         canTouchEvent = false;
-        gp.playSE(13);
+        gp.playSE(29);
     }
 }

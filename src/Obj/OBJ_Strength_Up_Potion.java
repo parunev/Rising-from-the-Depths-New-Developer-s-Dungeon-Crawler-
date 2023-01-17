@@ -30,7 +30,7 @@ public class OBJ_Strength_Up_Potion extends Entity {
     public boolean use(Entity entity){
         startDialogue(this, 0);
         entity.strength += value;
-        gp.playSE(2);
+        gp.playSE(23);
 
         return true;
     }

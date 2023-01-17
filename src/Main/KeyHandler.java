@@ -94,6 +94,7 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_P){
             gp.gameState = gp.pauseState;
+            gp.playSE(27);
         }
         if (code == KeyEvent.VK_C){
             gp.gameState = gp.characterState;
@@ -106,6 +107,7 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_ESCAPE){
             gp.gameState = gp.optionsState;
+            gp.playSE(27);
         }
         if (code == KeyEvent.VK_M){
             gp.gameState = gp.mapState;
@@ -136,6 +138,7 @@ public class KeyHandler implements KeyListener {
     public void pauseState(int code){
         if (code == KeyEvent.VK_P){
             gp.gameState = gp.playState;
+            gp.playSE(28);
         }
     }
 
@@ -160,6 +163,7 @@ public class KeyHandler implements KeyListener {
     public void optionsState(int code){
         if (code == KeyEvent.VK_ESCAPE){
             gp.gameState = gp.playState;
+            gp.playSE(28);
         }
         if (code == KeyEvent.VK_ENTER){
             enterPressed = true;
@@ -286,7 +290,7 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-    // INVENTORIES
+
     public void playerInventory(int code){
         if (code == KeyEvent.VK_W){
             if (gp.ui.playerSlotRow != 0){

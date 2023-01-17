@@ -31,7 +31,7 @@ public class OBJ_Speed_Up_Potion extends Entity {
     public boolean use(Entity entity){
         startDialogue(this, 0);
         entity.speed += value;
-        gp.playSE(2);
+        gp.playSE(24);
 
         return true;
     }

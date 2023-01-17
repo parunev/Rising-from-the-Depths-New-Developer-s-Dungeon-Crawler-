@@ -30,7 +30,7 @@ public class OBJ_Health_Potion extends Entity {
     public boolean use(Entity entity){
         startDialogue(this, 0);
         entity.life += value;
-        gp.playSE(2);
+        gp.playSE(22);
 
         return true;
     }

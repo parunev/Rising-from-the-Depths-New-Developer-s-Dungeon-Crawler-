@@ -51,10 +51,44 @@ public class AssetSetter {
         objSetter(new OBJ_Bones(gp), mapNum, i, 26, 42);i++;
 
         objSetter(new OBJ_Chest(gp), mapNum, i, 43, 36);
-        gp.obj[mapNum][i].setLoot(new OBJ_Shield_Blue(gp));
+        gp.obj[mapNum][i].setLoot(new OBJ_Strength_Up_Potion(gp));
         i++;
 
         objSetter(new OBJ_Chest(gp), mapNum, i, 35, 2);
+        gp.obj[mapNum][i].setLoot(new OBJ_Sleeping_Tent(gp));
+
+        // MAP 2
+        mapNum = 2;
+        i = 0;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 11, 7);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 6, 8);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 13, 13);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 22, 15);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 23, 25);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 27, 21);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 37, 21);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 32, 34);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 23, 33);i++;
+
+        objSetter(new OBJ_Bones(gp), mapNum, i, 25, 18);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 12, 8);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 5, 9);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 23, 26);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 46, 28);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 34, 38);i++;
+
+        objSetter(new OBJ_BlankTorch(gp), mapNum, i, 26, 20);i++;
+        objSetter(new OBJ_BlankTorch(gp), mapNum, i, 22, 20);i++;
+
+        objSetter(new OBJ_BlankCandle(gp), mapNum, i, 33, 37);i++;
+        objSetter(new OBJ_BlankCandle(gp), mapNum, i, 47, 23);i++;
+        objSetter(new OBJ_BlankCandle(gp), mapNum, i, 33, 23);i++;
+        objSetter(new OBJ_BlankCandle(gp), mapNum, i, 55, 23);
+
+        objSetter(new OBJ_Chest(gp), mapNum, i, 17, 13);
+        gp.obj[mapNum][i].setLoot(new OBJ_Sleeping_Tent(gp));
+
+        objSetter(new OBJ_Chest(gp), mapNum, i, 22, 34);
         gp.obj[mapNum][i].setLoot(new OBJ_Sleeping_Tent(gp));
     }
     public void setNPC(){
@@ -73,6 +107,9 @@ public class AssetSetter {
         npcSetter(new NPC_Merchant(gp), mapNum, i, 5, 26);
 
         // MAP 2
+        mapNum = 2;
+        i = 0;
+        npcSetter(new NPC_DungeonKeeper(gp), mapNum, i, 8, 5);i++;
        // setDungeonRocks();
     }
     public void setMonster(){

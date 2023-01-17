@@ -97,10 +97,9 @@ public class Entity {
     public int knockBackPower;
     public boolean stackable = false;
     public int amount = 1;
-    public int lightRadius; // radius of the light circle, in-case you want to add various light items
 
     // TYPE
-    public int type; // 0 = player, 1 = NPC, 2 = monster
+    public int type;
     public final int type_monster = 2;
     public final int type_sword = 3;
     public final int type_axe = 4;
@@ -108,7 +107,6 @@ public class Entity {
     public final int type_consumable = 6;
     public final int type_pickupOnly = 7;
     public final int type_obstacle = 8;
-    public final int type_light = 9;
     public final int type_pickaxe = 10;
 
     public Entity(GamePanel gp){
@@ -403,9 +401,6 @@ public class Entity {
         }
     }
 
-    // BOSS AI
-    // Makes the entity moves towards the player
-    // So when the player gets in range it triggers entity aggro effect
     public void moveTowardPlayer(int interval){
         actionLockCounter++;
 

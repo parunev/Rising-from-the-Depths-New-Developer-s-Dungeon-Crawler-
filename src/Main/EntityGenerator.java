@@ -11,12 +11,10 @@ public class EntityGenerator {
     }
 
     public Entity getObject(String itemName){
-
-        // You have to be really precise about these names otherwise it won't parse anything
-        // If you change an item name in their class you need to change the name here too
-        // Not really flexible solution, but it works for now
         return switch (itemName) {
             case OBJ_Axe.objName -> new OBJ_Axe(gp);
+            case OBJ_BlankCandle.objName -> new OBJ_BlankCandle(gp);
+            case OBJ_BlankTorch.objName -> new OBJ_BlankTorch(gp);
             case OBJ_BlueHeart.objName -> new OBJ_BlueHeart(gp);
             case OBJ_Bones.objName -> new OBJ_Bones(gp);
             case OBJ_Boots.objName -> new OBJ_Boots(gp);

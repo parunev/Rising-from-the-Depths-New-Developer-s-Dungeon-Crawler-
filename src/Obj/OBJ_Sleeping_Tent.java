@@ -14,7 +14,7 @@ public class OBJ_Sleeping_Tent extends Entity {
         type = type_consumable;
         name = objName;
         down1 = setup("/Resources/Objects/tent", gp.tileSize, gp.tileSize);
-        description = "["+ name +"]\nYA portable dungeon shelter,\nto regain health and mana.";
+        description = "["+ name +"]\nPortable dungeon shelter,\nto regain health and mana.";
         price = 300;
         stackable = true;
     }

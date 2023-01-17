@@ -9,7 +9,7 @@ import java.net.URL;
 public class Sound {
 
     Clip clip; // We use this to open audio files and import
-    URL[] soundURL = new URL[30]; // Store file paths of the sound files
+    URL[] soundURL = new URL[100]; // Store file paths of the sound files
     FloatControl fc; // Provides control over a range of floating-point values
     int volumeScale = 3; // Default
     float volume;
@@ -33,10 +33,18 @@ public class Sound {
         soundURL[15] = getClass().getResource("/Resources/Sounds/blocked.wav");
         soundURL[16] = getClass().getResource("/Resources/Sounds/parry.wav");
         soundURL[17] = getClass().getResource("/Resources/Sounds/Dungeon.wav");
-        soundURL[18] = getClass().getResource("/Resources/Sounds/Merchant.wav");
-        soundURL[19] = getClass().getResource("/Resources/Sounds/chipwall.wav");
-        soundURL[20] = getClass().getResource("/Resources/Sounds/dooropen.wav");
-        soundURL[21] = getClass().getResource("/Resources/Sounds/FinalBattle.wav");
+        soundURL[18] = getClass().getResource("/Resources/Sounds/chipwall.wav");
+        soundURL[19] = getClass().getResource("/Resources/Sounds/dooropen.wav");
+        soundURL[20] = getClass().getResource("/Resources/Sounds/FinalBattle.wav");
+        soundURL[21] = getClass().getResource("/Resources/Sounds/chest_open.wav");
+        soundURL[22] = getClass().getResource("/Resources/Sounds/heal.wav");
+        soundURL[23] = getClass().getResource("/Resources/Sounds/strength_up.wav");
+        soundURL[24] = getClass().getResource("/Resources/Sounds/speed_up.wav");
+        soundURL[25] = getClass().getResource("/Resources/Sounds/trade.wav");
+        soundURL[26] = getClass().getResource("/Resources/Sounds/denied.wav");
+        soundURL[27] = getClass().getResource("/Resources/Sounds/pause.wav");
+        soundURL[28] = getClass().getResource("/Resources/Sounds/unpause.wav");
+        soundURL[29] = getClass().getResource("/Resources/Sounds/teleport.wav");
     }
 
     // FORMAT TO OPEN AUDIO FILE IN JAVA

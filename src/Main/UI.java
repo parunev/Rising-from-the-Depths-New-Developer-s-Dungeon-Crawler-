@@ -316,7 +316,6 @@ public class UI {
     }
 
     public void drawDialogueScreen() {
-        // WINDOW
         int x = gp.tileSize * 3;
         int y = gp.tileSize / 2;
         int width = gp.screenWidth - (gp.tileSize * 6);
@@ -329,9 +328,7 @@ public class UI {
         y += gp.tileSize;
 
         if (npc.dialogues[npc.dialogueSet][npc.dialogueIndex] != null){
-            // currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
 
-            // LETTER BY LETTER
             char[] characters = npc.dialogues[npc.dialogueSet][npc.dialogueIndex].toCharArray();
 
             if (charIndex < characters.length){
@@ -364,7 +361,7 @@ public class UI {
 
         for (String line : currentDialogue.split("\n")){
             g2.drawString(line, x, y);
-            y += 40; // next line will be displayed below the first line
+            y += 40;
         }
     }
 
@@ -461,7 +458,6 @@ public class UI {
         g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY - 24, null);
     }
 
-    // We use Entity to check which entity is this inventory for, and the boolean is to decide to show the cursor or not
     public void drawInventory(Entity entity, boolean cursor){
         int frameX; int frameY;
         int frameWidth; int frameHeight;
@@ -889,12 +885,15 @@ public class UI {
                 // Player has no money
                 if (npc.inventory.get(itemIndex).price > gp.player.coin){
                     subState = 0;
+                    gp.playSE(26);
                     npc.startDialogue(npc, 2);
                 } else {
                     if (gp.player.canObtainItem(npc.inventory.get(itemIndex))){
+                        gp.playSE(25);
                         gp.player.coin -= npc.inventory.get(itemIndex).price;
                     } else {
                         subState = 0;
+                        gp.playSE(26);
                         npc.startDialogue(npc, 3);
                     }
                 }
@@ -946,6 +945,7 @@ public class UI {
                 gp.player.inventory.get(itemIndex) == gp.player.currentShield){
                     commandNum = 0;
                     subState = 0;
+                    gp.playSE(26);
                     npc.startDialogue(npc, 4);
                 }
                 // If it's not equipped item
@@ -955,6 +955,7 @@ public class UI {
                     } else {
                         gp.player.inventory.remove(itemIndex);
                     }
+                    gp.playSE(25);
                     gp.player.coin += price;
                 }
             }

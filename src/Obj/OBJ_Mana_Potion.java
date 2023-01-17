@@ -29,7 +29,7 @@ public class OBJ_Mana_Potion extends Entity {
     }
 
     public boolean use(Entity entity){
-        gp.playSE(2);
+        gp.playSE(22);
         gp.ui.addMessage("Mana +" + value);
         entity.mana += value;
 

@@ -3,6 +3,8 @@ package Obj;
 import Entity.Entity;
 import Main.GamePanel;
 
+import java.util.Random;
+
 public class OBJ_Bones extends Entity {
 
     GamePanel gp;
@@ -21,11 +23,23 @@ public class OBJ_Bones extends Entity {
     }
 
     public void setDialogues(){
-        dialogues[0][0] = "Remains of a fallen warrior. Maybe...";
+        dialogues[0][0] = "Bones of the fallen, a warning...";
+        dialogues[1][0] = "Remains of battle, a chilling sight..";
+        dialogues[2][0] = "Skeletal remains, a monster's feast...";
+        dialogues[3][0] = "Bones of the fallen, a grim tale..";
+        dialogues[4][0] = "Skeletons litter the ground, a monster's legacy...";
     }
 
     public void interact(){
-        startDialogue(this, 0);
+        Random r = new Random();
+        int index = r.nextInt(5);
+        switch (index) {
+            case 0 -> startDialogue(this, 0);
+            case 1 -> startDialogue(this, 1);
+            case 2 -> startDialogue(this, 2);
+            case 3 -> startDialogue(this, 3);
+            case 4 -> startDialogue(this, 4);
+        }
     }
 }
 

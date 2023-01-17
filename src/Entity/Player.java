@@ -55,7 +55,7 @@ public class Player extends Entity{
         dexterity = 1; // The more dexterity he has, the less damage he receives
         exp = 0;
         nextLevelExp = 5; // how much exp is needed for next level
-        coin = 500;
+        coin = 50;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         currentLight = null; // if not reset the lighting is still rendered
@@ -512,15 +512,6 @@ public class Player extends Entity{
                 defence = getDefence();
             }
 
-            if (selectedItem.type == type_light){
-                if (currentLight == selectedItem){
-                    currentLight = null;
-                } else {
-                    currentLight = selectedItem;
-                }
-                lightUpdated = true;
-            }
-
             if (selectedItem.type == type_consumable){
                 if (selectedItem.use(this)){
                     if (selectedItem.amount > 1){
@@ -533,10 +524,6 @@ public class Player extends Entity{
         }
     }
 
-    // Whenever we get an item we call this method and pass the item name and scan our inventory
-    // and check if the same item is already in our inventory, and if you have the same item
-    // return the index of the item
-    // This method also can be used when you want to check if player has a certain quest item etc.
     public int searchItemInInventory(String itemName){
         int itemIndex = 999;
 

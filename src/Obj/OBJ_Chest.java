@@ -27,7 +27,7 @@ public class OBJ_Chest extends Entity {
 
     public void setLoot(Entity loot){
         this.loot = loot;
-        setDialogue(); // We set the method here because we need the loot name, if it's set in the constructor we will get null
+        setDialogue();
     }
 
     public void setDialogue(){
@@ -39,7 +39,7 @@ public class OBJ_Chest extends Entity {
     public void interact(){
 
         if (!opened){
-            gp.playSE(3);
+            gp.playSE(21);
 
             if (!gp.player.canObtainItem(loot)){
                 startDialogue(this,0);
