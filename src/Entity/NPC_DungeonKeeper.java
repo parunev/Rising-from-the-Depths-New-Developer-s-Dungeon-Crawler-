@@ -40,24 +40,29 @@ public class NPC_DungeonKeeper extends Entity {
     // Store character dialogues
     public void setDialogue(){
         dialogues[0][0] = "Welcome to the depths of our dungeon, adventurer.\nMay your journey be filled with treasure and glory.";
-        dialogues[0][1] = "You may have noticed that the dungeon is rather dark.\nI have a solution. You can find a source of light in the chest.\nIt's a magic lantern that will light your way\nand reveal hidden secrets in the darkness.";
-        dialogues[0][2] = "Adventurer, are you ready to proceed to the next level of the dungeon?\nIf so, the ladder will take you deeper into the dungeon.\nRemember, the deeper you go, the greater the challenge and rewards will\nbe. Good luck!";
+        dialogues[0][1] = "Are you ready to proceed to the next level of the dungeon?\nIf so, the ladder will take you deeper into the dungeon.\nRemember, the deeper you go, the greater the challenge and rewards will\nbe. Good luck!";
+
+        dialogues[1][0] = """
+                Ah, welcome back adventurer!\s
+                You've made it to the second floor of the dungeon, I see.\s
+                Be careful, this floor is known for its traps and more powerful monsters.\s
+                Good luck!""";
     }
 
     public void speak(){
         facePlayer();
-        startDialogue(this, 0);
-
-        dialogueSet++;
-        if (dialogues[dialogueSet][0] == null){
-            dialogueSet--;
+        if (gp.currentMap == 0){
+            startDialogue(this, 0);
+        }
+        if (gp.currentMap == 1){
+            startDialogue(this, 1);
         }
     }
 
     // Character behaviour (AI kinda)
     public void setAction() {
         actionLockCounter++;
-        if (actionLockCounter == 120){
+        if (actionLockCounter == 240){
             Random random = new Random();
             int i = random.nextInt(100)+1;
             if (i <= 25){direction = "up";}

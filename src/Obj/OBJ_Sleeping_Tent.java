@@ -3,18 +3,18 @@ package Obj;
 import Entity.Entity;
 import Main.GamePanel;
 
-public class OBJ_Tent extends Entity {
+public class OBJ_Sleeping_Tent extends Entity {
     GamePanel gp;
-    public static final String objName = "Tent";
+    public static final String objName = "The Adventurer's Haven";
 
-    public OBJ_Tent(GamePanel gp) {
+    public OBJ_Sleeping_Tent(GamePanel gp) {
         super(gp);
         this.gp = gp;
 
         type = type_consumable;
         name = objName;
         down1 = setup("/Resources/Objects/tent", gp.tileSize, gp.tileSize);
-        description = "[Tent]\nYou can sleep until\nnew morning.";
+        description = "["+ name +"]\nYA portable dungeon shelter,\nto regain health and mana.";
         price = 300;
         stackable = true;
     }

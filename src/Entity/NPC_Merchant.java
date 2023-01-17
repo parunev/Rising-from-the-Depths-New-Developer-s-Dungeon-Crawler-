@@ -1,10 +1,7 @@
 package Entity;
 
 import Main.GamePanel;
-import Obj.OBJ_Health_Potion;
-import Obj.OBJ_Key;
-import Obj.OBJ_Mana_Potion;
-import Obj.OBJ_Shield_Blue;
+import Obj.*;
 
 public class NPC_Merchant extends Entity{
 
@@ -34,17 +31,19 @@ public class NPC_Merchant extends Entity{
     // Store character dialogues
     public void setDialogue(){
         dialogues[0][0] = "Well, well, well. What do we have here?\nA brave adventurer looking to stock up on supplies?\nI've got just what you need. Take a look at my wares\n, I guarantee you won't be disappointed.";
-        dialogues[1][0] = "Come again, hehe!";
+        dialogues[1][0] = "Farewell, adventurer!";
         dialogues[2][0] = "You need more coins to buy that!";
         dialogues[3][0] = "You cannot carry any more!";
         dialogues[4][0] = "You cannot sell an equipped item!";
     }
 
     public void setItems(){
-        inventory.add(new OBJ_Health_Potion(gp));
-        inventory.add(new OBJ_Mana_Potion(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Shield_Blue(gp));
+            inventory.add(new OBJ_Health_Potion(gp));
+            inventory.add(new OBJ_Mana_Potion(gp));
+            inventory.add(new OBJ_Key(gp));
+            inventory.add(new OBJ_Speed_Up_Potion(gp));
+            inventory.add(new OBJ_Strength_Up_Potion(gp));
+            inventory.add(new OBJ_Sleeping_Tent(gp));
     }
 
     public void speak(){

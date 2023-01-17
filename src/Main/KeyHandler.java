@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
-// The listener interface for receiving keyboard events (keystrokes)
 public class KeyHandler implements KeyListener {
     GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed, spacePressed;
@@ -20,7 +19,7 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int code = e.getKeyCode(); // returns the integer keyCode associated with the key in this event
+        int code = e.getKeyCode();
 
         if (gp.gameState == gp.titleState){ // TITLE STATE
             try {
@@ -39,7 +38,11 @@ public class KeyHandler implements KeyListener {
         } else if (gp.gameState == gp.optionsState) { // OPTIONS STATE
             optionsState(code);
         } else if (gp.gameState == gp.gameOverState) { // GAME OVER STATE
-            gameOverState(code);
+            try {
+                gameOverState(code);
+            } catch (IOException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (gp.gameState == gp.tradeState) { // TRADE STATE
             tradeState(code);
         } else if (gp.gameState == gp.mapState) { // MAP STATE
@@ -211,7 +214,7 @@ public class KeyHandler implements KeyListener {
 
     }
 
-    public void gameOverState(int code){
+    public void gameOverState(int code) throws IOException, ClassNotFoundException {
         if (code == KeyEvent.VK_W){
             gp.ui.commandNum--;
             if (gp.ui.commandNum < 0){
@@ -221,7 +224,7 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_S){
             gp.ui.commandNum++;
-            if (gp.ui.commandNum > 1){
+            if (gp.ui.commandNum > 2){
                 gp.ui.commandNum = 0;
             }
             gp.playSE(9);
@@ -231,7 +234,11 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = gp.playState;
                 gp.resetGame(false);
                 gp.playMusic(0);
-            }else if (gp.ui.commandNum == 1){ // quit
+            }else if (gp.ui.commandNum == 1){ // load
+                gp.saveLoad.load();
+                gp.gameState = gp.playState;
+                gp.playMusic(0);
+            }else if (gp.ui.commandNum == 2){ // quit
                 gp.gameState = gp.titleState;
                 gp.resetGame(true);
             }

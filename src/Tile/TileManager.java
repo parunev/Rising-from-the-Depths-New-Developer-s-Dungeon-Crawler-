@@ -16,19 +16,16 @@ public class TileManager {
     GamePanel gp;
     public Tile[] tile;
     public int[][][] mapTileNumber;
-    // boolean drawPath = true;
     ArrayList<String> fileNames = new ArrayList<>();
     ArrayList<String> collisionStatus = new ArrayList<>();
 
     public TileManager(GamePanel gp) throws IOException {
         this.gp = gp;
 
-        // READ TILE DATA FILE
         InputStream is = getClass().getResourceAsStream("/Resources/Maps/tiledata.txt");
         assert is != null;
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-        // GETTING TILE NAME AND COLLISION INFO FROM FILE
         String line;
 
         while ((line = br.readLine()) != null){
@@ -37,7 +34,7 @@ public class TileManager {
         }
         br.close();
 
-        tile = new Tile[fileNames.size()]; // means how much tiles we will import (have) in our game. Like grass,water,sand,cobble etc.
+        tile = new Tile[fileNames.size()];
         getTileImage();
 
         // GET THE maxWorldCol & Row
@@ -55,6 +52,7 @@ public class TileManager {
         br.close();
 
         loadMap("/Resources/Maps/dungeonMapNew.txt",0);
+        loadMap("/Resources/Maps/dungeonLevel2.txt",1);
 
     }
 
@@ -64,10 +62,7 @@ public class TileManager {
             String fileName;
             boolean collision;
 
-            // Get a file name
             fileName = fileNames.get(i);
-
-            // Get a collision status
             collision = collisionStatus.get(i).equals("true");
 
             setup(i, fileName, collision);
@@ -98,14 +93,14 @@ public class TileManager {
             int row = 0;
 
             while (col < gp.maxWorldCol && row < gp.maxWorldRow){
-                String line = br.readLine(); //reads a line of text
+                String line = br.readLine();
 
                 while (col < gp.maxWorldCol){
                     String[] numbers = line.split(" ");
-                    int num = Integer.parseInt(numbers[col]); // use col as an index for number[] array
+                    int num = Integer.parseInt(numbers[col]);
 
-                    mapTileNumber[map][col][row] = num; // we store the extracted number in the mapTileNum[][]
-                    col++; // continue this until everything in numbers[] is stored in the mapTileNum[][]
+                    mapTileNumber[map][col][row] = num;
+                    col++;
                 }
 
                 if (col == gp.maxWorldCol){
@@ -122,29 +117,24 @@ public class TileManager {
 
     public void draw(Graphics2D g2){
 
-        //automating the process of drawing tiles
         int worldCol = 0;
         int worldRow = 0;
 
         while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow){
 
-            //the map data has been stored in the mapTileNum[][]
             int tileNum = mapTileNumber[gp.currentMap][worldCol][worldRow]; // extract a tile number which is stored in mapTileNum[0][0]
 
-            //offsets - differences
             int worldX = worldCol * gp.tileSize;
             int worldY = worldRow * gp.tileSize;
             int screenX = worldX - gp.player.worldX + gp.player.screenX;
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-            // as long as a tile is in this boundary, we draw it
-            // boosts the game performance
+
             if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY){
 
-                // doesn't need to scale the images during the game-loop anymore
                 g2.drawImage(tile[tileNum].image, screenX, screenY, null);
             }
 
@@ -155,21 +145,5 @@ public class TileManager {
                 worldRow++;
             }
         }
-
-        // Drawing the nodes in the pathList
-        // DEBUG - Whole if-statement can be commented
-        /* if (drawPath){
-            g2.setColor(new Color(255,0,0,25));
-
-            for (int i = 0; i < gp.pFinder.pathList.size() ; i++) {
-                int worldX = gp.pFinder.pathList.get(i).col * gp.tileSize;
-                int worldY = gp.pFinder.pathList.get(i).row * gp.tileSize;
-                int screenX = worldX - gp.player.worldX + gp.player.screenX;
-                int screenY = worldY - gp.player.worldY + gp.player.screenY;
-
-                g2.fillRect(screenX, screenY, gp.tileSize, gp.tileSize);
-            }
-        }
-         */
     }
 }

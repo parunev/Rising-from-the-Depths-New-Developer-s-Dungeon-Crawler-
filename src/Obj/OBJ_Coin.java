@@ -18,8 +18,11 @@ public class OBJ_Coin extends Entity {
 
     public boolean use(Entity entity){
         gp.playSE(1);
-        gp.ui.addMessage("Coin + " + value);
-        gp.player.coin += value;
+        gp.ui.addMessage("$$$");
+        switch (gp.currentMap) {
+            case 0 -> gp.player.coin += value;
+            case 1 -> gp.player.coin += value + 2;
+        }
 
         return true;
     }

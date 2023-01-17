@@ -98,7 +98,7 @@ public class Player extends Entity{
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
-        inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Sleeping_Tent(gp));
     }
 
     public int getAttack(){
@@ -109,7 +109,7 @@ public class Player extends Entity{
     }
 
     public int getDefence(){
-        return defence = dexterity * currentShield.defenceValue;
+        return defence = dexterity + currentShield.defenceValue;
     }
 
     public int getCurrentWeaponSlot(){
@@ -481,8 +481,9 @@ public class Player extends Entity{
     public void checkLevelUp(){
         if (exp >= nextLevelExp){
             level++;
-            nextLevelExp = nextLevelExp * 5;
+            nextLevelExp = nextLevelExp * 6;
             maxLife += 2;
+            if (level % 5 == 0){maxMana++;}
             strength++;
             dexterity++;
             attack = getAttack();
@@ -651,10 +652,5 @@ public class Player extends Entity{
 
         // RESET ALPHA
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-
-        // DEBUG
-        //  g2.setFont(new Font("Arial", Font.PLAIN, 26));
-        //  g2.setColor(Color.white);
-        //  g2.drawString("Invincible:" + invincibleCounter, 10, 400);
     }
 }

@@ -59,6 +59,8 @@ public class EventHandler {
         eventMaster.dialogues[0][0] = "Ouch!!!";
         eventMaster.dialogues[1][0] = "Rejuvenate your body, replenish your magic and preserve your progress.\n" +
                 "Your game progress is saved!";
+        eventMaster.dialogues[2][0] = "Drink from the rejuvenating pool to replenish mana and regain health!";
+        eventMaster.dialogues[2][1] = "Refreshing!";
     }
 
     public void checkEvent() throws IOException {
@@ -72,7 +74,7 @@ public class EventHandler {
         }
 
         if (canTouchEvent){
-            // Damage pit event
+            // MAP0
             if (hit(0,2, 12, "any") || hit(0,2, 15, "any")
                     || hit(0,9, 14, "any") || hit(0,30, 19, "any")
                     || hit(0,31, 24, "any") || hit(0,36, 27, "any")
@@ -83,18 +85,12 @@ public class EventHandler {
                     || hit(0,14, 23, "any") || hit(0,7, 22, "any")
                     || hit(0,8, 23, "any")  || hit(0,6, 26, "any")
                     || hit(0,7, 27, "any")  || hit(0,14, 30, "any")
-                    || hit(0,11, 22, "any")){ // Map, Map column, Map row and direction
+                    || hit(0,11, 22, "any")){
                 spikeHit(gp.dialogueState);
             }
-             //Drinking water event
             else if (hit(0,44,14,"up")){
-                healingPool(gp.dialogueState);
+                healingPool(gp.dialogueState); // SAVE
             }
-            // Speak to the merchant
-           else if (hit(1,12,9,"up")){
-                speak(gp.npc[1][0]);
-            }
-
             else if (hit(0, 4, 5, "any")) {
                 teleport(0, 4, 12, gp.dungeon);
             }
@@ -107,11 +103,73 @@ public class EventHandler {
             else if (hit(0, 44, 17, "any")) {
                 teleport(0, 46, 36, gp.dungeon);
             }
+
+            // MAP 1
+            else if (hit(0, 44, 11, "any")) {
+                teleport(1, 9, 4, gp.dungeon);
+            }
+            else if (hit(1, 28, 20, "up") || (hit(1, 30, 21, "up")
+                    || (hit(1, 32, 21, "up")))){
+                regenerate(gp.dialogueState);
+            }
+            else if (hit(1,42,44,"up")){
+                healingPool(gp.dialogueState);
+            }
+            else if (hit(1, 45, 25, "any")){
+                teleport(1,5,28, gp.dungeon);
+            }
+            else if (hit(1, 5, 28, "any")){
+                teleport(1,45,25, gp.dungeon);
+            }
+            else if (hit(1,7, 14, "any")    || hit(1,6, 18, "any")
+                    || hit(1,4, 19, "any")  || hit(1,37, 3, "any")
+                    || hit(1,39, 3, "any")  || hit(1,41, 2, "any")
+                    || hit(1,43, 3, "any")  || hit(1,15, 15, "any")
+                    || hit(1,12, 18, "any") || hit(1,13, 20, "any")
+                    || hit(1,42, 20, "any") || hit(1,42, 21, "any")
+                    || hit(1,38, 27, "any") || hit(1,31, 27, "any")
+                    || hit(1,21, 13, "any") || hit(1,21, 11, "any")
+                    || hit(1,21, 7, "any")  || hit(1,24, 9, "any")
+                    || hit(1,24, 4, "any")  || hit(1,32, 4, "any")
+
+                    || hit(1,27, 27, "any")  || hit(1,14, 28, "any")
+                    || hit(1,14, 29, "any")  || hit(1,7, 39, "any")
+                    || hit(1,7, 40, "any")   || hit(1,7, 45, "any")
+                    || hit(1,7, 44, "any")   || hit(1,44, 24, "any")
+                    || hit(1,45, 24, "any")  || hit(1,46, 24, "any")
+                    || hit(1,47, 24, "any")  || hit(1,44, 24, "any")
+                    || hit(1,44, 25, "any")  || hit(1,44, 26, "any")
+                    || hit(1,45, 26, "any")  || hit(1,47, 24, "any")
+                    || hit(1,47, 25, "any")  || hit(1,47, 26, "any")
+
+                    || hit(1,14, 46, "any")  || hit(1,15, 46, "any")
+                    || hit(1,24, 42, "any")  || hit(1,28, 44, "any")
+                    || hit(1,20, 34, "any")  || hit(1,20, 37, "any")
+                    || hit(1,22, 34, "any")  || hit(1,22, 37, "any")
+                    || hit(1,24, 34, "any")  || hit(1,24, 37, "any")
+                    || hit(1,26, 34, "any")  || hit(1,26, 37, "any")
+                    || hit(1,28, 34, "any")  || hit(1,28, 37, "any")
+
+                    || hit(1,33, 34, "any")  || hit(1,33, 37, "any")
+                    || hit(1,35, 34, "any")  || hit(1,35, 37, "any")
+                    || hit(1,37, 34, "any")  || hit(1,37, 37, "any")
+                    || hit(1,39, 34, "any")  || hit(1,39, 37, "any")
+                    || hit(1,41, 34, "any")  || hit(1,41, 37, "any")
+                    || hit(1,43, 34, "any")  || hit(1,43, 37, "any")
+
+                    || hit(1,33, 39, "any")
+                    || hit(1,35, 39, "any")
+                    || hit(1,37, 39, "any")
+                    || hit(1,39, 39, "any")
+                    || hit(1,41, 39, "any")
+                    || hit(1,43, 39, "any")
+                    ){
+
+                spikeHit(gp.dialogueState);
+            }
         }
     }
 
-    // This is the method that checks the event collision
-    // Works pretty similar to object collision
     public boolean hit(int map, int col, int row, String reqDirection){
         boolean hit = false;
         if (map == gp.currentMap){
@@ -164,8 +222,18 @@ public class EventHandler {
 
             // Whenever you use the event the monsters will respawn
             gp.aSetter.setMonster();
-
             gp.saveLoad.save();
+        }
+    }
+
+    public void regenerate(int gameState) {
+        if (gp.keyH.enterPressed){
+            gp.gameState = gameState;
+            gp.player.attackCanceled = true;
+            gp.playSE(2);
+            eventMaster.startDialogue(eventMaster, 2);
+            gp.player.life = gp.player.maxLife;
+            gp.player.mana = gp.player.maxMana;
         }
     }
 
@@ -178,13 +246,5 @@ public class EventHandler {
 
         canTouchEvent = false;
         gp.playSE(13);
-    }
-
-    public void speak(Entity entity){
-        if (gp.keyH.enterPressed){
-            gp.gameState = gp.dialogueState;
-            gp.player.attackCanceled = true;
-            entity.speak();
-        }
     }
 }

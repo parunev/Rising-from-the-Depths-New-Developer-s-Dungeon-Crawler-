@@ -4,7 +4,6 @@ import Main.GamePanel;
 
 import java.awt.*;
 
-// This class handles all the environment filters such as Lighting, Rain, Fog etc.
 public class EnvironmentManager {
     GamePanel gp;
     public EM_Lighting lighting;
@@ -14,7 +13,7 @@ public class EnvironmentManager {
     }
 
     public void setUp(){
-        lighting = new EM_Lighting(gp);
+        lighting = new EM_Lighting(gp, 450);
     }
 
     public void update(){

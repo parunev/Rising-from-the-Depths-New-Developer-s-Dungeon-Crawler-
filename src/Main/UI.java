@@ -1,8 +1,5 @@
 package Main;
 
-// Handles all the on-screen User Interface
-// So we can display messages, item icons etc.
-
 import Entity.Entity;
 import Obj.OBJ_Coin;
 import Obj.OBJ_Heart;
@@ -597,12 +594,22 @@ public class UI {
             g2.drawString(">", x-40, y);
         }
 
+        // RETRY
+        g2.setFont(g2.getFont().deriveFont(50F));
+        text = "Last save";
+        x = getXForCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if (commandNum == 1){
+            g2.drawString(">", x-40, y);
+        }
+
         // BACK TO THE TITLE SCREEN
         text = "Quit";
         x = getXForCenteredText(text);
         y += 55;
         g2.drawString(text, x, y);
-        if (commandNum == 1){
+        if (commandNum == 2){
             g2.drawString(">", x-40, y);
         }
     }
@@ -957,7 +964,7 @@ public class UI {
     public void drawSleepScreen(){
         counter++;
 
-        if (counter < 120){ // screen gets darker for the next 2 seconds / 120
+        if (counter < 120){
             gp.eManager.lighting.filterAlpha += 0.01f;
             if (gp.eManager.lighting.filterAlpha > 1f){
                 gp.eManager.lighting.filterAlpha = 1f;

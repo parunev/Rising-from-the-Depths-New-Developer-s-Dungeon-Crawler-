@@ -9,7 +9,6 @@ import Obj.OBJ_Rock;
 
 import java.util.Random;
 
-// SAME AS GREEN SLIME
 public class MON_Muddy extends Entity {
 
     GamePanel gp;
@@ -20,13 +19,13 @@ public class MON_Muddy extends Entity {
 
         type = type_monster;
         name = "Muddy";
-        defaultSpeed = (int)1.2;
+        defaultSpeed = 2;
         speed = defaultSpeed;
         maxLife = 8;
         life = maxLife;
         attack = 7;
         defence = 0;
-        exp = 5;
+        exp = 3;
         projectile = new OBJ_Rock(gp);
 
         solidArea.x = 3;
@@ -52,7 +51,7 @@ public class MON_Muddy extends Entity {
 
     public void setAction(){
         if (onPath){
-            checkStopChasingOrNot(gp.player, 15, 100);
+            checkStopChasingOrNot(gp.player, 10, 100);
             searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
             checkShootOrNot(200, 30); // shoot a rock
         } else {
@@ -63,8 +62,6 @@ public class MON_Muddy extends Entity {
 
     public void damageReaction(){
         actionLockCounter = 0;
-        // When the monster receive damage it starts moving away from the player
-        // direction = gp.player.direction;
         onPath = true;
     }
 
