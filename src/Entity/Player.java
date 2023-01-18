@@ -3,6 +3,8 @@ package Entity;
 import Main.GamePanel;
 import Main.KeyHandler;
 import Obj.*;
+import Obj.Shields.OBJ_Shield_Oak;
+import Obj.Weapons.OBJ_Sword_Rusty;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -38,9 +40,9 @@ public class Player extends Entity{
     public void setDefaultValues(){
 
         // START POS
-        worldX = gp.tileSize * 9;
-        worldY = gp.tileSize * 4;
-        gp.currentMap = 2;
+        worldX = gp.tileSize * 4;
+        worldY = gp.tileSize * 3;
+        gp.currentMap = 0;
         defaultSpeed = 4;
         speed = defaultSpeed;
         direction = "down";

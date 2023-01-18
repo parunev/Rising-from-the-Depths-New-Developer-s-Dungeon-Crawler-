@@ -1,4 +1,4 @@
-package Obj;
+package Obj.Shields;
 
 import Entity.Entity;
 import Main.GamePanel;

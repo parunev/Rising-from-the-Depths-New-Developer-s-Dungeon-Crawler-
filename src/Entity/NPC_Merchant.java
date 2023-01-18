@@ -1,7 +1,7 @@
 package Entity;
 
 import Main.GamePanel;
-import Obj.*;
+import Obj.Consumables.*;
 
 public class NPC_Merchant extends Entity{
 

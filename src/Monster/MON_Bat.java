@@ -2,9 +2,9 @@ package Monster;
 
 import Entity.Entity;
 import Main.GamePanel;
-import Obj.OBJ_Coin;
-import Obj.OBJ_Heart;
-import Obj.OBJ_Mana_Crystal;
+import Obj.Consumables.OBJ_Coin;
+import Obj.Consumables.OBJ_Heart;
+import Obj.Consumables.OBJ_Mana_Crystal;
 
 import java.util.Random;
 
@@ -36,7 +36,6 @@ public class MON_Bat extends Entity {
     }
 
     public void getImage(){
-        // Using two images (down1, down2) for all directions
         up1 = setup("/Resources/Monsters/bat_down_1", gp.tileSize, gp.tileSize);
         up2 = setup("/Resources/Monsters/bat_down_2", gp.tileSize, gp.tileSize);
         down1 = setup("/Resources/Monsters/bat_down_1", gp.tileSize, gp.tileSize);
@@ -48,26 +47,11 @@ public class MON_Bat extends Entity {
     }
 
     public void setAction(){
-
-        // Disabling this since I want this monster to be kinda more hard to kill
-        // With implementing the aggro effect the monsters comes to you, and sometimes it gets easier to kill
-        // if (onPath){
-          //  checkStopChasingOrNot(gp.player, 15, 100);
-          //  searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
-
-        // } else {
-          //  checkStartChasingOrNot(gp.player, 5, 100);
             getRandomDirection(10);
-        // }
     }
 
     public void damageReaction(){
         actionLockCounter = 0;
-
-        // When the monster receive damage it starts moving away from the player
-        // direction = gp.player.direction;
-
-        // onPath = true;
     }
 
     public void checkDrop(){

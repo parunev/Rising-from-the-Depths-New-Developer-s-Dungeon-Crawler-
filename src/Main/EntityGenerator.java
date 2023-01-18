@@ -2,6 +2,16 @@ package Main;
 
 import Entity.Entity;
 import Obj.*;
+import Obj.Consumables.*;
+import Obj.Letters.OBJ_Final_Letter;
+import Obj.Letters.OBJ_Hint_Letter;
+import Obj.Letters.OBJ_Motivational_Letter;
+import Obj.Shields.OBJ_Shield_Iron;
+import Obj.Shields.OBJ_Shield_Oak;
+import Obj.Weapons.OBJ_Axe;
+import Obj.Weapons.OBJ_Pickaxe;
+import Obj.Weapons.OBJ_Sword_Rusty;
+import Obj.Weapons.OBJ_Sword_Steel;
 
 public class EntityGenerator {
     GamePanel gp;
@@ -25,6 +35,9 @@ public class EntityGenerator {
             case OBJ_Fireball.objName -> new OBJ_Fireball(gp);
             case OBJ_Heart.objName -> new OBJ_Heart(gp);
             case OBJ_Key.objName -> new OBJ_Key(gp);
+            case OBJ_Final_Letter.objName -> new OBJ_Final_Letter(gp);
+            case OBJ_Motivational_Letter.objName -> new OBJ_Motivational_Letter(gp);
+            case OBJ_Hint_Letter.objName -> new OBJ_Hint_Letter(gp);
             case OBJ_Mana_Crystal.objName -> new OBJ_Mana_Crystal(gp);
             case OBJ_Mana_Potion.objName -> new OBJ_Mana_Potion(gp);
             case OBJ_Pickaxe.objName -> new OBJ_Pickaxe(gp);

@@ -1,9 +1,9 @@
 package Main;
 
 import Entity.Entity;
-import Obj.OBJ_Coin;
-import Obj.OBJ_Heart;
-import Obj.OBJ_Mana_Crystal;
+import Obj.Consumables.OBJ_Coin;
+import Obj.Consumables.OBJ_Heart;
+import Obj.Consumables.OBJ_Mana_Crystal;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

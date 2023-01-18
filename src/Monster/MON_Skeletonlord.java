@@ -3,10 +3,10 @@ package Monster;
 import Data.Progress;
 import Entity.Entity;
 import Main.GamePanel;
-import Obj.OBJ_Coin;
+import Obj.Consumables.OBJ_Coin;
 import Obj.OBJ_Door_Iron;
-import Obj.OBJ_Heart;
-import Obj.OBJ_Mana_Crystal;
+import Obj.Consumables.OBJ_Heart;
+import Obj.Consumables.OBJ_Mana_Crystal;
 
 import java.util.Random;
 

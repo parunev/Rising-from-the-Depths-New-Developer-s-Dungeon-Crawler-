@@ -5,6 +5,15 @@ import Entity.NPC_DungeonKeeper;
 import Entity.NPC_Merchant;
 import Monster.*;
 import Obj.*;
+import Obj.Consumables.OBJ_Coin;
+import Obj.Consumables.OBJ_Key;
+import Obj.Consumables.OBJ_Sleeping_Tent;
+import Obj.Consumables.OBJ_Strength_Up_Potion;
+import Obj.Letters.OBJ_Final_Letter;
+import Obj.Letters.OBJ_Hint_Letter;
+import Obj.Letters.OBJ_Motivational_Letter;
+import Obj.Shields.OBJ_Shield_Iron;
+import Obj.Weapons.OBJ_Sword_Steel;
 
 public class AssetSetter {
 
@@ -84,6 +93,10 @@ public class AssetSetter {
         objSetter(new OBJ_BlankCandle(gp), mapNum, i, 47, 23);i++;
         objSetter(new OBJ_BlankCandle(gp), mapNum, i, 33, 23);i++;
         objSetter(new OBJ_BlankCandle(gp), mapNum, i, 55, 23);i++;
+
+        objSetter(new OBJ_Final_Letter(gp), mapNum, i, 12, 13); i++;
+        objSetter(new OBJ_Motivational_Letter(gp), mapNum, i, 29, 24); i++;
+        objSetter(new OBJ_Hint_Letter(gp), mapNum, i, 46, 36); i++;
 
         objSetter(new OBJ_Chest(gp), mapNum, i, 17, 13);
         gp.obj[mapNum][i].setLoot(new OBJ_Sword_Steel(gp));

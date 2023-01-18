@@ -1,4 +1,4 @@
-package Obj;
+package Obj.Consumables;
 
 import Entity.Entity;
 import Main.GamePanel;
