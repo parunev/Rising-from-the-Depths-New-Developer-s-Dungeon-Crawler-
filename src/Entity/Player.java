@@ -40,9 +40,9 @@ public class Player extends Entity{
     public void setDefaultValues(){
 
         // START POS
-        worldX = gp.tileSize * 4;
-        worldY = gp.tileSize * 3;
-        gp.currentMap = 0;
+        worldX = gp.tileSize * 9;
+        worldY = gp.tileSize * 4;
+        gp.currentMap = 2;
         defaultSpeed = 4;
         speed = defaultSpeed;
         direction = "down";

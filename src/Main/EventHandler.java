@@ -10,9 +10,6 @@ public class EventHandler {
     EventRect[][][] eventRect;
     Entity eventMaster;
 
-    // Setting some kind of margin and make it so if an event happened it won't happen again
-    // until player character move away from the event rectangle by one tile distance
-    // preventing the event from happening repeatedly
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
     int tempMap, tempCol, tempRow;
@@ -21,8 +18,6 @@ public class EventHandler {
         this.gp = gp;
 
         eventMaster = new Entity(gp);
-
-        // Event Rectangle on every single tile basically
         eventRect = new EventRect[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 
         int map = 0;
@@ -64,8 +59,6 @@ public class EventHandler {
     }
 
     public void checkEvent() throws IOException {
-
-        //Check if the player character is more than 1 tile away from the last event
         int xDistance = Math.abs(gp.player.worldX - previousEventX);
         int yDistance = Math.abs(gp.player.worldY - previousEventY);
         int distance = Math.max(xDistance, yDistance);
@@ -178,6 +171,13 @@ public class EventHandler {
             }
             else if (hit(2, 21, 35, "up")) {
                 healingPool(gp.dialogueState);
+            }
+            else if (hit(2, 5, 3, "any")   || hit(2, 11, 5, "any")  ||
+                     hit(2, 13, 6, "any")  || hit(2, 23, 38, "any") ||
+                     hit(2, 18, 33, "any") || hit(2, 33, 21, "any") ||
+                     hit(2, 35, 21, "any") || hit(2, 46, 32, "any") ||
+                     hit(2, 34, 33, "any")){
+                spikeHit(gp.dialogueState);
             }
         }
     }
