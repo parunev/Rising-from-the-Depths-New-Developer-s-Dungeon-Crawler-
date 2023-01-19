@@ -15,15 +15,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-//works as game screen
 public class GamePanel extends JPanel implements Runnable {
 
     // SCREEN SETTINGS
-    final int originalTileSize = 16; // 16x16 default size of the player character, NPCs and map tiles
+    final int originalTileSize = 16;
     final int scale = 3;
-    public final int tileSize = originalTileSize * scale; // 16x3 (48x48) pixels on the screen. Pretty common for retro games.
+    public final int tileSize = originalTileSize * scale;
 
-    // 16 tiles horizontally, 12 tiles vertically 4:3 ratio
     public final int maxScreenCol = 20;
     public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol; // 960 pixels
@@ -54,7 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
     SaveLoad saveLoad = new SaveLoad(this);
     public EntityGenerator eGenerator = new EntityGenerator(this);
     public CutsceneManager csManager = new CutsceneManager(this);
-    Thread gameThread; //it keeps your program running until you stop it
+    Thread gameThread;
 
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
@@ -63,14 +61,10 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity[][] monster = new Entity[maxMap][200];
     public InteractiveTile[][] iTile = new InteractiveTile[maxMap][50];
     public Entity[][] projectile = new Entity[maxMap][20];
-    //public ArrayList<Entity> projectileList = new ArrayList<>();
     public ArrayList<Entity> particleList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
     // GAME STATE
-    // When you play a game usually it has various game situations - title screen, main gameplay screen or in-game menu screen
-    // and depending on the situation the program draws different things on the screen and often receive diff key input
-    // Example: You can swing your sword by pressing enter in gameplay state but maybe enter works as confirm in menu screen
     public int gameState;
     public final int titleState = 0;
     public final int playState = 1;
@@ -96,17 +90,14 @@ public class GamePanel extends JPanel implements Runnable {
     public final int dungeon = 52;
 
     public GamePanel() throws IOException, FontFormatException {
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the size of this class (JPanel)
+        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
 
-        // if set true, all the drawings from this component will be done in an offscreen painting buffer
-        // enabling this can improve game's rendering performance
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
-        this.setFocusable(true); // with this, this Main.GamePanel can be "focused" to receive key inputs
+        this.setFocusable(true);
     }
 
-    // created this method, so we can add other setup stuff in the future
     public void setupGame(){
         aSetter.setObject();
         aSetter.setNPC();
@@ -134,48 +125,39 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    // passing this(Main.GamePanel) to this thread constructor, instantiate
     public void startGameThread(){
         gameThread = new Thread(this);
-        gameThread.start(); // automatically calls the run method
+        gameThread.start();
     }
 
-    //Game-Loop, core of our game
     @Override
     public void run() {
+        double drawInterval = 1000000000/FPS;
+        double nextDrawTime = System.nanoTime() + drawInterval;
 
-        // the allocated time for single loop is 0.016
-        double drawInterval = 1000000000/FPS; // we can draw the screen 60times per second
-        double nextDrawTime = System.nanoTime() + drawInterval; // returns the current value of the running JVM high resolution time source in nanoseconds;
-
-        // as long as this gameThread exists, it repeats the process that is written inside this brackets
         while (gameThread != null){
 
-            // UPDATE: update information such as character position
             try {
                 update();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
-            // DRAW: draw the screen with the updated information
             repaint();
 
-            // sleep method, delta method could be used too
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
-                remainingTime = remainingTime/1000000; // sleep accepts milliseconds and not nano
+                remainingTime = remainingTime/1000000;
 
                 if (remainingTime < 0){
                     remainingTime = 0;
                 }
 
-                Thread.sleep((long) remainingTime); // pause the game loop
+                Thread.sleep((long) remainingTime);
                 nextDrawTime += drawInterval;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            // If the FPS is 30, the program does this 30 times per seconds and so on
         }
     }
 
@@ -244,8 +226,6 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    //Graphics - a class that has many functions to draw objects on screen
-    // Imagine this is your paintbrush
     public void paintComponent(Graphics g){
         super.paintComponent(g); // parent class of this class (JPanel)
 
@@ -362,20 +342,16 @@ public class GamePanel extends JPanel implements Runnable {
         g2.dispose(); // dispose of this graphics context and release any system resources that it is using
     }
 
-    // Loop makes the music play non-stop
     public void playMusic(int i){
-        music.setFile(i); // we set the file we want to play
-        music.play(); // we play
-        music.loop(); // we loop
+        music.setFile(i);
+        music.play();
+        music.loop();
     }
 
-    // Stops the music at all
     public void stopMusic(){
         music.stop();
     }
 
-    // Play sound effect
-    // Usually the sound effect is very short, so we don't call the loop here
     public void playSE(int i){
         se.setFile(i);
         se.play();

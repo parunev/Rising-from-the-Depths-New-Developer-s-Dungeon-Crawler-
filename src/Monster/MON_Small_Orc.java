@@ -9,23 +9,23 @@ import Obj.OBJ_Rock;
 
 import java.util.Random;
 
-public class MON_Muddy extends Entity {
+public class MON_Small_Orc extends Entity {
 
     GamePanel gp;
 
-    public MON_Muddy(GamePanel gp) {
+    public MON_Small_Orc(GamePanel gp) {
         super(gp);
         this.gp = gp;
 
         type = type_monster;
-        name = "Muddy";
-        defaultSpeed = 2;
+        name = "Small Orc";
+        defaultSpeed = 3;
         speed = defaultSpeed;
-        maxLife = 8;
+        maxLife = 24;
         life = maxLife;
-        attack = 7;
+        attack = 9;
         defence = 0;
-        exp = 3;
+        exp = 5;
         projectile = new OBJ_Rock(gp);
 
         solidArea.x = 3;
@@ -35,33 +35,23 @@ public class MON_Muddy extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        checkCurrentMap();
         getImage();
     }
 
-    public void checkCurrentMap() {
-        if (gp.currentMap == 3) {
-            maxLife = 10;
-            attack = 8;
-            defence = 1;
-        }
-    }
-
     public void getImage(){
-        up1 = setup("/Resources/Monsters/muddy_image_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/Resources/Monsters/muddy_image_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/Resources/Monsters/muddy_image_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/Resources/Monsters/muddy_image_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/Resources/Monsters/muddy_image_3", gp.tileSize, gp.tileSize);
-        left2 = setup("/Resources/Monsters/muddy_image_4", gp.tileSize, gp.tileSize);
-        right1 = setup("/Resources/Monsters/muddy_image_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/Resources/Monsters/muddy_image_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/Resources/Monsters/orc_image_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/Resources/Monsters/orc_image_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/Resources/Monsters/orc_image_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/Resources/Monsters/orc_image_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/Resources/Monsters/orc_image_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/Resources/Monsters/orc_image_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/Resources/Monsters/orc_image_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/Resources/Monsters/orc_image_2", gp.tileSize, gp.tileSize);
     }
-
 
     public void setAction(){
         if (onPath){
-            checkStopChasingOrNot(gp.player, 10, 100);
+            checkStopChasingOrNot(gp.player, 8, 100);
             searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
             checkShootOrNot(200, 30); // shoot a rock
         } else {

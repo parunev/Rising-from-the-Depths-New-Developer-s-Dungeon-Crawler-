@@ -22,6 +22,7 @@ public class OBJ_Coin extends Entity {
         switch (gp.currentMap) {
             case 0 -> gp.player.coin += value;
             case 1 -> gp.player.coin += value + 2;
+            case 3 -> gp.player.coin += value + 3;
         }
 
         return true;

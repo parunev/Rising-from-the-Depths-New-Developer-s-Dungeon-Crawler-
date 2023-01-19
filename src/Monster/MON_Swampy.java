@@ -33,7 +33,16 @@ public class MON_Swampy extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
+        checkCurrentMap();
         getImage();
+    }
+
+    public void checkCurrentMap() {
+        if (gp.currentMap == 3) {
+            maxLife = 8;
+            attack = 6;
+            defence = 1;
+        }
     }
 
     public void getImage(){

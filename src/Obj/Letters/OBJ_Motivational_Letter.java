@@ -26,20 +26,25 @@ public class OBJ_Motivational_Letter extends Entity {
                 and let that be your guiding light. The victory is within reach, do not
                 give up now. Stay strong, stay determined, and emerge victorious.""";
 
-        dialogues[1][0] = "Though the path ahead may be uncertain and the monsters formidable,\n" +
-                "do not falter. Your strength, courage and determination will guide you through.\n" +
-                "Remember, the end justifies the means and the victory is so close.\n" +
-                "Keep fighting, and do not give up hope. Triumph awaits you.";
+        dialogues[1][0] = """
+                Though the path ahead may be uncertain and the monsters formidable,
+                do not falter. Your strength, courage and determination will guide you.
+                Remember, the end justifies the means and the victory is so close.
+                Keep fighting, and do not give up hope. Triumph awaits you.""";
 
-        dialogues[2][0] = "In the face of adversity, let your determination be your\n" +
-                "guide and your strength be your weapon. The monsters may be powerful but\n" +
-                "remember the reason why you began this journey. Keep moving forward,\n" +
-                "the victory is within reach. Believe in yourself and you will emerge victorious.";
+        dialogues[2][0] = """
+                In the face of adversity, let your determination be your
+                guide and your strength be your weapon. The monsters may be powerful but
+                remember the reason why you began this journey. Keep moving forward,
+                the victory is within reach. Believe in yourself and you will emerge victorious.""";
     }
 
     public boolean use(Entity entity){
         if (gp.currentMap == 2){
             startDialogue(this, 0);
+        }
+        if (gp.currentMap == 3){
+            startDialogue(this, 1);
         }
         return true;
     }

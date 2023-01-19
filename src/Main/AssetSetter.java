@@ -32,32 +32,22 @@ public class AssetSetter {
         gp.obj[mapNum][i].setLoot(new OBJ_Key(gp));
         i++;
 
-        objSetter(new OBJ_Bones(gp), mapNum, i, 3, 5);i++;
-        objSetter(new OBJ_Door(gp), mapNum, i, 31, 5);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 6, 5);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 8, 14);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 27, 2);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 19, 31);i++;
-        objSetter(new OBJ_Bones(gp), mapNum, i, 42, 13);i++;
-        objSetter(new OBJ_Coin(gp), mapNum, i, 34, 3);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 3, 5);i++; objSetter(new OBJ_Door(gp), mapNum, i, 31, 5);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 6, 5);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 8, 14);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 27, 2);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 19, 31);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 42, 13);i++; objSetter(new OBJ_Coin(gp), mapNum, i, 34, 3);i++;
         objSetter(new OBJ_Coin(gp), mapNum, i, 33, 2);
 
         // MAP 1
         mapNum = 1;
         i = 0;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 8, 3);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 13, 7);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 7, 15);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 16, 20);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 26, 21);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 42, 22);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 48, 23);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 33, 38);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 8, 3);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 13, 7);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 7, 15);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 16, 20);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 26, 21);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 42, 22);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 48, 23);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 33, 38);i++;
 
-        objSetter(new OBJ_Bones(gp), mapNum, i, 43, 33);i++;
-        objSetter(new OBJ_Bones(gp), mapNum, i, 19, 38);i++;
-        objSetter(new OBJ_Bones(gp), mapNum, i, 7, 41);i++;
-        objSetter(new OBJ_Bones(gp), mapNum, i, 26, 42);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 43, 33);i++; objSetter(new OBJ_Bones(gp), mapNum, i, 19, 38);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 7, 41);i++; objSetter(new OBJ_Bones(gp), mapNum, i, 26, 42);i++;
 
         objSetter(new OBJ_Chest(gp), mapNum, i, 43, 36);
         gp.obj[mapNum][i].setLoot(new OBJ_Strength_Up_Potion(gp));
@@ -69,30 +59,20 @@ public class AssetSetter {
         // MAP 2
         mapNum = 2;
         i = 0;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 11, 7);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 6, 8);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 13, 13);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 22, 15);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 23, 25);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 27, 21);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 37, 21);i++;
-        objSetter(new OBJ_SkullBones(gp), mapNum, i, 32, 34);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 11, 7);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 6, 8);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 13, 13);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 22, 15);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 23, 25);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 27, 21);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 37, 21);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 32, 34);i++;
         objSetter(new OBJ_SkullBones(gp), mapNum, i, 23, 33);i++;
 
-        objSetter(new OBJ_Bones(gp), mapNum, i, 25, 18);i++;
-        objSetter(new OBJ_Bones(gp), mapNum, i, 12, 8);i++;
-        objSetter(new OBJ_Bones(gp), mapNum, i, 5, 9);i++;
-        objSetter(new OBJ_Bones(gp), mapNum, i, 23, 26);i++;
-        objSetter(new OBJ_Bones(gp), mapNum, i, 46, 28);i++;
-        objSetter(new OBJ_Bones(gp), mapNum, i, 34, 38);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 25, 18);i++; objSetter(new OBJ_Bones(gp), mapNum, i, 12, 8);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 5, 9);i++; objSetter(new OBJ_Bones(gp), mapNum, i, 23, 26);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 46, 28);i++; objSetter(new OBJ_Bones(gp), mapNum, i, 34, 38);i++;
 
-        objSetter(new OBJ_BlankTorch(gp), mapNum, i, 26, 20);i++;
-        objSetter(new OBJ_BlankTorch(gp), mapNum, i, 22, 20);i++;
+        objSetter(new OBJ_BlankTorch(gp), mapNum, i, 26, 20);i++; objSetter(new OBJ_BlankTorch(gp), mapNum, i, 22, 20);i++;
 
-        objSetter(new OBJ_BlankCandle(gp), mapNum, i, 33, 37);i++;
-        objSetter(new OBJ_BlankCandle(gp), mapNum, i, 47, 23);i++;
-        objSetter(new OBJ_BlankCandle(gp), mapNum, i, 33, 23);i++;
-        objSetter(new OBJ_BlankCandle(gp), mapNum, i, 55, 23);i++;
+        objSetter(new OBJ_BlankCandle(gp), mapNum, i, 33, 37);i++; objSetter(new OBJ_BlankCandle(gp), mapNum, i, 47, 23);i++;
+        objSetter(new OBJ_BlankCandle(gp), mapNum, i, 33, 23);i++; objSetter(new OBJ_BlankCandle(gp), mapNum, i, 55, 23);i++;
 
         objSetter(new OBJ_Final_Letter(gp), mapNum, i, 12, 13); i++;
         objSetter(new OBJ_Motivational_Letter(gp), mapNum, i, 29, 24); i++;
@@ -104,6 +84,44 @@ public class AssetSetter {
 
         objSetter(new OBJ_Chest(gp), mapNum, i, 22, 34);
         gp.obj[mapNum][i].setLoot(new OBJ_Shield_Iron(gp));
+
+        // MAP 3
+        mapNum = 3;
+        i = 0;
+
+        objSetter(new OBJ_Door(gp), mapNum, i, 9, 45);i++;
+        objSetter(new OBJ_Door(gp), mapNum, i, 39, 45);i++;
+        objSetter(new OBJ_Chest(gp), mapNum, i, 9, 44);
+        gp.obj[mapNum][i].setLoot(new OBJ_Key(gp));
+        i++;
+
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 22, 8);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 29, 11);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 25, 15);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 45, 26);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 39, 20);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 48, 20);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 13, 26);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 3, 25);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 3, 20);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 27, 47);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 19, 38);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 45, 43);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 45, 37);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 45, 6);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 40, 11);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 48, 11);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 22, 20);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 30, 22);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 21, 24);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 5, 33);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 8, 38);i++; objSetter(new OBJ_SkullBones(gp), mapNum, i, 3, 46);i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 36, 32);i++;
+
+        objSetter(new OBJ_BlankTorch(gp), mapNum, i, 22, 19);i++; objSetter(new OBJ_BlankTorch(gp), mapNum, i, 22, 25);i++;
+        objSetter(new OBJ_BlankTorch(gp), mapNum, i, 9, 25);i++; objSetter(new OBJ_BlankTorch(gp), mapNum, i, 11, 37);i++;
+        objSetter(new OBJ_BlankTorch(gp), mapNum, i, 7, 45);i++; objSetter(new OBJ_BlankTorch(gp), mapNum, i, 23, 45);i++;
+        objSetter(new OBJ_BlankTorch(gp), mapNum, i, 33, 41);i++; objSetter(new OBJ_BlankTorch(gp), mapNum, i, 42, 41);i++;
+        objSetter(new OBJ_BlankTorch(gp), mapNum, i, 38, 31);i++; objSetter(new OBJ_BlankTorch(gp), mapNum, i, 35, 22);i++;
+
+        objSetter(new OBJ_Bones(gp), mapNum, i, 41, 27);i++; objSetter(new OBJ_Bones(gp), mapNum, i, 48, 22);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 32, 41);i++; objSetter(new OBJ_Bones(gp), mapNum, i, 27, 37);i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 11, 32);i++;
+
+        objSetter(new OBJ_Motivational_Letter(gp), mapNum, i, 41, 37); i++;
+        objSetter(new OBJ_Final_Letter(gp), mapNum, i, 15, 27); i++;
+        objSetter(new OBJ_Hint_Letter(gp), mapNum, i, 36, 43);
+
     }
     public void setNPC(){
         int mapNum = 0;
@@ -123,54 +141,69 @@ public class AssetSetter {
         // MAP 2
         mapNum = 2;
         i = 0;
-        npcSetter(new NPC_DungeonKeeper(gp), mapNum, i, 8, 5);i++;
-       // setDungeonRocks();
+        npcSetter(new NPC_DungeonKeeper(gp), mapNum, i, 8, 5);
+
+        // MAP 3
+        mapNum = 3;
+        i = 0;
+        npcSetter(new NPC_DungeonKeeper(gp), mapNum, i, 10, 4);i++;
+        npcSetter(new NPC_Merchant(gp),mapNum, i, 10, 32);
     }
     public void setMonster(){
         int mapNum = 0;
         int i = 0;
 
-        monsterSetter(new MON_Swampy(gp), mapNum, i, 9, 22);i++;
-        monsterSetter(new MON_Swampy(gp), mapNum, i, 13, 22);i++;
-        monsterSetter(new MON_Swampy(gp), mapNum, i, 5, 25);i++;
-        monsterSetter(new MON_Swampy(gp), mapNum, i, 16, 26);i++;
-        monsterSetter(new MON_Swampy(gp), mapNum, i, 15, 31);i++;
-        monsterSetter(new MON_Swampy(gp), mapNum, i, 21, 33);i++;
-        monsterSetter(new MON_Swampy(gp), mapNum, i, 47, 33);i++;
-        monsterSetter(new MON_Swampy(gp), mapNum, i, 41, 36);i++;
-        monsterSetter(new MON_Swampy(gp), mapNum, i, 39, 33);i++;
-        monsterSetter(new MON_Swampy(gp), mapNum, i, 34, 27);i++;
-        monsterSetter(new MON_Swampy(gp), mapNum, i, 27, 27);i++;
-        monsterSetter(new MON_Swampy(gp), mapNum, i, 32, 24);
+        monsterSetter(new MON_Swampy(gp), mapNum, i, 9, 22);i++; monsterSetter(new MON_Swampy(gp), mapNum, i, 13, 22);i++;
+        monsterSetter(new MON_Swampy(gp), mapNum, i, 5, 25);i++; monsterSetter(new MON_Swampy(gp), mapNum, i, 16, 26);i++;
+        monsterSetter(new MON_Swampy(gp), mapNum, i, 15, 31);i++; monsterSetter(new MON_Swampy(gp), mapNum, i, 21, 33);i++;
+        monsterSetter(new MON_Swampy(gp), mapNum, i, 47, 33);i++; monsterSetter(new MON_Swampy(gp), mapNum, i, 41, 36);i++;
+        monsterSetter(new MON_Swampy(gp), mapNum, i, 39, 33);i++; monsterSetter(new MON_Swampy(gp), mapNum, i, 34, 27);i++;
+        monsterSetter(new MON_Swampy(gp), mapNum, i, 27, 27);i++; monsterSetter(new MON_Swampy(gp), mapNum, i, 32, 24);
 
         // MAP 1
         mapNum = 1;
         i = 0;
 
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 2, 14);  i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 3, 17);  i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 5, 19);  i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 14, 19); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 15, 16); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 21, 12); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 23, 4);  i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 34, 4);  i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 39, 2);  i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 40, 13); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 36, 20); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 42, 19); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 35, 27); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 23, 27); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 14, 30); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 25, 34); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 21, 37); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 29, 38); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 34, 34); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 36, 37); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 42, 39); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 7, 42);  i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 26, 43); i++;
-        monsterSetter(new MON_Muddy(gp), mapNum, i, 30, 46);
+        monsterSetter(new MON_Muddy(gp), mapNum, i, 2, 14); i++; monsterSetter(new MON_Muddy(gp), mapNum, i, 3, 17);  i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i, 5, 19); i++; monsterSetter(new MON_Muddy(gp), mapNum, i, 14, 19); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i, 15, 16); i++; monsterSetter(new MON_Muddy(gp), mapNum, i, 21, 12); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i, 23, 4); i++; monsterSetter(new MON_Muddy(gp), mapNum, i, 34, 4);  i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i, 39, 2); i++; monsterSetter(new MON_Muddy(gp), mapNum, i, 40, 13); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i, 36, 20); i++; monsterSetter(new MON_Muddy(gp), mapNum, i, 42, 19); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i, 35, 27); i++; monsterSetter(new MON_Muddy(gp), mapNum, i, 23, 27); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i, 14, 30); i++; monsterSetter(new MON_Muddy(gp), mapNum, i, 25, 34); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i, 21, 37); i++; monsterSetter(new MON_Muddy(gp), mapNum, i, 29, 38); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i, 34, 34); i++; monsterSetter(new MON_Muddy(gp), mapNum, i, 36, 37); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i, 42, 39); i++; monsterSetter(new MON_Muddy(gp), mapNum, i, 7, 42);  i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i, 26, 43); i++; monsterSetter(new MON_Muddy(gp), mapNum, i, 30, 46);
+
+        // MAP 3
+        mapNum = 3;
+        i = 0;
+
+        monsterSetter(new MON_Muddy(gp), mapNum, i,24, 8); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,28,8); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i,23, 9); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,40,9); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i,23,11); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,47,11); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i,24,12); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,41,12); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i,27,13); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,46,8); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i,28,12); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,43,9); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i,29,9);  i++;
+
+        monsterSetter(new MON_Swampy(gp), mapNum, i,21, 20); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,31,20); i++;
+        monsterSetter(new MON_Swampy(gp), mapNum, i,23, 22); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,27,23); i++;
+        monsterSetter(new MON_Swampy(gp), mapNum, i,25,24); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,29,25); i++;
+        monsterSetter(new MON_Swampy(gp), mapNum, i,22,26); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,31,27); i++;
+        monsterSetter(new MON_Swampy(gp), mapNum, i,26,26); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,44,23); i++;
+        monsterSetter(new MON_Swampy(gp), mapNum, i,38,21); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,47,24); i++;
+        monsterSetter(new MON_Swampy(gp), mapNum, i,38,23); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,46,27); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i,38,27); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,43,27); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i,40,26); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,47,20); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i,42,23); i++;
+
+        monsterSetter(new MON_Small_Orc(gp), mapNum, i,5,26); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,15,20); i++;
+        monsterSetter(new MON_Small_Orc(gp), mapNum, i,4,27); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,15,39); i++;
+        monsterSetter(new MON_Small_Orc(gp), mapNum, i,4,21); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,15,46); i++;
+        monsterSetter(new MON_Small_Orc(gp), mapNum, i,11,20); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,26,46);
     }
     public void setInteractiveTiles(){
         int mapNum = 0;

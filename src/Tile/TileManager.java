@@ -54,6 +54,7 @@ public class TileManager {
         loadMap("/Resources/Maps/dungeonMapNew.txt",0);
         loadMap("/Resources/Maps/dungeonLevel2.txt",1);
         loadMap("/Resources/Maps/dungeonLevel3History.txt",2);
+        loadMap("/Resources/Maps/dungeonLevel4.txt",3);
 
     }
 

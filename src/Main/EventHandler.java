@@ -3,6 +3,7 @@ package Main;
 import Entity.Entity;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class EventHandler {
 
@@ -51,11 +52,18 @@ public class EventHandler {
     }
 
     public void setDialogue(){
-        eventMaster.dialogues[0][0] = "Ouch!!!";
-        eventMaster.dialogues[1][0] = "Rejuvenate your body, replenish your magic and preserve your progress.\n" +
+        eventMaster.dialogues[0][0] = "Ouch!";
+        eventMaster.dialogues[1][0] = "I press on, despite the spike's injury.";
+        eventMaster.dialogues[2][0] = "Spikes hurt.";
+
+        eventMaster.dialogues[4][0] = "Rejuvenate your body, replenish your magic and preserve your progress.\n" +
                 "Your game progress is saved!";
-        eventMaster.dialogues[2][0] = "Drink from the rejuvenating pool to replenish mana and regain health!";
-        eventMaster.dialogues[2][1] = "Refreshing!";
+
+        eventMaster.dialogues[5][0] = "Drink from the rejuvenating pool to replenish mana and regain health!";
+        eventMaster.dialogues[5][1] = "Refreshing!";
+
+        eventMaster.dialogues[6][0] = "Drink from the rejuvenating pool to regain health!";
+        eventMaster.dialogues[6][1] = "Ah, much better!";
     }
 
     public void checkEvent() throws IOException {
@@ -80,46 +88,34 @@ public class EventHandler {
                     || hit(0,7, 27, "any")  || hit(0,14, 30, "any")
                     || hit(0,11, 22, "any")){
                 spikeHit(gp.dialogueState);
-            }
-            else if (hit(0,44,14,"up")){
+            } else if (hit(0,44,14,"up")){
                 healingPool(gp.dialogueState); // SAVE
-            }
-            else if (hit(0, 4, 5, "any")) {
+            } else if (hit(0, 4, 5, "any")) {
                 teleport(0, 4, 12, gp.dungeon);
-            }
-            else if (hit(0, 4, 12, "any")) {
+            } else if (hit(0, 4, 12, "any")) {
                 teleport(0, 4, 5, gp.dungeon);
-            }
-            else if (hit(0, 46, 36, "any")) {
+            } else if (hit(0, 46, 36, "any")) {
                 teleport(0, 44, 17, gp.dungeon);
-            }
-            else if (hit(0, 44, 17, "any")) {
+            } else if (hit(0, 44, 17, "any")) {
                 teleport(0, 46, 36, gp.dungeon);
             }
 
             // MAP 1
             else if (hit(0, 44, 11, "any")) {
                 teleport(1, 9, 4, gp.dungeon);
-            }
-            else if (hit(1, 28, 21, "up")){
-                regenerate(gp.dialogueState, 1,28, 21);
-            }
-            else if (hit(1, 32, 21, "up")){
+            } else if (hit(1, 32, 21, "up")){
                 regenerate(gp.dialogueState, 1, 32, 21);
-            }
-            else if (hit(1, 30, 21, "up")){
-                regenerate(gp.dialogueState, 1, 30, 21);
-            }
-            else if (hit(1,42,44,"up")){
+            } else if (hit(1,42,44,"up")){
                 healingPool(gp.dialogueState);
-            }
-            else if (hit(1, 45, 25, "any")){
+            } else if (hit(1, 9, 19, "any")) {
+                regenerate_health(gp.dialogueState, 1, 9, 19);
+            } else if (hit(1, 38, 33, "any")){
+                regenerate_health(gp.dialogueState, 1, 38, 33);
+            } else if (hit(1, 45, 25, "any")){
                 teleport(1,5,28, gp.dungeon);
-            }
-            else if (hit(1, 5, 28, "any")){
+            } else if (hit(1, 5, 28, "any")){
                 teleport(1,45,25, gp.dungeon);
-            }
-            else if (hit(1,7, 14, "any")    || hit(1,6, 18, "any")
+            } else if (hit(1,7, 14, "any")    || hit(1,6, 18, "any")
                     || hit(1,4, 19, "any")  || hit(1,37, 3, "any")
                     || hit(1,39, 3, "any")  || hit(1,41, 2, "any")
                     || hit(1,43, 3, "any")  || hit(1,15, 15, "any")
@@ -132,7 +128,7 @@ public class EventHandler {
 
                     || hit(1,27, 27, "any")  || hit(1,14, 28, "any")
                     || hit(1,14, 29, "any")  || hit(1,7, 39, "any")
-                    || hit(1,7, 40, "any")   || hit(1,7, 45, "any")
+                    || hit(1,7, 40, "any")   || hit(1,7, 43, "any")
                     || hit(1,7, 44, "any")   || hit(1,44, 24, "any")
                     || hit(1,45, 24, "any")  || hit(1,46, 24, "any")
                     || hit(1,47, 24, "any")  || hit(1,44, 24, "any")
@@ -165,18 +161,96 @@ public class EventHandler {
 
                 spikeHit(gp.dialogueState);
             }
+
             // MAP 2
             else if (hit(1, 42, 45, "any")) {
                 teleport(2, 9, 4, gp.dungeon);
-            }
-            else if (hit(2, 21, 35, "up")) {
+            } else if (hit(2, 21, 35, "up")) {
                 healingPool(gp.dialogueState);
-            }
-            else if (hit(2, 5, 3, "any")   || hit(2, 11, 5, "any")  ||
+            } else if (hit(2, 5, 3, "any")   || hit(2, 11, 5, "any")  ||
                      hit(2, 13, 6, "any")  || hit(2, 23, 38, "any") ||
                      hit(2, 18, 33, "any") || hit(2, 33, 21, "any") ||
                      hit(2, 35, 21, "any") || hit(2, 46, 32, "any") ||
                      hit(2, 34, 33, "any")){
+                spikeHit(gp.dialogueState);
+            } else if (hit(2, 13, 36, "any")){
+                teleport(3, 9, 3, gp.dungeon);
+            }
+
+            // MAP 3
+            else if (hit(3, 4, 2, "any")){
+                teleport(3, 26, 2, gp.dungeon);
+            } else if (hit(3, 26, 2, "any")){
+                teleport(3, 4, 2, gp.dungeon);
+            } else if (hit(3, 14, 2, "any")){
+                teleport(3, 43, 2, gp.dungeon);
+            } else if (hit(3, 43, 2, "any")){
+                teleport(3, 14, 2, gp.dungeon);
+            } else if (hit(3, 5, 32, "any")){
+                teleport(3, 8, 32, gp.dungeon);
+            } else if (hit(3, 8, 32, "any")){
+                teleport(3, 5, 32, gp.dungeon);
+            } else if (hit(3, 9,9, "any") || hit(3, 39,42, "any")){
+                healingPool(gp.dialogueState);
+            } else if (hit(3, 21, 46, "any")){
+                regenerate(gp.dialogueState,3,21,46);
+            } else if (hit(3,24, 7, "any")   || hit(3,28, 7, "any")
+                    || hit(3,23, 8, "any")   || hit(3,29, 8, "any")
+                    || hit(3,23, 12, "any")  || hit(3,29, 12, "any")
+                    || hit(3,24, 13, "any")  || hit(3,28, 13, "any")
+                    || hit(3,24, 20, "any")  || hit(3,30, 21, "any")
+                    || hit(3,23, 21, "any")  || hit(3,29, 22, "any")
+                    || hit(3,21, 23, "any")  || hit(3,29, 27, "any")
+                    || hit(3,24, 25, "any")  || hit(3,30, 26, "any")
+                    || hit(3,25, 27, "any")  || hit(3,44, 8, "any")
+                    || hit(3,25, 24, "any")  || hit(3,42, 10, "any")
+                    || hit(3,26, 23, "any")  || hit(3,40, 12, "any")
+                    || hit(3,27, 24, "any")  || hit(3,46, 13, "any")
+                    || hit(3,26, 25, "any")  || hit(3,41, 20, "any")
+
+                    || hit(3,39, 29, "any")  || hit(3,46, 26, "any")
+                    || hit(3,39, 21, "any")  || hit(3,47, 25, "any")
+                    || hit(3,40, 24, "any")  || hit(3,44, 30, "any")
+                    || hit(3,39, 27, "any")  || hit(3,44, 32, "any")
+                    || hit(3,41, 26, "any")  || hit(3,36, 33, "any")
+                    || hit(3,42, 22, "any")  || hit(3,36, 35, "any")
+                    || hit(3,43, 21, "any")  || hit(3,45, 40, "any")
+                    || hit(3,44, 22, "any")  || hit(3,45, 41, "any")
+                    || hit(3,43, 23, "any")  || hit(3,44, 43, "any")
+                    || hit(3,47, 22, "any")  || hit(3,30, 43, "any")
+                    || hit(3,48, 21, "any")  || hit(3,32, 46, "any")
+                    || hit(3,40, 24, "any")  || hit(3,32, 39, "any")
+                    || hit(3,45, 25, "any")  || hit(3,30, 37, "any")
+                    || hit(3,32, 35, "any")
+
+                    || hit(3,26, 33, "any")  || hit(3,6, 20, "any")
+                    || hit(3,27, 33, "any")  || hit(3,8, 21, "any")
+                    || hit(3,27, 36, "any")  || hit(3,9, 21, "any")
+                    || hit(3,26, 40, "any")  || hit(3,12, 20, "any")
+                    || hit(3,27, 42, "any")  || hit(3,13, 20, "any")
+                    || hit(3,27, 43, "any")  || hit(3,16, 22, "any")
+                    || hit(3,26, 47, "any")  || hit(3,14, 24, "any")
+                    || hit(3,18, 46, "any")  || hit(3,14, 25, "any")
+                    || hit(3,17, 46, "any")  || hit(3,12, 26, "any")
+                    || hit(3,5, 47, "any")  || hit(3,8, 27, "any")
+                    || hit(3,3, 47, "any")  || hit(3,7, 27, "any")
+                    || hit(3,4, 44, "any")  || hit(3,10, 39, "any")
+                    || hit(3,4, 43, "any")  || hit(3,7, 38, "any")
+                    || hit(3,3, 40, "any")  || hit(3,6, 38, "any")
+                    || hit(3,3, 37, "any")  || hit(3,15, 31, "any")
+                    || hit(3,5, 35, "any")  || hit(3,15, 32, "any")
+                    || hit(3,5, 34, "any")  || hit(3,15, 36, "any")
+                    || hit(3,3, 30, "any")  || hit(3,14, 38, "any")
+                    || hit(3,3, 29, "any")  || hit(3,16, 41, "any")
+                    || hit(3,3, 26, "any")  || hit(3,14, 43, "any")
+                    || hit(3,4, 23, "any")  || hit(3,18, 38, "any")
+                    || hit(3,4, 22, "any")  || hit(3,20, 39, "any")
+
+                    || hit(3,22, 38, "any")  || hit(3,23, 38, "any")
+                    || hit(3,20, 32, "any")  || hit(3,21, 32, "any")
+                    || hit(3,21, 33, "any")
+            ){
+
                 spikeHit(gp.dialogueState);
             }
         }
@@ -218,7 +292,14 @@ public class EventHandler {
 
     public void spikeHit(int gameState){
         gp.gameState = gameState;
-        eventMaster.startDialogue(eventMaster, 0);
+
+        Random r = new Random();
+        int index = r.nextInt(3);
+        switch (index) {
+            case 0 -> eventMaster.startDialogue(eventMaster, 0);
+            case 1 -> eventMaster.startDialogue(eventMaster, 1);
+            case 2 -> eventMaster.startDialogue(eventMaster, 2);
+        }
         gp.player.life--;
         canTouchEvent = false;
     }
@@ -227,8 +308,8 @@ public class EventHandler {
         if (gp.keyH.enterPressed){
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
-            gp.playSE(2);
-            eventMaster.startDialogue(eventMaster, 1);
+            gp.playSE(30);
+            eventMaster.startDialogue(eventMaster, 4);
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
 
@@ -243,9 +324,20 @@ public class EventHandler {
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
             gp.playSE(2);
-            eventMaster.startDialogue(eventMaster, 2);
+            eventMaster.startDialogue(eventMaster, 5);
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
+            eventRect[map][col][row].eventDone = true;
+        }
+    }
+
+    public void regenerate_health(int gameState, int map, int col, int row) {
+        if (gp.keyH.enterPressed){
+            gp.gameState = gameState;
+            gp.player.attackCanceled = true;
+            gp.playSE(2);
+            eventMaster.startDialogue(eventMaster, 6);
+            gp.player.life += 3;
             eventRect[map][col][row].eventDone = true;
         }
     }

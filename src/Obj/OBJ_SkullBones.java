@@ -17,6 +17,13 @@ public class OBJ_SkullBones extends Entity {
         type = type_obstacle;
         name = objName;
         down1 = setup("/Resources/Objects/skullbones", gp.tileSize, gp.tileSize);
+
+        solidArea.x = 4;
+        solidArea.y = 8;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        solidArea.width = 30;
+        solidArea.height = 30;
         collision = true;
 
         setDialogues();

@@ -18,7 +18,7 @@ public class KeyHandler implements KeyListener {
     public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e){
         int code = e.getKeyCode();
 
         if (gp.gameState == gp.titleState){ // TITLE STATE

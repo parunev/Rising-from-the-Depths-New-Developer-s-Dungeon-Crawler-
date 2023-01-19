@@ -59,20 +59,22 @@ public class NPC_DungeonKeeper extends Entity {
         dialogues[2][5] = "Now, it's your turn to take up the challenge and venture into\nthe dungeon to face the demon lord. You will have to venture deep into\nthe dungeon, fighting your way through hordes of monsters,\nuncovering ancient treasures and powerful artifacts, and finally";
         dialogues[2][6] = ", facing the demon lord in the final chamber. Will you be able to defeat\nthe demon lord and claim the ultimate treasure, or will you fall like\nso many before you? Only time will tell.";
         dialogues[2][7] = "This dungeon level appears to be abandoned by monsters, with only the\npresence of fallen soldiers and various story-telling objects scattered\nthroughout. It's possible there may be new discoveries to be made.";
+
+        // MAP 3
+        dialogues[3][0] = "Welcome, brave adventurer, to the fourth level of the dungeon.";
+        dialogues[3][1] = "You have journeyed far and overcome many challenges to reach this point.\nKnow that many before you have failed, but you have persevered.";
+        dialogues[3][2] = "The trials ahead will be even greater\n,but I have faith in your strength and determination.\nMay you find what you seek and emerge victorious.";
     }
 
     public void speak(){
         super.speak();
         onPath = true;
         facePlayer();
-        if (gp.currentMap == 0){
-            startDialogue(this, 0);
-        }
-        if (gp.currentMap == 1){
-            startDialogue(this, 1);
-        }
-        if (gp.currentMap == 2){
-            startDialogue(this, 2);
+        switch (gp.currentMap) {
+            case 0 -> startDialogue(this, 0);
+            case 1 -> startDialogue(this, 1);
+            case 2 -> startDialogue(this, 2);
+            case 3 -> startDialogue(this, 3);
         }
     }
 

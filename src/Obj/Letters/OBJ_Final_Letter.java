@@ -37,6 +37,9 @@ public class OBJ_Final_Letter extends Entity {
         if (gp.currentMap == 2){
             startDialogue(this, 0);
         }
+        if (gp.currentMap == 3){
+            startDialogue(this, 1);
+        }
         return true;
     }
 }

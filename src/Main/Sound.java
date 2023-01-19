@@ -8,10 +8,10 @@ import java.net.URL;
 
 public class Sound {
 
-    Clip clip; // We use this to open audio files and import
-    URL[] soundURL = new URL[100]; // Store file paths of the sound files
-    FloatControl fc; // Provides control over a range of floating-point values
-    int volumeScale = 3; // Default
+    Clip clip;
+    URL[] soundURL = new URL[100];
+    FloatControl fc;
+    int volumeScale = 3;
     float volume;
 
     public Sound(){
@@ -45,15 +45,15 @@ public class Sound {
         soundURL[27] = getClass().getResource("/Resources/Sounds/pause.wav");
         soundURL[28] = getClass().getResource("/Resources/Sounds/unpause.wav");
         soundURL[29] = getClass().getResource("/Resources/Sounds/teleport.wav");
+        soundURL[30] = getClass().getResource("/Resources/Sounds/save.wav");
     }
 
-    // FORMAT TO OPEN AUDIO FILE IN JAVA
     public void setFile(int i){
         try{
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
             clip = AudioSystem.getClip();
             clip.open(ais);
-            fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
             checkVolume();
         }catch (Exception ignored){}
     }
@@ -71,8 +71,6 @@ public class Sound {
     }
 
     public void checkVolume(){
-
-        // VOLUME LEVELS -80f to 6f (-30f to -70f sounds all the same)
         switch (volumeScale) {
             case 0 -> volume = -80f;
             case 1 -> volume = -20f;

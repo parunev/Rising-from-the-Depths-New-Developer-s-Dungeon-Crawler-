@@ -25,11 +25,20 @@ public class OBJ_Hint_Letter extends Entity {
                 treacherous, but it has also been rewarding. Remember, the equipment
                 you have gathered can be sold for coins. Keep your eyes open for
                 opportunities to acquire new weapons. Good luck and safe travels!""";
+
+        dialogues[1][0] = """
+                The path ahead is treacherous, but with determination
+                and a little bit of coins, you may just find the key to unlock the door
+                to the next level. Gather as many coins as you can, and use them wisely
+                to purchase the key that will open the door to your destiny.""";
     }
 
     public boolean use(Entity entity){
         if (gp.currentMap == 2){
             startDialogue(this, 0);
+        }
+        if (gp.currentMap == 3){
+            startDialogue(this, 1);
         }
         return true;
     }

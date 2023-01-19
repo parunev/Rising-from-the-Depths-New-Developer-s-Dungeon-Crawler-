@@ -9,7 +9,6 @@ public class NPC_Merchant extends Entity{
         super(gp);
 
         direction = "down";
-        speed = 1;
         getOldManImage();
         setDialogue();
         setItems();
