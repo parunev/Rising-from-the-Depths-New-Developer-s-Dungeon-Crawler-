@@ -204,6 +204,29 @@ public class AssetSetter {
         monsterSetter(new MON_Small_Orc(gp), mapNum, i,4,27); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,15,39); i++;
         monsterSetter(new MON_Small_Orc(gp), mapNum, i,4,21); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,15,46); i++;
         monsterSetter(new MON_Small_Orc(gp), mapNum, i,11,20); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,26,46);
+
+        // BOSS MAP
+        mapNum = 4;
+        i = 0;
+
+        monsterSetter(new MON_Muddy(gp), mapNum, i,1, 14); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,1, 22); i++;
+        monsterSetter(new MON_Swampy(gp), mapNum, i,5, 13); i++;  monsterSetter(new MON_Swampy(gp), mapNum, i,6, 22); i++;
+        monsterSetter(new MON_Bat(gp), mapNum, i,4, 15); i++; monsterSetter(new MON_Bat(gp), mapNum, i,4, 25); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i,1, 34); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,2, 41); i++;
+        monsterSetter(new MON_Swampy(gp), mapNum, i,6, 33); i++; monsterSetter(new MON_Swampy(gp), mapNum, i,5, 45); i++;
+        monsterSetter(new MON_Bat(gp), mapNum, i,4, 35); i++; monsterSetter(new MON_Bat(gp), mapNum, i,7, 42); i++;
+        monsterSetter(new MON_Small_Orc(gp), mapNum, i,11, 34); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,11, 23); i++;
+        monsterSetter(new MON_Muddy(gp), mapNum, i,16, 33); i++; monsterSetter(new MON_Muddy(gp), mapNum, i,16, 23); i++;
+        monsterSetter(new MON_Bat(gp), mapNum, i,13, 30); i++; monsterSetter(new MON_Bat(gp), mapNum, i,13, 20); i++;
+        monsterSetter(new MON_Small_Orc(gp), mapNum, i,11, 14); i++;monsterSetter(new MON_Muddy(gp), mapNum, i,15, 12); i++;
+        monsterSetter(new MON_Bat(gp), mapNum, i,15, 10); i++;
+
+        monsterSetter(new MON_Small_Orc(gp), mapNum, i,27, 3); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,24, 5); i++;
+        monsterSetter(new MON_Small_Orc(gp), mapNum, i,22, 12); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,27, 13); i++;
+        monsterSetter(new MON_Small_Orc(gp), mapNum, i,22, 23); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,26, 23); i++;
+        monsterSetter(new MON_Small_Orc(gp), mapNum, i,27, 30); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,21, 33); i++;
+        monsterSetter(new MON_Small_Orc(gp), mapNum, i,26, 35); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,35, 43); i++;
+        monsterSetter(new MON_Small_Orc(gp), mapNum, i,37, 43);
     }
     public void setInteractiveTiles(){
         int mapNum = 0;

@@ -23,6 +23,7 @@ public class OBJ_Coin extends Entity {
             case 0 -> gp.player.coin += value;
             case 1 -> gp.player.coin += value + 2;
             case 3 -> gp.player.coin += value + 3;
+            case 4 -> gp.player.coin += value + 4;
         }
 
         return true;

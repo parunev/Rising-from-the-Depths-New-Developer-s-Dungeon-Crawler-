@@ -38,10 +38,19 @@ public class MON_Swampy extends Entity {
     }
 
     public void checkCurrentMap() {
-        if (gp.currentMap == 3) {
-            maxLife = 8;
-            attack = 6;
-            defence = 1;
+        switch (gp.currentMap) {
+            case 3 -> {
+                maxLife = 8;
+                life = maxLife;
+                attack = 6;
+                defence = 1;
+            }
+            case 4 -> {
+                maxLife = 10;
+                life = maxLife;
+                attack = 8;
+                defence = 2;
+            }
         }
     }
 
