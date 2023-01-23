@@ -142,10 +142,8 @@ public class EventHandler {
             gp.player.mana = gp.player.maxMana;
 
             // Whenever you use the event the monsters will respawn
-            if (gp.currentMap != 4){
-                gp.aSetter.setMonster();
-            }
 
+            gp.aSetter.setMonster();
             gp.saveLoad.save();
         }
     }

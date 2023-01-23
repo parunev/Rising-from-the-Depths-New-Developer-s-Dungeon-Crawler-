@@ -40,9 +40,9 @@ public class Player extends Entity{
     public void setDefaultValues(){
 
         // START POS
-        worldX = gp.tileSize * 4;
-        worldY = gp.tileSize * 3;
-        gp.currentMap = 0;
+        worldX = gp.tileSize * 7;
+        worldY = gp.tileSize * 4;
+        gp.currentMap = 4;
         defaultSpeed = 4;
         speed = defaultSpeed;
         direction = "down";
@@ -53,7 +53,7 @@ public class Player extends Entity{
         maxMana = 4;
         mana = maxMana;
         life = maxLife; // 1 = half, 2 = full
-        strength = 1;
+        strength = 50;
         dexterity = 1;
         exp = 0;
         nextLevelExp = 5;

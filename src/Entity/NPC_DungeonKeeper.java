@@ -64,6 +64,13 @@ public class NPC_DungeonKeeper extends Entity {
         dialogues[3][0] = "Welcome, brave adventurer, to the fourth level of the dungeon.";
         dialogues[3][1] = "You have journeyed far and overcome many challenges to reach this point.\nKnow that many before you have failed, but you have persevered.";
         dialogues[3][2] = "The trials ahead will be even greater\n,but I have faith in your strength and determination.\nMay you find what you seek and emerge victorious.";
+
+        // MAP 4 BOSS MAP
+        dialogues[4][0] = """
+                You've reached the fifth level of the dungeon, brave adventurer.
+                But be warned, this is where many have fallen. No one has ever
+                returned from this point. It is said that a powerful boss awaits
+                those who dare to continue. Are you ready to face the ultimate test?""";
     }
 
     public void speak(){
@@ -75,6 +82,7 @@ public class NPC_DungeonKeeper extends Entity {
             case 1 -> startDialogue(this, 1);
             case 2 -> startDialogue(this, 2);
             case 3 -> startDialogue(this, 3);
+            case 4 -> startDialogue(this, 4);
         }
     }
 

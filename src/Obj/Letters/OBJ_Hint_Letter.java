@@ -31,14 +31,19 @@ public class OBJ_Hint_Letter extends Entity {
                 and a little bit of coins, you may just find the key to unlock the door
                 to the next level. Gather as many coins as you can, and use them wisely
                 to purchase the key that will open the door to your destiny.""";
+
+        dialogues[2][0] = """
+                Brave adventurer, heed my advice. The boss ahead is fierce,
+                but with proper guard and parry techniques, victory can be yours.
+                Do not forget to stock up on potions from the merchant
+                before entering the battle. Good luck on your quest!""";
     }
 
     public boolean use(Entity entity){
-        if (gp.currentMap == 2){
-            startDialogue(this, 0);
-        }
-        if (gp.currentMap == 3){
-            startDialogue(this, 1);
+        switch (gp.currentMap) {
+            case 2 -> startDialogue(this, 0);
+            case 3 -> startDialogue(this, 1);
+            case 4 -> startDialogue(this, 2);
         }
         return true;
     }

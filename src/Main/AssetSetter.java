@@ -5,10 +5,7 @@ import Entity.NPC_DungeonKeeper;
 import Entity.NPC_Merchant;
 import Monster.*;
 import Obj.*;
-import Obj.Consumables.OBJ_Coin;
-import Obj.Consumables.OBJ_Key;
-import Obj.Consumables.OBJ_Sleeping_Tent;
-import Obj.Consumables.OBJ_Strength_Up_Potion;
+import Obj.Consumables.*;
 import Obj.Letters.OBJ_Final_Letter;
 import Obj.Letters.OBJ_Hint_Letter;
 import Obj.Letters.OBJ_Motivational_Letter;
@@ -122,6 +119,23 @@ public class AssetSetter {
         objSetter(new OBJ_Final_Letter(gp), mapNum, i, 15, 27); i++;
         objSetter(new OBJ_Hint_Letter(gp), mapNum, i, 36, 43);
 
+        // MAP 4
+        mapNum = 4;
+        i = 0;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 5, 3); i++;objSetter(new OBJ_Bones(gp), mapNum, i, 4, 2); i++;
+        objSetter(new OBJ_BlankCandle(gp), mapNum, i, 1, 2); i++;objSetter(new OBJ_BlankTorch(gp), mapNum, i, 2, 9); i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 4, 32); i++;objSetter(new OBJ_BlankTorch(gp), mapNum, i, 16, 43); i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 17, 40); i++;objSetter(new OBJ_BlankTorch(gp), mapNum, i, 14, 23); i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 17, 14); i++;objSetter(new OBJ_BlankTorch(gp), mapNum, i, 13, 3); i++;
+        objSetter(new OBJ_BlankTorch(gp), mapNum, i, 15, 3); i++;objSetter(new OBJ_SkullBones(gp), mapNum, i, 22, 5); i++;
+        objSetter(new OBJ_Bones(gp), mapNum, i, 26, 4); i++;objSetter(new OBJ_Bones(gp), mapNum, i, 24, 12); i++;
+        objSetter(new OBJ_SkullBones(gp), mapNum, i, 27, 33); i++;objSetter(new OBJ_BlankTorch(gp), mapNum, i, 23, 43); i++;
+        objSetter(new OBJ_Final_Letter(gp), mapNum, i, 16, 45); i++;objSetter(new OBJ_Motivational_Letter(gp), mapNum, i, 13, 5); i++;
+        objSetter(new OBJ_Hint_Letter(gp), mapNum, i, 23, 45); i++;
+        objSetter(new OBJ_Chest(gp), mapNum, i, 7, 40);
+        gp.obj[mapNum][i].setLoot(new OBJ_Strength_Up_Potion(gp));i++;
+        objSetter(new OBJ_Chest(gp), mapNum, i, 13, 23);
+        gp.obj[mapNum][i].setLoot(new OBJ_Speed_Up_Potion(gp));
     }
     public void setNPC(){
         int mapNum = 0;
@@ -148,6 +162,13 @@ public class AssetSetter {
         i = 0;
         npcSetter(new NPC_DungeonKeeper(gp), mapNum, i, 10, 4);i++;
         npcSetter(new NPC_Merchant(gp),mapNum, i, 10, 32);
+
+        // MAP 4
+        mapNum = 4;
+        i = 0;
+        npcSetter(new NPC_DungeonKeeper(gp), mapNum, i, 2, 3);i++;
+        npcSetter(new NPC_Merchant(gp),mapNum, i, 44, 45);
+
     }
     public void setMonster(){
         int mapNum = 0;

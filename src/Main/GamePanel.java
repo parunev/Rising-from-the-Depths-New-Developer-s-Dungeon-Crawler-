@@ -369,9 +369,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
         currentArea = nextArea;
-        if (currentMap != 4){
-            aSetter.setMonster();
-        }
+        aSetter.setMonster();
     }
     
     public void removeTempEntity(){

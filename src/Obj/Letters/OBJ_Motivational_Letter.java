@@ -33,18 +33,17 @@ public class OBJ_Motivational_Letter extends Entity {
                 Keep fighting, and do not give up hope. Triumph awaits you.""";
 
         dialogues[2][0] = """
-                In the face of adversity, let your determination be your
-                guide and your strength be your weapon. The monsters may be powerful but
+                In the face of adversity, let your determination be your guide and
+                your strength be your weapon. The monsters may be powerful but
                 remember the reason why you began this journey. Keep moving forward,
-                the victory is within reach. Believe in yourself and you will emerge victorious.""";
+                the victory is within reach. Believe in yourself and you will emerge victory.""";
     }
 
     public boolean use(Entity entity){
-        if (gp.currentMap == 2){
-            startDialogue(this, 0);
-        }
-        if (gp.currentMap == 3){
-            startDialogue(this, 1);
+        switch (gp.currentMap){
+            case 2: startDialogue(this, 0);
+            case 3: startDialogue(this, 1);
+            case 4: startDialogue(this, 2);
         }
         return true;
     }
