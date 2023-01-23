@@ -67,15 +67,7 @@ public class EM_Lighting {
     }
 
     public void draw(Graphics2D g2){
-
-        if (gp.currentArea == gp.outside){
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.94f));
-        }
-
-        if (gp.currentArea == gp.dungeon){
-            g2.drawImage(darknessFilter,0,0,null);
-        }
-
+        g2.drawImage(darknessFilter,0,0,null);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 }

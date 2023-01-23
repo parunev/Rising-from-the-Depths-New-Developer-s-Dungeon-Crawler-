@@ -48,8 +48,7 @@ public class MON_Swampy extends Entity {
             case 4 -> {
                 maxLife = 10;
                 life = maxLife;
-                attack = 8;
-                defence = 2;
+                attack = 7;
             }
         }
     }

@@ -135,7 +135,8 @@ public class AssetSetter {
         objSetter(new OBJ_Chest(gp), mapNum, i, 7, 40);
         gp.obj[mapNum][i].setLoot(new OBJ_Strength_Up_Potion(gp));i++;
         objSetter(new OBJ_Chest(gp), mapNum, i, 13, 23);
-        gp.obj[mapNum][i].setLoot(new OBJ_Speed_Up_Potion(gp));
+        gp.obj[mapNum][i].setLoot(new OBJ_Speed_Up_Potion(gp)); i++;
+        objSetter(new OBJ_Door_Iron(gp), mapNum, i, 39, 12);
     }
     public void setNPC(){
         int mapNum = 0;
@@ -247,7 +248,9 @@ public class AssetSetter {
         monsterSetter(new MON_Small_Orc(gp), mapNum, i,22, 23); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,26, 23); i++;
         monsterSetter(new MON_Small_Orc(gp), mapNum, i,27, 30); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,21, 33); i++;
         monsterSetter(new MON_Small_Orc(gp), mapNum, i,26, 35); i++; monsterSetter(new MON_Small_Orc(gp), mapNum, i,35, 43); i++;
-        monsterSetter(new MON_Small_Orc(gp), mapNum, i,37, 43);
+        monsterSetter(new MON_Small_Orc(gp), mapNum, i,37, 43); i++;
+
+        monsterSetter(new MON_Lyuborge(gp), mapNum, i, 38, 14);
     }
     public void setInteractiveTiles(){
         int mapNum = 0;

@@ -142,7 +142,6 @@ public class EventHandler {
             gp.player.mana = gp.player.maxMana;
 
             // Whenever you use the event the monsters will respawn
-
             gp.aSetter.setMonster();
             gp.saveLoad.save();
         }
@@ -168,15 +167,20 @@ public class EventHandler {
             eventRect[map][col][row].eventDone = true;
         }
     }
-    public void teleport(int map, int col, int row, int area){
+    public void teleport(int map, int col, int row){
         gp.gameState = gp.transitionState;
-        gp.nextArea = area;
         tempMap = map;
         tempCol = col;
         tempRow = row;
 
         canTouchEvent = false;
         gp.playSE(29);
+    }
+    public void boss_Lyuborge(){
+        if (!gp.bossBattleOn){
+            gp.gameState = gp.cutsceneState;
+            gp.csManager.sceneNum = gp.csManager.lyuborge;
+        }
     }
 
     // MAPS
@@ -196,15 +200,15 @@ public class EventHandler {
         } else if (hit(0, 44, 14, "up")) {
             healingPool(gp.dialogueState); // SAVE
         } else if (hit(0, 4, 5, "any")) {
-            teleport(0, 4, 12, gp.dungeon);
+            teleport(0, 4, 12);
         } else if (hit(0, 4, 12, "any")) {
-            teleport(0, 4, 5, gp.dungeon);
+            teleport(0, 4, 5);
         } else if (hit(0, 46, 36, "any")) {
-            teleport(0, 44, 17, gp.dungeon);
+            teleport(0, 44, 17);
         } else if (hit(0, 44, 17, "any")) {
-            teleport(0, 46, 36, gp.dungeon);
+            teleport(0, 46, 36);
         } else if ((hit(0, 44, 11, "any"))) {
-            teleport(1, 9, 4, gp.dungeon);
+            teleport(1, 9, 4);
         }
     }
     public void firstMap() throws IOException {
@@ -217,9 +221,9 @@ public class EventHandler {
         } else if (hit(1, 38, 33, "any")) {
             regenerate_health(gp.dialogueState, 1, 38, 33);
         } else if (hit(1, 45, 25, "any")) {
-            teleport(1, 5, 28, gp.dungeon);
+            teleport(1, 5, 28);
         } else if (hit(1, 5, 28, "any")) {
-            teleport(1, 45, 25, gp.dungeon);
+            teleport(1, 45, 25);
         } else if (hit(1, 7, 14, "any") || hit(1, 6, 18, "any")
                 || hit(1, 4, 19, "any") || hit(1, 37, 3, "any")
                 || hit(1, 39, 3, "any") || hit(1, 41, 2, "any")
@@ -265,7 +269,7 @@ public class EventHandler {
         ) {
             spikeHit(gp.dialogueState);
         } else if (hit(1, 42, 45, "any")) {
-            teleport(2, 9, 4, gp.dungeon);
+            teleport(2, 9, 4);
         }
     }
     public void secondMap() throws IOException {
@@ -278,22 +282,22 @@ public class EventHandler {
                 hit(2, 34, 33, "any")) {
             spikeHit(gp.dialogueState);
         } else if (hit(2, 13, 36, "any")) {
-            teleport(3, 9, 3, gp.dungeon);
+            teleport(3, 9, 3);
         }
     }
     public void thirdMap() throws IOException {
          if (hit(3, 4, 2, "any")) {
-            teleport(3, 26, 2, gp.dungeon);
+            teleport(3, 26, 2);
         } else if (hit(3, 26, 2, "any")) {
-            teleport(3, 4, 2, gp.dungeon);
+            teleport(3, 4, 2);
         } else if (hit(3, 14, 2, "any")) {
-            teleport(3, 43, 2, gp.dungeon);
+            teleport(3, 43, 2);
         } else if (hit(3, 43, 2, "any")) {
-            teleport(3, 14, 2, gp.dungeon);
+            teleport(3, 14, 2);
         } else if (hit(3, 5, 32, "any")) {
-            teleport(3, 8, 32, gp.dungeon);
+            teleport(3, 8, 32);
         } else if (hit(3, 8, 32, "any")) {
-            teleport(3, 5, 32, gp.dungeon);
+            teleport(3, 5, 32);
         } else if (hit(3, 9, 9, "any") || hit(3, 39, 42, "any")) {
             healingPool(gp.dialogueState);
         } else if (hit(3, 21, 46, "any")) {
@@ -352,44 +356,44 @@ public class EventHandler {
                 || hit(3, 21, 33, "any")) {
             spikeHit(gp.dialogueState);
         } else if (hit(3, 39, 48, "down")) {
-             teleport(4, 4, 3, gp.dungeon);
+             teleport(4, 4, 3);
          }
     }
     public void bossMap() throws IOException {
         if (hit(4, 3, 7, "any")) {
-            teleport(4, 3, 9, gp.dungeon);
+            teleport(4, 3, 9);
         } else if (hit(4,4,17, "down")) {
-            teleport(4, 4, 19, gp.dungeon);
+            teleport(4, 4, 19);
         } else if (hit(4, 4, 27, "down")) {
-            teleport(4, 4, 29, gp.dungeon);
+            teleport(4, 4, 29);
         } else if (hit(4, 4, 37, "down")) {
-            teleport(4, 4, 39, gp.dungeon);
+            teleport(4, 4, 39);
         } else if (hit(4, 8, 43, "right")) {
-            teleport(4, 10, 43, gp.dungeon);
+            teleport(4, 10, 43);
         } else if (hit(4, 14, 39, "up")) {
-            teleport(4, 14, 37, gp.dungeon);
+            teleport(4, 14, 37);
         } else if (hit(4, 14, 29, "up")) {
-            teleport(4, 14, 27, gp.dungeon);
+            teleport(4, 14, 27);
         } else if (hit(4, 14, 19, "up")) {
-            teleport(4, 14, 17, gp.dungeon);
+            teleport(4, 14, 17);
         } else if (hit(4, 14, 9, "up")) {
-            teleport(4, 14, 7, gp.dungeon);
+            teleport(4, 14, 7);
         } else if (hit(4, 18, 3, "right")){
-            teleport(4, 20, 3, gp.dungeon);
+            teleport(4, 20, 3);
         } else if (hit(4, 24, 7, "down")){
-            teleport(4, 24, 9, gp.dungeon);
+            teleport(4, 24, 9);
         } else if (hit(4, 24, 17, "down")){
-            teleport(4, 24, 19, gp.dungeon);
+            teleport(4, 24, 19);
         } else if (hit(4, 24, 27, "down")){
-            teleport(4, 24, 29, gp.dungeon);
+            teleport(4, 24, 29);
         } else if (hit(4, 24, 37, "down")){
-            teleport(4, 24, 39, gp.dungeon);
+            teleport(4, 24, 39);
         } else if (hit(4, 28, 43, "right")){
-            teleport(4, 30, 43, gp.dungeon);
+            teleport(4, 30, 43);
         } else if (hit(4, 38, 43, "right")){
-            teleport(4, 40, 43, gp.dungeon);
+            teleport(4, 40, 43);
         } else if (hit(4, 44, 42, "up")){
-            teleport(4, 39, 30, gp.dungeon);
+            teleport(4, 39, 30);
 
         } else if (hit(4, 2, 14, "any") || hit(4, 4, 14, "any") ||
                 hit(4, 6, 14, "any") || hit(4, 5, 15, "any") ||
@@ -443,6 +447,8 @@ public class EventHandler {
             healingPool(gp.dialogueState);
         } else if (hit(4, 14, 4, "any") || hit(4, 24, 44, "any")){
             regenerate_health(gp.dialogueState,4,14,4);
+        } else if (hit(4, 39, 30, "any")){
+            boss_Lyuborge();
         }
     }
 }

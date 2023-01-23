@@ -35,7 +35,7 @@ public class Sound {
         soundURL[17] = getClass().getResource("/Resources/Sounds/Dungeon.wav");
         soundURL[18] = getClass().getResource("/Resources/Sounds/chipwall.wav");
         soundURL[19] = getClass().getResource("/Resources/Sounds/dooropen.wav");
-        soundURL[20] = getClass().getResource("/Resources/Sounds/FinalBattle.wav");
+        soundURL[20] = getClass().getResource("/Resources/Sounds/Battle.wav");
         soundURL[21] = getClass().getResource("/Resources/Sounds/chest_open.wav");
         soundURL[22] = getClass().getResource("/Resources/Sounds/heal.wav");
         soundURL[23] = getClass().getResource("/Resources/Sounds/strength_up.wav");

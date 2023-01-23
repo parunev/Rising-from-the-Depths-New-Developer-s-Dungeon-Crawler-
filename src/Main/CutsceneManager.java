@@ -1,9 +1,8 @@
 package Main;
 
 import Entity.PlayerDummy;
-import Monster.MON_Skeletonlord;
+import Monster.MON_Lyuborge;
 import Obj.OBJ_BlueHeart;
-import Obj.OBJ_Door_Iron;
 
 import java.awt.*;
 import java.util.Objects;
@@ -20,7 +19,7 @@ public class CutsceneManager {
 
     // Scene Number
     public final int NA = 0;
-    public final int skeletonLord = 1;
+    public final int lyuborge = 1;
     public final int ending = 2;
 
     public CutsceneManager(GamePanel gp){
@@ -50,27 +49,14 @@ public class CutsceneManager {
         this.g2 = g2;
 
         switch (sceneNum){
-            case skeletonLord -> scene_skeletonLord();
+            case lyuborge -> scene_Lyuborge();
             case ending -> scene_ending();
         }
     }
 
-    public void scene_skeletonLord(){
+    public void scene_Lyuborge(){
         if (scenePhase == 0){
             gp.bossBattleOn = true;
-
-            // Shut the iron door
-            for (int i = 0; i < gp.obj[1].length; i++) {
-
-                if (gp.obj[gp.currentMap][i] == null){
-                    gp.obj[gp.currentMap][i] = new OBJ_Door_Iron(gp);
-                    gp.obj[gp.currentMap][i].worldX = gp.tileSize * 25;
-                    gp.obj[gp.currentMap][i].worldY = gp.tileSize * 28;
-                    gp.obj[gp.currentMap][i].temp = true; // only available during the boss fight
-                    gp.playSE(20);
-                    break;
-                }
-            }
 
             // Search a vacant slot for the dummy
             for (int i = 0; i < gp.npc[1].length ; i++) {
@@ -89,7 +75,7 @@ public class CutsceneManager {
         if (scenePhase == 1){
             gp.player.worldY -= 2;
 
-            if (gp.player.worldY < gp.tileSize * 16){
+            if (gp.player.worldY < gp.tileSize * 14){
                 scenePhase++;
             }
         }
@@ -100,7 +86,7 @@ public class CutsceneManager {
             for (int i = 0; i <gp.monster[1].length ; i++) {
 
                 if (gp.monster[gp.currentMap][i] != null
-                        && gp.monster[gp.currentMap][i].name.equals(MON_Skeletonlord.monName)){
+                        && gp.monster[gp.currentMap][i].name.equals(MON_Lyuborge.monName)){
 
                     gp.monster[gp.currentMap][i].sleep = false;
                     gp.ui.npc = gp.monster[gp.currentMap][i];
@@ -145,7 +131,7 @@ public class CutsceneManager {
 
             // Change the music
             gp.stopMusic();
-            gp.playMusic(21);
+            gp.playMusic(20);
         }
     }
 

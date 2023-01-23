@@ -18,11 +18,8 @@ public class Main {
 
         gamePanel.config.loadConfig();
 
-        // causes this window to be sized to fit the preferred size
-        // and layouts of its subcomponents (=Main.GamePanel)
         window.pack();
 
-        //not specify the location of the window, the window will be displayed at the center of the screen
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 

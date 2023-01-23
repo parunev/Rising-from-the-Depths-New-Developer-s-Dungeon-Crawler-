@@ -42,16 +42,15 @@ public class MON_Muddy extends Entity {
     public void checkCurrentMap() {
         switch (gp.currentMap) {
             case 3 -> {
-                maxLife = 10;
+                maxLife = 9;
                 life = maxLife;
                 attack = 8;
                 defence = 1;
             }
             case 4 -> {
-                maxLife = 12;
+                maxLife = 10;
                 life = maxLife;
-                attack = 10;
-                defence = 2;
+                attack = 9;
             }
         }
     }

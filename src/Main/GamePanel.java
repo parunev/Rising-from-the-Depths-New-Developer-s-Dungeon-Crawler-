@@ -82,13 +82,6 @@ public class GamePanel extends JPanel implements Runnable {
     // OTHERS
     public boolean bossBattleOn = false;
 
-    // AREA STATE
-    public int currentArea;
-    public int nextArea;
-    public final int outside = 50;
-    public final int indoor = 51;
-    public final int dungeon = 52;
-
     public GamePanel() throws IOException, FontFormatException {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -105,11 +98,9 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setInteractiveTiles();
         eManager.setUp();
         gameState = titleState;
-        currentArea = dungeon;
     }
 
     public void resetGame(boolean restart){
-        currentArea = dungeon;
         removeTempEntity();
         bossBattleOn = false;
         player.setDefaultPositions();
@@ -355,21 +346,6 @@ public class GamePanel extends JPanel implements Runnable {
     public void playSE(int i){
         se.setFile(i);
         se.play();
-    }
-
-    public void changeArea(){
-        if (nextArea != currentArea){
-            stopMusic();
-
-            if (nextArea == outside || nextArea == dungeon){
-                playMusic(0);
-            }
-            if (nextArea == indoor){
-                playMusic(18);
-            }
-        }
-        currentArea = nextArea;
-        aSetter.setMonster();
     }
     
     public void removeTempEntity(){
