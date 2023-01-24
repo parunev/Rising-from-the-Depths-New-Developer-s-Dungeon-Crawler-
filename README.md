@@ -14,4 +14,4 @@ I wanted to give an update that the game has undergone a major overhaul and is n
 > ###### I hope you all enjoy it as much as I enjoyed making it.   :+1:
 
 
-<img src="https://user-images.githubusercontent.com/94488479/214358840-0aee75a1-f525-4a23-8190-5c47f500f676.gif" width="728" height="90">
+<img src="https://user-images.githubusercontent.com/94488479/214358840-0aee75a1-f525-4a23-8190-5c47f500f676.gif" width="728" height="350">
