@@ -13,4 +13,5 @@ I wanted to give an update that the game has undergone a major overhaul and is n
 > ###### I am proud of what I have achieved, and I am excited to continue developing and adding new features to the game. ######
 > ###### I hope you all enjoy it as much as I enjoyed making it.   :+1:
 
-<img width="842" alt="Screenshot 2023-01-13 at 19 28 27" src="https://user-images.githubusercontent.com/94488479/212381826-bf299b97-f6e8-45ca-8690-a2c566476715.png">
+
+<img src="https://user-images.githubusercontent.com/94488479/214358840-0aee75a1-f525-4a23-8190-5c47f500f676.gif" width="728" height="90">
