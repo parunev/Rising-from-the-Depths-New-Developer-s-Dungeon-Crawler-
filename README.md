@@ -4,8 +4,10 @@ The story behind the game is that a new, independent game developer has decided 
 
 The developer, who has always been fascinated by the genre, want to bring a fresh perspective and new ideas to the classic dungeon crawler formula. The player will have to fight off dangerous monsters, solve challenging puzzles, and explore the mysterious and dark depths of the dungeon while uncovering the secrets of the artifact, and the developer's unique vision.
 
+>###### VIDEO   :clapper: ######
+Click [here](https://www.youtube.com/watch?v=B8obGN_G7tY&t=138s) to check first results. 
 
->###### Updates & Info ######
+>###### Updates & Info   :bookmark: ######
 
 I wanted to give an update that the game has undergone a major overhaul and is now focused solely on dungeon exploration. It has also been given a new name. The game now features new tiles, sounds, levels, objects, and monster AI.
 
